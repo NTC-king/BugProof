@@ -1,9 +1,9 @@
 {
-  "schemaVersion": 2,
-  "runId": "a1181a00-6ef9-4455-8c8d-d53c38755167",
-  "createdAt": "2026-10-22T16:51:33.267Z",
+  "schemaVersion": 3,
+  "runId": "51b09b15-dec7-4464-9136-1bb96e9b47c0",
+  "createdAt": "2026-10-22T17:52:39.823Z",
   "app": {
-    "version": "0.2.0",
+    "version": "0.3.0",
     "sourceRevision": "working-tree; see repository and release record",
     "policyHashes": [
       "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4"
@@ -11,7 +11,14 @@
   },
   "runtime": {
     "name": "Pyodide",
-    "version": "314.0.7"
+    "expectedVersion": "314.0.7",
+    "observed": [
+      {
+        "pyodide": "314.0.7",
+        "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
+        "implementation": "cpython"
+      }
+    ]
   },
   "task": {
     "functionName": "clamp",
@@ -131,7 +138,12 @@
           "value": 5,
           "caseId": "inside",
           "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
-          "elapsedMs": 3
+          "runtime": {
+            "pyodide": "314.0.7",
+            "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
+            "implementation": "cpython"
+          },
+          "elapsedMs": 2
         },
         "result": "pass"
       },
@@ -154,6 +166,11 @@
           "value": -2,
           "caseId": "below",
           "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
+          "runtime": {
+            "pyodide": "314.0.7",
+            "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
+            "implementation": "cpython"
+          },
           "elapsedMs": 1
         },
         "result": "fail"
@@ -177,7 +194,12 @@
           "value": 10,
           "caseId": "above",
           "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
-          "elapsedMs": 2
+          "runtime": {
+            "pyodide": "314.0.7",
+            "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
+            "implementation": "cpython"
+          },
+          "elapsedMs": 3
         },
         "result": "pass"
       },
@@ -200,7 +222,12 @@
           "value": 3,
           "caseId": "equal",
           "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
-          "elapsedMs": 1
+          "runtime": {
+            "pyodide": "314.0.7",
+            "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
+            "implementation": "cpython"
+          },
+          "elapsedMs": 2
         },
         "result": "pass"
       },
@@ -223,6 +250,11 @@
           "value": 0,
           "caseId": "reversed",
           "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
+          "runtime": {
+            "pyodide": "314.0.7",
+            "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
+            "implementation": "cpython"
+          },
           "elapsedMs": 1
         },
         "result": "fail"
@@ -258,7 +290,12 @@
           "value": null,
           "caseId": "inside",
           "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
-          "elapsedMs": 3
+          "runtime": {
+            "pyodide": "314.0.7",
+            "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
+            "implementation": "cpython"
+          },
+          "elapsedMs": 2
         },
         "result": "fail"
       },
@@ -281,6 +318,11 @@
           "value": null,
           "caseId": "below",
           "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
+          "runtime": {
+            "pyodide": "314.0.7",
+            "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
+            "implementation": "cpython"
+          },
           "elapsedMs": 1
         },
         "result": "fail"
@@ -304,6 +346,11 @@
           "value": null,
           "caseId": "above",
           "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
+          "runtime": {
+            "pyodide": "314.0.7",
+            "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
+            "implementation": "cpython"
+          },
           "elapsedMs": 1
         },
         "result": "fail"
@@ -327,6 +374,11 @@
           "value": null,
           "caseId": "equal",
           "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
+          "runtime": {
+            "pyodide": "314.0.7",
+            "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
+            "implementation": "cpython"
+          },
           "elapsedMs": 1
         },
         "result": "fail"
@@ -350,6 +402,11 @@
           "value": null,
           "caseId": "reversed",
           "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
+          "runtime": {
+            "pyodide": "314.0.7",
+            "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
+            "implementation": "cpython"
+          },
           "elapsedMs": 1
         },
         "result": "fail"
@@ -366,7 +423,9 @@
   },
   "executionIntegrity": {
     "policyConsistent": true,
-    "reason": "Both versions completed under the same recorded policy hash."
+    "runtimeConsistent": true,
+    "comparisonConsistent": true,
+    "reason": "Both versions completed under the same recorded policy and observed pinned runtime."
   },
   "challengesExcludedFromRepairPrompt": null,
   "limitations": [

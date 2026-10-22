@@ -36,6 +36,8 @@ Client disconnection aborts the upstream fetch where supported; cancellation can
 ## Data Model
 Task source/name/contract plus examples/challenges; cases with args/kwargs and value-or-exception expectation; candidate with provenance/model; case outcomes with actual value/status; report with frozen hashes and exact evidence. Memory-only; explicit JSON export. Expectations never enter the Python worker.
 
+Version 0.3/schema 3 adds observed Python/Pyodide runtime metadata to every outcome. A passing comparison requires complete matching policy hashes and runtime metadata across both versions, with the observed Pyodide version equal to the package pin. Runtime records are local unsigned evidence, not attestation. Historic schema-2 live artifacts are retained unchanged.
+
 ## File Structure
 `src/App.tsx`, `src/main.tsx`, `src/styles.css`: workbench.
 `src/domain.mjs`, `src/fixtures.mjs`, `src/runner.ts`: validation, examples, bridge.
@@ -49,6 +51,8 @@ Optional Gemini adapter, exact model ID configured server-side. No provider requ
 
 ## Important Failure Modes
 Invalid code/data -> useful error; initialization/execution timeout -> terminate worker/inconclusive; provider missing/unavailable -> preserve work and show honest no-key/error state. Do not switch to host execution.
+
+Oversized repair bodies return controlled HTTP 413 responses for both Content-Length and streamed/chunked requests. Request/header timeouts bound slow clients. Truncated, blocked or malformed provider candidates return controlled errors. Revoking consent aborts a pending repair only; focused errors and an evidence jump link support navigation. Installer environment changes are scoped with finally-based restoration, and Node 24+ is checked before startup/install.
 
 ## Decisions and Open Issues
 The entrant approved implementation of the displayed plan and requested no routine pauses. Record fast mode, but leave final hands-on review unperformed. The runtime/CSP uncertainty was resolved by actual browser tests. Genuine live-provider integration was verified on one median fixture on 2026-10-22 after the entrant confirmed a replacement key and Free Tier/billing-off status. See `docs/LIVE_SMOKE_2026-10-22.md`. Final user review and public submission remain unperformed.

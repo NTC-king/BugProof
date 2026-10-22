@@ -64,6 +64,23 @@ test('static/runner boundary and API request guards', async (t) => {
   );
   assert.equal((await get('app', '/', { headers: { host: 'evil.invalid' } })).status, 403);
   assert.equal((await get('runner', '/worker.mjs', { method: 'POST' })).status, 405);
+  const headers = {
+    origin: 'http://127.0.0.1:4100',
+    'content-type': 'application/json',
+    'x-bugproof-session': session.token,
+  };
+  for (const extraHeaders of [{ 'content-length': '70000' }, {}]) {
+    const oversized = await get('app', '/api/repair', {
+      method: 'POST',
+      headers: { ...headers, ...extraHeaders },
+      body: 'x'.repeat(70000),
+    });
+    assert.equal(oversized.status, 413);
+    assert.match((await oversized.json()).error, /64 KiB/);
+  }
+  const invalid = await get('app', '/api/repair', { method: 'POST', headers, body: '{' });
+  assert.equal(invalid.status, 400);
+  assert.match((await invalid.json()).error, /Invalid JSON/);
 });
 
 test(

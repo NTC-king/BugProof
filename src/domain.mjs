@@ -6,7 +6,7 @@ export const LIMITS = Object.freeze({
   array: 200,
 });
 export const RUNTIME_VERSION = '314.0.7';
-export const APP_VERSION = '0.2.0';
+export const APP_VERSION = '0.3.0';
 export function jsonValue(value, depth = 0) {
   if (depth > LIMITS.depth) throw new Error('JSON nesting exceeds 8 levels.');
   if (value === null || typeof value === 'boolean') return;
@@ -60,7 +60,7 @@ export function validateCases(cases, suite, ids = new Set()) {
       throw new Error(`${c.id}: kwargs must be an object.`);
     jsonValue(c.args);
     jsonValue(kwargs);
-    if (JSON.stringify({ args: c.args, kwargs }).length > LIMITS.input)
+    if (new TextEncoder().encode(JSON.stringify({ args: c.args, kwargs })).length > LIMITS.input)
       throw new Error(`${c.id}: input exceeds 16 KiB.`);
     const e = c.expect;
     if (!e || !['value', 'raises'].includes(e.kind))
@@ -253,6 +253,27 @@ export async function makeReport(
     /^[a-f0-9]{64}$/.test(policyHashes[0]) &&
     executed.every((o) => o.policyHash === policyHashes[0]);
   const proposedVerdict = verdict(proposed);
+  const runtimeRecords = executed.map((o) => o.runtime);
+  const validRuntime = (value) =>
+    value &&
+    typeof value.pyodide === 'string' &&
+    typeof value.python === 'string' &&
+    value.python.length > 0 &&
+    value.python.length <= 512 &&
+    value.implementation === 'cpython';
+  const observedRuntimes = [
+    ...new Map(
+      runtimeRecords.filter(validRuntime).map((value) => [canonicalJSON(value), value]),
+    ).values(),
+  ];
+  const runtimeConsistent =
+    originalOutcomes.length === cases.length &&
+    candidateOutcomes.length === cases.length &&
+    observedRuntimes.length === 1 &&
+    runtimeRecords.every(validRuntime) &&
+    observedRuntimes[0].pyodide === RUNTIME_VERSION &&
+    runtimeRecords.every((value) => canonicalJSON(value) === canonicalJSON(observedRuntimes[0]));
+  const comparisonConsistent = policyConsistent && runtimeConsistent;
   let independent = null;
   if (provenance.kind === 'live_model') {
     const basis = provenance.basis;
@@ -269,7 +290,7 @@ export async function makeReport(
     );
   }
   return {
-    schemaVersion: 2,
+    schemaVersion: 3,
     runId,
     createdAt: new Date().toISOString(),
     app: {
@@ -277,7 +298,7 @@ export async function makeReport(
       sourceRevision: 'working-tree; see repository and release record',
       policyHashes,
     },
-    runtime: { name: 'Pyodide', version: RUNTIME_VERSION },
+    runtime: { name: 'Pyodide', expectedVersion: RUNTIME_VERSION, observed: observedRuntimes },
     task: t,
     candidate: { source: candidate, provenance },
     hashes,
@@ -286,15 +307,19 @@ export async function makeReport(
       rows: proposed,
       summary: summary(proposed),
       verdict:
-        !policyConsistent && ['pass_on_listed_tests', 'examples_only'].includes(proposedVerdict)
+        !comparisonConsistent && ['pass_on_listed_tests', 'examples_only'].includes(proposedVerdict)
           ? 'inconclusive'
           : proposedVerdict,
     },
     executionIntegrity: {
       policyConsistent,
-      reason: policyConsistent
-        ? 'Both versions completed under the same recorded policy hash.'
-        : 'A single matching policy hash was not received for every case in both versions. Do not award a passing comparison; rerun both versions.',
+      runtimeConsistent,
+      comparisonConsistent,
+      reason: !policyConsistent
+        ? 'A single matching policy hash was not received for every case in both versions. Do not award a passing comparison; rerun both versions.'
+        : !runtimeConsistent
+          ? 'Matching observed Python/Pyodide runtime metadata was not received for every case, or the runtime differs from the pin. Rerun both versions with the pinned runtime.'
+          : 'Both versions completed under the same recorded policy and observed pinned runtime.',
     },
     challengesExcludedFromRepairPrompt: independent,
     limitations: [

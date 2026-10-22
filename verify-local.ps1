@@ -12,10 +12,14 @@ try {
   if ($LASTEXITCODE -ne 0) { throw 'Type checking failed.' }
   & $node 'node_modules\vite\bin\vite.js' build
   if ($LASTEXITCODE -ne 0) { throw 'Production build failed.' }
-  & $node --test 'tests/*.test.mjs'
+  & $node --test --test-concurrency=1 'tests/*.test.mjs'
   if ($LASTEXITCODE -ne 0) { throw 'Unit/server tests failed.' }
   if ($Evaluate) { & $node 'tests/browser.mjs' --evaluate }
   else { & $node 'tests/browser.mjs' }
   if ($LASTEXITCODE -ne 0) { throw 'Browser verification failed. Read the first reported failure.' }
+  if ($Evaluate) {
+    & $node 'tests/audit-evidence.mjs'
+    if ($LASTEXITCODE -ne 0) { throw 'Saved evidence audit failed.' }
+  }
   Write-Host 'Verification passed. No real model request was made by this test suite.'
 } finally { Pop-Location }

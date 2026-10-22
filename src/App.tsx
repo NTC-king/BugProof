@@ -59,6 +59,8 @@ export default function App() {
   const frame = useRef<HTMLIFrameElement>(null);
   const fileInput = useRef<HTMLInputElement>(null);
   const control = useRef<AbortController | null>(null);
+  const operation = useRef<'verification' | 'repair' | null>(null);
+  const errorBox = useRef<HTMLDivElement>(null);
   const revision = useRef(0);
   const reference = fixtures.find((f) => f.id === selected);
   const referenceAvailable =
@@ -117,6 +119,12 @@ export default function App() {
       setElapsed((performance.now() - started) / 1000);
     };
   }, [busy]);
+  useEffect(() => {
+    if (error) {
+      errorBox.current?.focus({ preventScroll: true });
+      errorBox.current?.scrollIntoView({ block: 'center' });
+    }
+  }, [error]);
 
   function invalidate() {
     revision.current++;
@@ -211,6 +219,7 @@ export default function App() {
     const current = revision.current,
       abort = new AbortController();
     control.current = abort;
+    operation.current = 'verification';
     setBusy(true);
     setError('');
     setReport(null);
@@ -270,6 +279,7 @@ export default function App() {
       if (control.current === abort) {
         setBusy(false);
         control.current = null;
+        operation.current = null;
       }
     }
   }
@@ -278,6 +288,7 @@ export default function App() {
     const current = revision.current,
       abort = new AbortController();
     control.current = abort;
+    operation.current = 'repair';
     setBusy(true);
     setError('');
     setReport(null);
@@ -315,6 +326,7 @@ export default function App() {
       if (control.current === abort) {
         control.current = null;
         setBusy(false);
+        operation.current = null;
       }
     }
   }
@@ -590,6 +602,11 @@ export default function App() {
                 Cancel run
               </button>
             )}
+            {!busy && (report || baseline) && (
+              <a className="secondary evidence-link" href="#evidence">
+                View results ↓
+              </a>
+            )}
             {!ready && (
               <button
                 className="secondary"
@@ -619,7 +636,10 @@ export default function App() {
               <input
                 type="checkbox"
                 checked={consent}
-                onChange={(e) => setConsent(e.target.checked)}
+                onChange={(e) => {
+                  setConsent(e.target.checked);
+                  if (!e.target.checked && operation.current === 'repair') control.current?.abort();
+                }}
               />
               Allow sending this non-confidential function, contract and visible examples to the
               configured provider.
@@ -639,7 +659,7 @@ export default function App() {
           </p>
         )}
       </section>
-      <section className="evidence" aria-label="Execution evidence">
+      <section className="evidence" id="evidence" tabIndex={-1} aria-label="Execution evidence">
         <div className="evidence-heading">
           <h2>
             <span className="section-number">02</span> Follow the evidence
@@ -656,11 +676,14 @@ export default function App() {
           {busy && <span className="spinner" />}
           {status}
           <span className="elapsed" aria-hidden="true">
-            {elapsed > 0 ? `${elapsed.toFixed(1)}s elapsed` : ''}
+            {elapsed > 0 &&
+            (busy || report || baseline || status.startsWith('Live candidate received'))
+              ? `${elapsed.toFixed(1)}s elapsed`
+              : ''}
           </span>
         </div>
         {error && (
-          <div role="alert" className="error-box">
+          <div role="alert" tabIndex={-1} ref={errorBox} className="error-box">
             {error}
           </div>
         )}

@@ -7,6 +7,7 @@ export type Outcome = {
   message?: string;
   elapsedMs?: number;
   policyHash?: string;
+  runtime?: { pyodide: string; python: string; implementation: string };
 };
 export function execute(
   frame: HTMLIFrameElement,

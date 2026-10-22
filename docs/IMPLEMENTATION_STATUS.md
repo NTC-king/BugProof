@@ -8,7 +8,11 @@ The local UI runs the original and candidate through real browser Python, compar
 
 ## Completed checks
 
-The initial results below are the historical 0.1 baseline. **Current 0.2:** production build and 43 unit/server tests pass; the 22-check browser run passed at 2026-10-22T16:57:05.459Z. Full 42-candidate rerun completed at 16:54:53 UTC with all 30 faulty variants rejected and all 12 references passing their listed cases. A separate genuine model request completed at 17:22:28 UTC, and its generated candidate passed all 6 listed median cases. See `docs/UPGRADE_0_2.md` and `docs/LIVE_SMOKE_2026-10-22.md` for exact evidence and limitations.
+The current release-quality pass is version 0.3, with schema-3 observed runtime evidence, consent-revocation cancellation, bounded request handling, setup cleanup and result navigation. See `docs/RELEASE_0_3.md` for the current verification record, including failures found during testing. The 0.1 and 0.2 results below are historical, not the current release label.
+
+**Current 0.3:** 47 unit/server checks pass; strict TypeScript, production build and actual Command Prompt startup/health pass. The strict browser evaluation completed at `2026-10-22T17:56:05.399Z`: 26 browser checks, 42 complete candidate comparisons, 211 candidate case checks, all 30 known faulty variants rejected and all 12 references passing listed cases. The saved-report audit passed. No new live model request was made. Runtime observed: Pyodide 314.0.7 / CPython 3.14.2. A prior partial-original run was rejected by the audit and is documented in the release record.
+
+The initial results below are the historical 0.1 baseline. **Historical 0.2:** production build and 43 unit/server tests pass; the 22-check browser run passed at 2026-10-22T16:57:05.459Z. Full 42-candidate rerun completed at 16:54:53 UTC with all 30 faulty variants rejected and all 12 references passing their listed cases. A separate genuine model request completed at 17:22:28 UTC, and its generated candidate passed all 6 listed median cases. See `docs/UPGRADE_0_2.md` and `docs/LIVE_SMOKE_2026-10-22.md` for exact evidence and limitations.
 
 - Strict TypeScript check and Vite production build: passed.
 - Documented Windows launcher `start-local.ps1`: executed successfully after stopping the owned development server; rebuilt and started both local listeners. Health endpoint checked after startup.

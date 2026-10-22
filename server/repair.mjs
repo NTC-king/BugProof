@@ -115,8 +115,17 @@ export async function generateRepair(
   const data = await readBoundedJSON(response, signal);
   if (!data || typeof data !== 'object' || Array.isArray(data))
     throw new Error('Model returned invalid or incomplete JSON. No candidate was accepted.');
-  const text = data.candidates?.[0]?.content?.parts
-    ?.filter((p) => typeof p.text === 'string')
+  const first = Array.isArray(data.candidates) ? data.candidates[0] : null;
+  if (first?.finishReason === 'MAX_TOKENS')
+    throw new Error(
+      'Model reached its output limit. No incomplete candidate was accepted; no automatic retry was made.',
+    );
+  if (['SAFETY', 'RECITATION', 'PROHIBITED_CONTENT', 'BLOCKLIST'].includes(first?.finishReason))
+    throw new Error('Model service blocked this response. No candidate was accepted.');
+  if (!Array.isArray(first?.content?.parts))
+    throw new Error('Model returned invalid or incomplete JSON. No candidate was accepted.');
+  const text = first.content.parts
+    .filter((p) => p && typeof p.text === 'string' && p.thought !== true)
     .map((p) => p.text)
     .join('');
   let candidate;

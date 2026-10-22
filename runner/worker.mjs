@@ -3,6 +3,14 @@ self.onmessage = async ({ data }) => {
   const id = data.id;
   try {
     const py = await loadPyodide({ indexURL: new URL('/vendor/', self.location.href).href });
+    const runtime = {
+      pyodide: String(py.version),
+      ...JSON.parse(
+        py.runPython(
+          'import sys, json\njson.dumps({"python": sys.version, "implementation": sys.implementation.name})',
+        ),
+      ),
+    };
     const harness = await fetch('/harness.py').then((r) => {
       if (!r.ok) throw new Error('Harness unavailable');
       return r.text();
@@ -32,6 +40,7 @@ self.onmessage = async ({ data }) => {
           ...result,
           caseId: c.id,
           policyHash,
+          runtime,
           elapsedMs: Math.round(performance.now() - start),
         },
       });

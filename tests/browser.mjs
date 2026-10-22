@@ -68,6 +68,7 @@ try {
       [...document.querySelectorAll('button')].some(
         (b) => b.textContent.includes('Verify both') && !b.disabled,
       ),
+    null,
     { timeout: 15000 },
   );
   const workerPromise = page.waitForEvent('worker');
@@ -106,7 +107,21 @@ try {
   assert.equal(report.proposed.verdict, 'pass_on_listed_tests');
   assert.equal(report.candidate.provenance.kind, 'teaching_fixture');
   assert.equal(report.proposed.rows.length, 6);
+  assert.equal(report.schemaVersion, 3);
+  assert.equal(report.executionIntegrity.comparisonConsistent, true);
+  assert.equal(report.runtime.expectedVersion, '314.0.7');
+  assert.equal(report.runtime.observed.length, 1);
+  assert.equal(report.runtime.observed[0].pyodide, '314.0.7');
+  assert.match(report.runtime.observed[0].python, /3\.14\./);
+  assert.equal(report.runtime.observed[0].implementation, 'cpython');
   findings.push({ check: 'downloaded evidence matches actual displayed run', status: 'pass' });
+  findings.push({
+    check: 'evidence records the actual browser Python and pinned Pyodide runtime',
+    status: 'pass',
+  });
+  await page.getByRole('link', { name: 'View results' }).click();
+  assert.equal(new URL(page.url()).hash, '#evidence');
+  findings.push({ check: 'results shortcut navigates to the current evidence', status: 'pass' });
   const frame = page.frames().find((f) => f.url().includes(':4101/frame.html'));
   assert.ok(frame);
   const domProbe = await frame.evaluate(() => {
@@ -200,6 +215,7 @@ try {
   await page.getByRole('button', { name: /Verify both versions/ }).click();
   await page.getByRole('alert').waitFor();
   assert.equal(await page.getByTestId('verdict').count(), 0);
+  await page.waitForFunction(() => document.activeElement?.getAttribute('role') === 'alert');
   findings.push({
     check: 'malformed case JSON gives an error without execution or a passing verdict',
     status: 'pass',
@@ -216,6 +232,41 @@ try {
         'unconfigured live-repair UI reports an honest no-key error without an external model call',
       status: 'pass',
     });
+  }
+  await page.getByRole('button', { name: 'Reset example', exact: true }).click();
+  let releaseRepair;
+  const heldRepair = new Promise((resolve) => {
+    releaseRepair = resolve;
+  });
+  let repairEntered;
+  const enteredRepair = new Promise((resolve) => {
+    repairEntered = resolve;
+  });
+  const repairURL = origin + '/api/repair';
+  const holdRepair = async (route) => {
+    repairEntered();
+    await heldRepair;
+    try {
+      await route.abort();
+    } catch {}
+  };
+  await page.route(repairURL, holdRepair);
+  try {
+    await page.getByLabel(/Allow sending this non-confidential/).check();
+    await page.getByRole('button', { name: /Request live repair/ }).click();
+    await enteredRepair;
+    await page.getByLabel(/Allow sending this non-confidential/).uncheck();
+    await page
+      .getByRole('button', { name: 'Cancel run', exact: true })
+      .waitFor({ state: 'detached' });
+    assert.equal(await page.getByTestId('verdict').count(), 0);
+    findings.push({
+      check: 'revoking consent cancels a pending repair (intercepted request; no provider call)',
+      status: 'pass',
+    });
+  } finally {
+    releaseRepair();
+    await page.unroute(repairURL, holdRepair);
   }
   const evaluation = [];
   // Portable workspaces are data only. Opening one must not execute code or call a model.
@@ -351,6 +402,33 @@ try {
   } finally {
     await page.context().unroute(harnessURL, mutatePolicyResponse);
   }
+  let runtimeFetches = 0;
+  const workerURL = 'http://127.0.0.1:4101/worker.mjs';
+  const mutateRuntimeResponse = async (route) => {
+    const response = await route.fetch();
+    let body = await response.text();
+    runtimeFetches++;
+    if (runtimeFetches === 2) {
+      assert.ok(body.includes('pyodide: String(py.version)'));
+      body = body.replace('pyodide: String(py.version)', "pyodide: 'controlled-test-runtime'");
+    }
+    await route.fulfill({ response, body });
+  };
+  await page.context().route(workerURL, mutateRuntimeResponse);
+  try {
+    await page.getByRole('button', { name: /Verify both versions/ }).click();
+    await waitDone(page);
+    assert.equal(runtimeFetches, 2);
+    assert.match(await page.getByTestId('verdict').innerText(), /Incomplete/);
+    assert.match(await page.locator('.integrity-warning').innerText(), /runtime/i);
+    findings.push({
+      check:
+        'matching outputs cannot pass with mismatched runtime metadata (controlled worker-response mutation)',
+      status: 'pass',
+    });
+  } finally {
+    await page.context().unroute(workerURL, mutateRuntimeResponse);
+  }
   await page.getByLabel('Teaching example').selectOption('median');
   await page.getByRole('button', { name: 'Reset example', exact: true }).click();
   if (process.argv.includes('--evaluate')) {
@@ -382,6 +460,11 @@ try {
         const path = `artifacts/evaluation/${f.id}-${variant.name}.json`;
         await d.saveAs(path);
         const evidence = JSON.parse(await readFile(path, 'utf8'));
+        assert.equal(
+          evidence.executionIntegrity.comparisonConsistent,
+          true,
+          `${f.id}/${variant.name}: both versions must complete under matching policy/runtime metadata`,
+        );
         const exampleRows = evidence.proposed.rows.filter((r) => r.suite === 'example');
         evaluation.push({
           fixture: f.id,

@@ -81,7 +81,7 @@
         <code>makeReport</code> compare outputs, withhold passes for incomplete evidence and record
         sources/cases/policy hashes. <code>src/components/EvidenceView.tsx → EvidenceView</code>
         renders the first issue, filters and counts. A passing comparison also requires matching
-        policy evidence for both versions.
+        policy evidence and matching observed pinned runtime metadata for both versions.
       </li>
     </ol>
     <h2>To change this, start here</h2>
@@ -106,6 +106,11 @@
       <li>
         Optional live provider: <code>server/repair.mjs</code>. Never add credentials to source or
         this map.
+      </li>
+      <li>
+        Request-body limits: <code>server/body.mjs → readRequestBody</code>. Temporary setup
+        environment restoration:
+        <code>scripts/with-local-environment.ps1 → Invoke-BugProofEnvironment</code>.
       </li>
       <li>
         Genuine integration evidence: <code>docs/LIVE_SMOKE_2026-10-22.md</code> and
@@ -133,9 +138,10 @@
     </p>
     <p>
       <small
-        >Updated for version 0.2 on October 22, 2026. Source/evidence checkpoint: 519ee38. This
-        snapshot can drift; consult the repository and latest test artifacts. No hands-on learner
-        activity or reflection is claimed by this reference page.</small
+        >Updated for version 0.3 on October 22, 2026, based on checkpoint a129c44 plus the local
+        release-quality pass. This snapshot can drift; consult the repository and latest test
+        artifacts. No hands-on learner activity or reflection is claimed by this reference
+        page.</small
       >
     </p>
   </body>

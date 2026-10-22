@@ -1,6 +1,5 @@
 // Explicit opt-in only. Ordinary test/verify commands never run this file.
 import assert from 'node:assert/strict';
-import { chromium } from 'playwright';
 import { spawn } from 'node:child_process';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { APP_VERSION } from '../src/domain.mjs';
@@ -16,6 +15,8 @@ if (!key.trim() || /\s/.test(key) || /YOUR_NEW|replacement_key/i.test(key)) {
   console.error('Configure a valid replacement key locally. The key value is never printed.');
   process.exit(2);
 }
+// Do not load browser tooling until both explicit opt-in and local credentials pass.
+const { chromium } = await import('playwright');
 const origin = 'http://127.0.0.1:4100';
 const redact = (value) => String(value).replaceAll(key, '[REDACTED]');
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -150,6 +151,9 @@ try {
   assert.equal(evidence.candidate.source, data.source);
   assert.equal(evidence.challengesExcludedFromRepairPrompt, true);
   assert.equal(evidence.executionIntegrity.policyConsistent, true);
+  assert.equal(evidence.executionIntegrity.comparisonConsistent, true);
+  assert.equal(evidence.schemaVersion, 3);
+  assert.equal(evidence.runtime.observed.length, 1);
   assert.equal(record.requests, 1);
   await writeFile(path, text);
   assert.equal((await page.content()).includes(key), false);

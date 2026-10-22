@@ -137,3 +137,21 @@ test('network errors do not echo raw provider/credential details', async () => {
     (error) => !error.message.includes('secret') && /reach the model service/.test(error.message),
   );
 });
+
+test('malformed parts and provider truncation/blocking return controlled errors', async () => {
+  for (const candidate of [
+    { content: { parts: {} } },
+    { finishReason: 'MAX_TOKENS', content: { parts: [] } },
+    { finishReason: 'SAFETY', content: { parts: [] } },
+  ]) {
+    await assert.rejects(
+      generateRepair(request(), {
+        key: 'dummy',
+        fetchImpl: async () => Response.json({ candidates: [candidate] }),
+      }),
+      (error) =>
+        !/not a function/.test(error.message) &&
+        /No (incomplete )?candidate|No candidate|No incomplete candidate/.test(error.message),
+    );
+  }
+});

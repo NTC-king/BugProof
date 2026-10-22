@@ -21,5 +21,7 @@ Challenges are excluded from this app's repair payload, not secret from the owne
 
 Canonical input-overlap hashes ignore JSON object-key order and expected outcomes, and the recorded basis includes the exact candidate. They do not detect every equivalent positional/keyword call or prove statistical independence. A passing comparison requires one matching recorded policy hash for every case in both versions; hashes are not interpreter/runtime attestation.
 
+Version 0.3 additionally requires matching observed Python/Pyodide records for all outcomes and the pinned Pyodide version. A controlled browser-test mutation checks rejection of mismatched runtime metadata. A privileged local actor can still forge these records; no remote attestation is claimed. The request reader stops buffering at 64 KiB and returns HTTP 413 for oversized declared or streamed bodies. Consent revocation aborts an in-flight repair, but cannot retract already transmitted data.
+
 ## Evidence
 Server tests cover routing and request guards. Real-browser tests exercise worker-to-app network rejection, cross-origin DOM rejection, import blocking, long-computation watchdog, cancellation, export and viewport overflow. Read actual completed `artifacts/browser-results.json`; a test's existence is not proof it passed.

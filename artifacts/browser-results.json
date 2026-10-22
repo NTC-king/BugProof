@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T16:54:53.490Z",
+  "generatedAt": "2026-10-22T17:56:05.399Z",
   "browser": "155.0.4283.62",
   "findings": [
     {
@@ -16,6 +16,14 @@
     },
     {
       "check": "downloaded evidence matches actual displayed run",
+      "status": "pass"
+    },
+    {
+      "check": "evidence records the actual browser Python and pinned Pyodide runtime",
+      "status": "pass"
+    },
+    {
+      "check": "results shortcut navigates to the current evidence",
       "status": "pass"
     },
     {
@@ -59,6 +67,10 @@
       "status": "pass"
     },
     {
+      "check": "revoking consent cancels a pending repair (intercepted request; no provider call)",
+      "status": "pass"
+    },
+    {
       "check": "workspace download/import preserves source and cases without execution, provider calls or trusted provenance",
       "status": "pass"
     },
@@ -80,6 +92,14 @@
     },
     {
       "check": "actual Python dictionary-key coercion and tuple returns cannot earn a JSON pass",
+      "status": "pass"
+    },
+    {
+      "check": "matching outputs cannot pass when executed policy versions differ (controlled harness-response mutation)",
+      "status": "pass"
+    },
+    {
+      "check": "matching outputs cannot pass with mismatched runtime metadata (controlled worker-response mutation)",
       "status": "pass"
     },
     {

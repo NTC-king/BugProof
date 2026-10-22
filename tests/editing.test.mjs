@@ -70,6 +70,7 @@ test('matching expected outputs cannot pass a comparison with changed or missing
   const outcomes = [...t.examples, ...t.challenges].map((c) => ({
     caseId: c.id,
     policyHash: 'a'.repeat(64),
+    runtime: { pyodide: '314.0.7', python: '3.14.0 (unit test double)', implementation: 'cpython' },
     ...(c.expect.kind === 'raises'
       ? { status: 'raised', exceptionType: c.expect.type }
       : { status: 'returned', value: c.expect.value }),
@@ -95,4 +96,55 @@ test('matching expected outputs cannot pass a comparison with changed or missing
     assert.equal(invalid.proposed.verdict, 'inconclusive');
     assert.equal(invalid.executionIntegrity.policyConsistent, false);
   }
+});
+
+test('matching outputs and policy cannot pass with missing, mismatched or unpinned runtime metadata', async () => {
+  const t = validateTask(fixtures[0]);
+  const runtime = {
+    pyodide: '314.0.7',
+    python: '3.14.0 (unit test double)',
+    implementation: 'cpython',
+  };
+  const outcomes = [...t.examples, ...t.challenges].map((c) => ({
+    caseId: c.id,
+    policyHash: 'a'.repeat(64),
+    runtime,
+    ...(c.expect.kind === 'raises'
+      ? { status: 'raised', exceptionType: c.expect.type }
+      : { status: 'returned', value: c.expect.value }),
+  }));
+  for (const altered of [
+    undefined,
+    { ...runtime, python: 'other Python' },
+    { ...runtime, pyodide: 'other pin' },
+  ]) {
+    const report = await makeReport(
+      t,
+      fixtures[0].correct,
+      outcomes,
+      outcomes.map((o) => ({ ...o, runtime: altered })),
+      { kind: 'teaching_fixture' },
+      'runtime-unit-test',
+    );
+    assert.equal(report.executionIntegrity.policyConsistent, true);
+    assert.equal(report.executionIntegrity.runtimeConsistent, false);
+    assert.equal(report.proposed.verdict, 'inconclusive');
+  }
+});
+
+test('per-case input bound counts UTF-8 bytes rather than UTF-16 text length', () => {
+  assert.throws(
+    () =>
+      validateTask({
+        ...fixtures[0],
+        examples: [
+          {
+            id: 'unicode',
+            args: ['漢'.repeat(3000), '漢'.repeat(3000)],
+            expect: { kind: 'value', value: 0 },
+          },
+        ],
+      }),
+    /16 KiB/,
+  );
 });

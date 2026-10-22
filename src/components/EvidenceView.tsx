@@ -116,7 +116,7 @@ export function EvidenceView({ report, baseline }: { report: any; baseline: any 
             now fail
           </p>
         )}
-        {report && !report.executionIntegrity?.policyConsistent && (
+        {report && !report.executionIntegrity?.comparisonConsistent && (
           <p className="integrity-warning">
             {report.executionIntegrity?.reason ?? 'Execution policy consistency is not confirmed.'}
           </p>
@@ -303,6 +303,15 @@ export function EvidenceView({ report, baseline }: { report: any; baseline: any 
             <dd>
               {report.app.policyHashes.join(', ') ||
                 'No policy hash received; inspect incomplete results.'}
+            </dd>
+            <dt>Observed execution runtime</dt>
+            <dd>
+              {report.runtime.observed
+                ?.map(
+                  (value: any) =>
+                    `Pyodide ${value.pyodide} · ${value.python} · ${value.implementation}`,
+                )
+                .join(' | ') || 'No complete runtime metadata received.'}
             </dd>
           </dl>
         </details>

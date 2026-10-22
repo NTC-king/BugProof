@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { randomBytes } from 'node:crypto';
 import { generateRepair, MODEL } from './repair.mjs';
 import { APP_VERSION } from '../src/domain.mjs';
+import { readRequestBody } from './body.mjs';
 const ROOT = resolve(fileURLToPath(new URL('..', import.meta.url)));
 export const APP_ORIGIN = 'http://127.0.0.1:4100',
   RUNNER_ORIGIN = 'http://127.0.0.1:4101';
@@ -90,16 +91,19 @@ export async function createServers({ repair = generateRepair } = {}) {
           (req.headers['content-type'] ?? '').split(';')[0] !== 'application/json'
         )
           return json(res, 403, { error: 'Origin, session, or content type not allowed.' });
-        let length = 0,
-          chunks = [];
-        for await (const chunk of req) {
-          length += chunk.length;
-          if (length > 65536) return json(res, 413, { error: 'Repair request exceeds 64 KiB.' });
-          chunks.push(chunk);
+        let bytes;
+        try {
+          bytes = await readRequestBody(req);
+        } catch (error) {
+          if (res.destroyed) return;
+          res.setHeader('Connection', 'close');
+          return json(res, error.status === 413 ? 413 : 400, {
+            error: error.status === 413 ? error.message : 'Request body could not be read.',
+          });
         }
         let body;
         try {
-          body = JSON.parse(Buffer.concat(chunks).toString());
+          body = JSON.parse(bytes.toString());
         } catch {
           return json(res, 400, { error: 'Invalid JSON.' });
         }
@@ -149,8 +153,14 @@ export async function createServers({ repair = generateRepair } = {}) {
     }
   };
   return {
-    app: http.createServer(makeHandler(false)),
-    runner: http.createServer(makeHandler(true)),
+    app: http.createServer(
+      { requestTimeout: 15000, headersTimeout: 10000, maxHeaderSize: 8192 },
+      makeHandler(false),
+    ),
+    runner: http.createServer(
+      { requestTimeout: 15000, headersTimeout: 10000, maxHeaderSize: 8192 },
+      makeHandler(true),
+    ),
   };
 }
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
@@ -162,12 +172,18 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
     server.on('error', (e) => {
       console.error(`${name}: ${e.message}`);
       process.exitCode = 1;
-      Object.values(servers).forEach((s) => s.close());
+      Object.values(servers).forEach((s) => {
+        s.close();
+        s.closeAllConnections();
+      });
     });
     server.listen(port, '127.0.0.1', () => console.log(`${name}: http://127.0.0.1:${port}`));
   }
   const stop = () => {
-    Object.values(servers).forEach((s) => s.close());
+    Object.values(servers).forEach((s) => {
+      s.close();
+      s.closeAllConnections();
+    });
   };
   process.on('SIGINT', stop);
   process.on('SIGTERM', stop);
