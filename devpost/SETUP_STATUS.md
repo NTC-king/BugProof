@@ -2,6 +2,8 @@
 
 Updated: 2026-10-22, after the 0.3 strict browser evaluation completed at 17:56:05 UTC and its saved-evidence audit passed. Current verification details and test failures are recorded in `docs/RELEASE_0_3.md`; the prior live-model result stays historical.
 
+Follow-up: the actual Windows install/verify commands passed after lockfile reinstallation. The suite now has 55 passing tests, including eight evaluation-index regressions; the fresh 26-check browser smoke completed at 18:05:34 UTC. See `docs/ACCEPTANCE_AUDIT.md` for requirement-level evidence and the remaining entrant-review gate. No app feature, provider call or public action was added.
+
 ## Working locally
 
 - Separate new project at `F:\BugProof`; unrelated trading projects were not modified.

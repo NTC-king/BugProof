@@ -68,4 +68,6 @@ Browser tests use the explicit existing Edge path; adjust it for another environ
 
 This is separate from every trading project. The entrant explicitly approved implementing the displayed detailed proposal and requested fast execution; planning files retain that basis. No separate interview, hands-on final review, public repository, registration or submission is invented. Public name, license selection, submission prose, narration, legal/account actions and publishing remain entrant decisions/release gates.
 
+See [the acceptance audit](docs/ACCEPTANCE_AUDIT.md) for each core requirement, its evidence and the remaining human-review/release gates. The latest post-install verification passes 55 unit/server checks and 26 browser checks; the full fixture set is independently audited for all 42 distinct expected candidates.
+
 The official Learn pack is pinned under `.agents/skills` to commit `a0f065781873e8a7ed9a9a705a8dafa6a0810439`; its MIT notice is retained. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). The personal learner profile, credentials, caches and private evidence are ignored, but ignore rules do not erase Git history. The original research proposal remains in the separate research_reports directory recorded in the project setup documents.
