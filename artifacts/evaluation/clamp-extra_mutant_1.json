@@ -1,0 +1,374 @@
+{
+  "schemaVersion": 1,
+  "runId": "80783e7c-3bcb-44f0-8b0b-044d06df251d",
+  "createdAt": "2026-10-22T14:40:35.074Z",
+  "app": {
+    "version": "0.1.0",
+    "sourceRevision": "working-tree; see repository and release record",
+    "policyHashes": [
+      "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8"
+    ]
+  },
+  "runtime": {
+    "name": "Pyodide",
+    "version": "314.0.7"
+  },
+  "task": {
+    "functionName": "clamp",
+    "source": "def clamp(x, low, high):\n    return min(high, x)\n",
+    "contract": "Clamp x into the inclusive interval [low, high]. If low > high, raise ValueError. Equal bounds are valid.",
+    "examples": [
+      {
+        "id": "inside",
+        "suite": "example",
+        "args": [
+          5,
+          0,
+          10
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 5
+        },
+        "provenance": "self_authored_fixture"
+      },
+      {
+        "id": "below",
+        "suite": "example",
+        "args": [
+          -2,
+          0,
+          10
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 0
+        },
+        "provenance": "self_authored_fixture"
+      }
+    ],
+    "challenges": [
+      {
+        "id": "above",
+        "suite": "challenge",
+        "args": [
+          30,
+          0,
+          10
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 10
+        },
+        "provenance": "self_authored_fixture"
+      },
+      {
+        "id": "equal",
+        "suite": "challenge",
+        "args": [
+          4,
+          3,
+          3
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 3
+        },
+        "provenance": "self_authored_fixture"
+      },
+      {
+        "id": "reversed",
+        "suite": "challenge",
+        "args": [
+          2,
+          10,
+          0
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "raises",
+          "type": "ValueError"
+        },
+        "provenance": "self_authored_fixture"
+      }
+    ]
+  },
+  "candidate": {
+    "source": "def clamp(x, low, high):\n    return None\n",
+    "provenance": {
+      "kind": "user_pasted",
+      "label": "User-entered candidate"
+    }
+  },
+  "hashes": {
+    "original": "c302eb442d7cca11b3a239a546637388d135e09fbdb4a3b3795b046e56f9a90e",
+    "candidate": "783d3a01152cf451685c03ff8eae25a51674db332678496015ba25e535147727",
+    "contract": "7c9b68a03be5f883222d474b52bea81d4929591ce6785b8eb17b7c0759ed198b",
+    "cases": "b8ab90dfc99e50abee465feae5b105fdc561c8f63645b63e5c2558de8a10f0d3"
+  },
+  "original": {
+    "rows": [
+      {
+        "id": "inside",
+        "suite": "example",
+        "args": [
+          5,
+          0,
+          10
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 5
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": 5,
+          "caseId": "inside",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 4
+        },
+        "result": "pass"
+      },
+      {
+        "id": "below",
+        "suite": "example",
+        "args": [
+          -2,
+          0,
+          10
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 0
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": -2,
+          "caseId": "below",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 2
+        },
+        "result": "fail"
+      },
+      {
+        "id": "above",
+        "suite": "challenge",
+        "args": [
+          30,
+          0,
+          10
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 10
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": 10,
+          "caseId": "above",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "pass"
+      },
+      {
+        "id": "equal",
+        "suite": "challenge",
+        "args": [
+          4,
+          3,
+          3
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 3
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": 3,
+          "caseId": "equal",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "pass"
+      },
+      {
+        "id": "reversed",
+        "suite": "challenge",
+        "args": [
+          2,
+          10,
+          0
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "raises",
+          "type": "ValueError"
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": 0,
+          "caseId": "reversed",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "fail"
+      }
+    ],
+    "summary": {
+      "total": 5,
+      "passed": 3,
+      "failed": 2,
+      "blocked": 0,
+      "incomplete": 0
+    },
+    "verdict": "failed"
+  },
+  "proposed": {
+    "rows": [
+      {
+        "id": "inside",
+        "suite": "example",
+        "args": [
+          5,
+          0,
+          10
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 5
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": null,
+          "caseId": "inside",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 3
+        },
+        "result": "fail"
+      },
+      {
+        "id": "below",
+        "suite": "example",
+        "args": [
+          -2,
+          0,
+          10
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 0
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": null,
+          "caseId": "below",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "fail"
+      },
+      {
+        "id": "above",
+        "suite": "challenge",
+        "args": [
+          30,
+          0,
+          10
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 10
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": null,
+          "caseId": "above",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "fail"
+      },
+      {
+        "id": "equal",
+        "suite": "challenge",
+        "args": [
+          4,
+          3,
+          3
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 3
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": null,
+          "caseId": "equal",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "fail"
+      },
+      {
+        "id": "reversed",
+        "suite": "challenge",
+        "args": [
+          2,
+          10,
+          0
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "raises",
+          "type": "ValueError"
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": null,
+          "caseId": "reversed",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "fail"
+      }
+    ],
+    "summary": {
+      "total": 5,
+      "passed": 0,
+      "failed": 5,
+      "blocked": 0,
+      "incomplete": 0
+    },
+    "verdict": "failed"
+  },
+  "challengesExcludedFromRepairPrompt": null,
+  "limitations": [
+    "Passing listed tests is not proof of correctness.",
+    "Local supported-subset execution; not a hardened public sandbox.",
+    "Challenge independence is only supported for an unchanged recorded repair basis; it is unknown for pasted/teaching candidates.",
+    "Unsigned report hashes detect changes but are not cryptographic attestation."
+  ]
+}

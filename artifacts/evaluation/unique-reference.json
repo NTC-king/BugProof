@@ -1,0 +1,397 @@
+{
+  "schemaVersion": 1,
+  "runId": "5c0a3750-6319-4c16-a1f8-b3c352658281",
+  "createdAt": "2026-10-22T14:41:01.659Z",
+  "app": {
+    "version": "0.1.0",
+    "sourceRevision": "working-tree; see repository and release record",
+    "policyHashes": [
+      "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8"
+    ]
+  },
+  "runtime": {
+    "name": "Pyodide",
+    "version": "314.0.7"
+  },
+  "task": {
+    "functionName": "unique",
+    "source": "def unique(values):\n    return values\n",
+    "contract": "Return each integer once, preserving the order of its first appearance. Empty input returns an empty list.",
+    "examples": [
+      {
+        "id": "sorted",
+        "suite": "example",
+        "args": [
+          [
+            1,
+            1,
+            2,
+            2
+          ]
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": [
+            1,
+            2
+          ]
+        },
+        "provenance": "self_authored_fixture"
+      },
+      {
+        "id": "empty",
+        "suite": "example",
+        "args": [
+          []
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": []
+        },
+        "provenance": "self_authored_fixture"
+      }
+    ],
+    "challenges": [
+      {
+        "id": "order",
+        "suite": "challenge",
+        "args": [
+          [
+            3,
+            1,
+            3,
+            2
+          ]
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": [
+            3,
+            1,
+            2
+          ]
+        },
+        "provenance": "self_authored_fixture"
+      },
+      {
+        "id": "negative",
+        "suite": "challenge",
+        "args": [
+          [
+            0,
+            -2,
+            0,
+            -2,
+            1
+          ]
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": [
+            0,
+            -2,
+            1
+          ]
+        },
+        "provenance": "self_authored_fixture"
+      }
+    ]
+  },
+  "candidate": {
+    "source": "def unique(values):\n    return [x for i, x in enumerate(values) if x not in values[:i]]\n",
+    "provenance": {
+      "kind": "user_pasted",
+      "label": "User-entered candidate"
+    }
+  },
+  "hashes": {
+    "original": "8a5765fa6949c9a2a650cd3d72311f9df00c33ff86db9bc754bf4b3caee5dc9a",
+    "candidate": "6ed74f9e44297366f07054ab862db58c663b08845911095dadd7b2a83e84d54b",
+    "contract": "f0319713bf93d2f59451aacff64b2b6efb10fe468adda74d35e6af40155d47c5",
+    "cases": "afcfea48626d0b39d8af4fc5dc5337b46b33d691ceecc3286809a2b300ecbb41"
+  },
+  "original": {
+    "rows": [
+      {
+        "id": "sorted",
+        "suite": "example",
+        "args": [
+          [
+            1,
+            1,
+            2,
+            2
+          ]
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": [
+            1,
+            2
+          ]
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "caseId": "sorted",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 3
+        },
+        "result": "fail"
+      },
+      {
+        "id": "empty",
+        "suite": "example",
+        "args": [
+          []
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": []
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": [],
+          "caseId": "empty",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "pass"
+      },
+      {
+        "id": "order",
+        "suite": "challenge",
+        "args": [
+          [
+            3,
+            1,
+            3,
+            2
+          ]
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": [
+            3,
+            1,
+            2
+          ]
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": [
+            3,
+            1,
+            3,
+            2
+          ],
+          "caseId": "order",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "fail"
+      },
+      {
+        "id": "negative",
+        "suite": "challenge",
+        "args": [
+          [
+            0,
+            -2,
+            0,
+            -2,
+            1
+          ]
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": [
+            0,
+            -2,
+            1
+          ]
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": [
+            0,
+            -2,
+            0,
+            -2,
+            1
+          ],
+          "caseId": "negative",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "fail"
+      }
+    ],
+    "summary": {
+      "total": 4,
+      "passed": 1,
+      "failed": 3,
+      "blocked": 0,
+      "incomplete": 0
+    },
+    "verdict": "failed"
+  },
+  "proposed": {
+    "rows": [
+      {
+        "id": "sorted",
+        "suite": "example",
+        "args": [
+          [
+            1,
+            1,
+            2,
+            2
+          ]
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": [
+            1,
+            2
+          ]
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": [
+            1,
+            2
+          ],
+          "caseId": "sorted",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 3
+        },
+        "result": "pass"
+      },
+      {
+        "id": "empty",
+        "suite": "example",
+        "args": [
+          []
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": []
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": [],
+          "caseId": "empty",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "pass"
+      },
+      {
+        "id": "order",
+        "suite": "challenge",
+        "args": [
+          [
+            3,
+            1,
+            3,
+            2
+          ]
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": [
+            3,
+            1,
+            2
+          ]
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": [
+            3,
+            1,
+            2
+          ],
+          "caseId": "order",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "pass"
+      },
+      {
+        "id": "negative",
+        "suite": "challenge",
+        "args": [
+          [
+            0,
+            -2,
+            0,
+            -2,
+            1
+          ]
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": [
+            0,
+            -2,
+            1
+          ]
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": [
+            0,
+            -2,
+            1
+          ],
+          "caseId": "negative",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 2
+        },
+        "result": "pass"
+      }
+    ],
+    "summary": {
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "blocked": 0,
+      "incomplete": 0
+    },
+    "verdict": "pass_on_listed_tests"
+  },
+  "challengesExcludedFromRepairPrompt": null,
+  "limitations": [
+    "Passing listed tests is not proof of correctness.",
+    "Local supported-subset execution; not a hardened public sandbox.",
+    "Challenge independence is only supported for an unchanged recorded repair basis; it is unknown for pasted/teaching candidates.",
+    "Unsigned report hashes detect changes but are not cryptographic attestation."
+  ]
+}

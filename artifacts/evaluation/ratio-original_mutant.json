@@ -1,0 +1,363 @@
+{
+  "schemaVersion": 1,
+  "runId": "aa239618-7a51-443e-a6ca-ba6f3b814712",
+  "createdAt": "2026-10-22T14:43:02.846Z",
+  "app": {
+    "version": "0.1.0",
+    "sourceRevision": "working-tree; see repository and release record",
+    "policyHashes": [
+      "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8"
+    ]
+  },
+  "runtime": {
+    "name": "Pyodide",
+    "version": "314.0.7"
+  },
+  "task": {
+    "functionName": "safe_ratio",
+    "source": "def safe_ratio(numerator, denominator):\n    return numerator / denominator\n",
+    "contract": "Return numerator / denominator for finite numbers. If denominator is zero return None. A zero numerator with nonzero denominator returns zero.",
+    "examples": [
+      {
+        "id": "normal",
+        "suite": "example",
+        "args": [
+          6,
+          2
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 3
+        },
+        "provenance": "self_authored_fixture"
+      },
+      {
+        "id": "zero_denominator",
+        "suite": "example",
+        "args": [
+          1,
+          0
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": null
+        },
+        "provenance": "self_authored_fixture"
+      }
+    ],
+    "challenges": [
+      {
+        "id": "zero_numerator",
+        "suite": "challenge",
+        "args": [
+          0,
+          5
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 0
+        },
+        "provenance": "self_authored_fixture"
+      },
+      {
+        "id": "both_zero",
+        "suite": "challenge",
+        "args": [
+          0,
+          0
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": null
+        },
+        "provenance": "self_authored_fixture"
+      },
+      {
+        "id": "negative",
+        "suite": "challenge",
+        "args": [
+          -6,
+          2
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": -3
+        },
+        "provenance": "self_authored_fixture"
+      }
+    ]
+  },
+  "candidate": {
+    "source": "def safe_ratio(numerator, denominator):\n    return numerator / denominator\n",
+    "provenance": {
+      "kind": "user_pasted",
+      "label": "User-entered candidate"
+    }
+  },
+  "hashes": {
+    "original": "bfb6e6d72a85aad4df46a7013cfecc7613875d957bed8272f74131e7d426ed59",
+    "candidate": "bfb6e6d72a85aad4df46a7013cfecc7613875d957bed8272f74131e7d426ed59",
+    "contract": "3b2b1e94e29a53da20bb9b08657e5151e1d3a5518bbe61c68ec9d618b7ed44ea",
+    "cases": "0d913021bda56c16376d914f45de04e04801da8cb531fba80c2bc478ac49f846"
+  },
+  "original": {
+    "rows": [
+      {
+        "id": "normal",
+        "suite": "example",
+        "args": [
+          6,
+          2
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 3
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": 3,
+          "caseId": "normal",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 6
+        },
+        "result": "pass"
+      },
+      {
+        "id": "zero_denominator",
+        "suite": "example",
+        "args": [
+          1,
+          0
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": null
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "raised",
+          "exceptionType": "ZeroDivisionError",
+          "message": "division by zero",
+          "caseId": "zero_denominator",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "fail"
+      },
+      {
+        "id": "zero_numerator",
+        "suite": "challenge",
+        "args": [
+          0,
+          5
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 0
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": 0,
+          "caseId": "zero_numerator",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "pass"
+      },
+      {
+        "id": "both_zero",
+        "suite": "challenge",
+        "args": [
+          0,
+          0
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": null
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "raised",
+          "exceptionType": "ZeroDivisionError",
+          "message": "division by zero",
+          "caseId": "both_zero",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "fail"
+      },
+      {
+        "id": "negative",
+        "suite": "challenge",
+        "args": [
+          -6,
+          2
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": -3
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": -3,
+          "caseId": "negative",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "pass"
+      }
+    ],
+    "summary": {
+      "total": 5,
+      "passed": 3,
+      "failed": 2,
+      "blocked": 0,
+      "incomplete": 0
+    },
+    "verdict": "failed"
+  },
+  "proposed": {
+    "rows": [
+      {
+        "id": "normal",
+        "suite": "example",
+        "args": [
+          6,
+          2
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 3
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": 3,
+          "caseId": "normal",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 5
+        },
+        "result": "pass"
+      },
+      {
+        "id": "zero_denominator",
+        "suite": "example",
+        "args": [
+          1,
+          0
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": null
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "raised",
+          "exceptionType": "ZeroDivisionError",
+          "message": "division by zero",
+          "caseId": "zero_denominator",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 3
+        },
+        "result": "fail"
+      },
+      {
+        "id": "zero_numerator",
+        "suite": "challenge",
+        "args": [
+          0,
+          5
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 0
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": 0,
+          "caseId": "zero_numerator",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "pass"
+      },
+      {
+        "id": "both_zero",
+        "suite": "challenge",
+        "args": [
+          0,
+          0
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": null
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "raised",
+          "exceptionType": "ZeroDivisionError",
+          "message": "division by zero",
+          "caseId": "both_zero",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "fail"
+      },
+      {
+        "id": "negative",
+        "suite": "challenge",
+        "args": [
+          -6,
+          2
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": -3
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": -3,
+          "caseId": "negative",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "pass"
+      }
+    ],
+    "summary": {
+      "total": 5,
+      "passed": 3,
+      "failed": 2,
+      "blocked": 0,
+      "incomplete": 0
+    },
+    "verdict": "failed"
+  },
+  "challengesExcludedFromRepairPrompt": null,
+  "limitations": [
+    "Passing listed tests is not proof of correctness.",
+    "Local supported-subset execution; not a hardened public sandbox.",
+    "Challenge independence is only supported for an unchanged recorded repair basis; it is unknown for pasted/teaching candidates.",
+    "Unsigned report hashes detect changes but are not cryptographic attestation."
+  ]
+}

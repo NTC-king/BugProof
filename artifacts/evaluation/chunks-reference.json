@@ -1,0 +1,563 @@
+{
+  "schemaVersion": 1,
+  "runId": "04b24d26-84d0-493b-b8e6-8cb4c8680ee6",
+  "createdAt": "2026-10-22T14:41:24.445Z",
+  "app": {
+    "version": "0.1.0",
+    "sourceRevision": "working-tree; see repository and release record",
+    "policyHashes": [
+      "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8"
+    ]
+  },
+  "runtime": {
+    "name": "Pyodide",
+    "version": "314.0.7"
+  },
+  "task": {
+    "functionName": "chunks",
+    "source": "def chunks(values, n):\n    return [values[i:i+n] for i in range(0, len(values) - n + 1, n)]\n",
+    "contract": "Split values into consecutive chunks of size n, retaining a shorter final chunk. n must be a positive integer, otherwise raise ValueError.",
+    "examples": [
+      {
+        "id": "even",
+        "suite": "example",
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4
+          ],
+          2
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": [
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        },
+        "provenance": "self_authored_fixture"
+      },
+      {
+        "id": "zero",
+        "suite": "example",
+        "args": [
+          [
+            1
+          ],
+          0
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "raises",
+          "type": "ValueError"
+        },
+        "provenance": "self_authored_fixture"
+      }
+    ],
+    "challenges": [
+      {
+        "id": "remainder",
+        "suite": "challenge",
+        "args": [
+          [
+            1,
+            2,
+            3
+          ],
+          2
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": [
+            [
+              1,
+              2
+            ],
+            [
+              3
+            ]
+          ]
+        },
+        "provenance": "self_authored_fixture"
+      },
+      {
+        "id": "short",
+        "suite": "challenge",
+        "args": [
+          [
+            1
+          ],
+          5
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": [
+            [
+              1
+            ]
+          ]
+        },
+        "provenance": "self_authored_fixture"
+      },
+      {
+        "id": "empty",
+        "suite": "challenge",
+        "args": [
+          [],
+          2
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": []
+        },
+        "provenance": "self_authored_fixture"
+      },
+      {
+        "id": "negative",
+        "suite": "challenge",
+        "args": [
+          [
+            1
+          ],
+          -1
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "raises",
+          "type": "ValueError"
+        },
+        "provenance": "self_authored_fixture"
+      }
+    ]
+  },
+  "candidate": {
+    "source": "def chunks(values, n):\n    if n <= 0 or int(n) != n:\n        raise ValueError(\"size\")\n    return [values[i:i+n] for i in range(0, len(values), n)]\n",
+    "provenance": {
+      "kind": "user_pasted",
+      "label": "User-entered candidate"
+    }
+  },
+  "hashes": {
+    "original": "f213032234bb105cc2bf95c74b617a8efdf5db4b69ab57e621a2a495c8607543",
+    "candidate": "07d37954842fdbfbfc2dddce58d503c8ddbabd2cdc16b68394c90c85755a9ed4",
+    "contract": "940120996d79764e9660742ebfba8b34d16a3641991ad19d62cf652a23ea38d3",
+    "cases": "03bc4cca1eee7072a9b39c114e53fbafbb7a74ed786d2c68a64a4c3a0eeb8f62"
+  },
+  "original": {
+    "rows": [
+      {
+        "id": "even",
+        "suite": "example",
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4
+          ],
+          2
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": [
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": [
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "caseId": "even",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 5
+        },
+        "result": "pass"
+      },
+      {
+        "id": "zero",
+        "suite": "example",
+        "args": [
+          [
+            1
+          ],
+          0
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "raises",
+          "type": "ValueError"
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "raised",
+          "exceptionType": "ValueError",
+          "message": "range() arg 3 must not be zero",
+          "caseId": "zero",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 3
+        },
+        "result": "pass"
+      },
+      {
+        "id": "remainder",
+        "suite": "challenge",
+        "args": [
+          [
+            1,
+            2,
+            3
+          ],
+          2
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": [
+            [
+              1,
+              2
+            ],
+            [
+              3
+            ]
+          ]
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": [
+            [
+              1,
+              2
+            ]
+          ],
+          "caseId": "remainder",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 4
+        },
+        "result": "fail"
+      },
+      {
+        "id": "short",
+        "suite": "challenge",
+        "args": [
+          [
+            1
+          ],
+          5
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": [
+            [
+              1
+            ]
+          ]
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": [],
+          "caseId": "short",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 2
+        },
+        "result": "fail"
+      },
+      {
+        "id": "empty",
+        "suite": "challenge",
+        "args": [
+          [],
+          2
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": []
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": [],
+          "caseId": "empty",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 3
+        },
+        "result": "pass"
+      },
+      {
+        "id": "negative",
+        "suite": "challenge",
+        "args": [
+          [
+            1
+          ],
+          -1
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "raises",
+          "type": "ValueError"
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": [],
+          "caseId": "negative",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 2
+        },
+        "result": "fail"
+      }
+    ],
+    "summary": {
+      "total": 6,
+      "passed": 3,
+      "failed": 3,
+      "blocked": 0,
+      "incomplete": 0
+    },
+    "verdict": "failed"
+  },
+  "proposed": {
+    "rows": [
+      {
+        "id": "even",
+        "suite": "example",
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4
+          ],
+          2
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": [
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": [
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "caseId": "even",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 3
+        },
+        "result": "pass"
+      },
+      {
+        "id": "zero",
+        "suite": "example",
+        "args": [
+          [
+            1
+          ],
+          0
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "raises",
+          "type": "ValueError"
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "raised",
+          "exceptionType": "ValueError",
+          "message": "size",
+          "caseId": "zero",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 2
+        },
+        "result": "pass"
+      },
+      {
+        "id": "remainder",
+        "suite": "challenge",
+        "args": [
+          [
+            1,
+            2,
+            3
+          ],
+          2
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": [
+            [
+              1,
+              2
+            ],
+            [
+              3
+            ]
+          ]
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": [
+            [
+              1,
+              2
+            ],
+            [
+              3
+            ]
+          ],
+          "caseId": "remainder",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 2
+        },
+        "result": "pass"
+      },
+      {
+        "id": "short",
+        "suite": "challenge",
+        "args": [
+          [
+            1
+          ],
+          5
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": [
+            [
+              1
+            ]
+          ]
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": [
+            [
+              1
+            ]
+          ],
+          "caseId": "short",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "pass"
+      },
+      {
+        "id": "empty",
+        "suite": "challenge",
+        "args": [
+          [],
+          2
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": []
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": [],
+          "caseId": "empty",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 2
+        },
+        "result": "pass"
+      },
+      {
+        "id": "negative",
+        "suite": "challenge",
+        "args": [
+          [
+            1
+          ],
+          -1
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "raises",
+          "type": "ValueError"
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "raised",
+          "exceptionType": "ValueError",
+          "message": "size",
+          "caseId": "negative",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 3
+        },
+        "result": "pass"
+      }
+    ],
+    "summary": {
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "blocked": 0,
+      "incomplete": 0
+    },
+    "verdict": "pass_on_listed_tests"
+  },
+  "challengesExcludedFromRepairPrompt": null,
+  "limitations": [
+    "Passing listed tests is not proof of correctness.",
+    "Local supported-subset execution; not a hardened public sandbox.",
+    "Challenge independence is only supported for an unchanged recorded repair basis; it is unknown for pasted/teaching candidates.",
+    "Unsigned report hashes detect changes but are not cryptographic attestation."
+  ]
+}

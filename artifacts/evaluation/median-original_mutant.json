@@ -1,0 +1,458 @@
+{
+  "schemaVersion": 1,
+  "runId": "8268b331-3f54-4982-a0e0-519354a85561",
+  "createdAt": "2026-10-22T14:40:03.070Z",
+  "app": {
+    "version": "0.1.0",
+    "sourceRevision": "working-tree; see repository and release record",
+    "policyHashes": [
+      "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8"
+    ]
+  },
+  "runtime": {
+    "name": "Pyodide",
+    "version": "314.0.7"
+  },
+  "task": {
+    "functionName": "median",
+    "source": "def median(values):\n    ordered = sorted(values)\n    return ordered[(len(ordered) - 1) // 2]\n",
+    "contract": "Return the median of finite numeric values, sorting without mutating input. For an even count, average the two central values. Empty input must raise ValueError.",
+    "examples": [
+      {
+        "id": "odd",
+        "suite": "example",
+        "args": [
+          [
+            3,
+            1,
+            2
+          ]
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 2
+        },
+        "provenance": "self_authored_fixture"
+      },
+      {
+        "id": "two",
+        "suite": "example",
+        "args": [
+          [
+            2,
+            8
+          ]
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 5
+        },
+        "provenance": "self_authored_fixture"
+      }
+    ],
+    "challenges": [
+      {
+        "id": "four",
+        "suite": "challenge",
+        "args": [
+          [
+            10,
+            2,
+            8,
+            4
+          ]
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 6
+        },
+        "provenance": "self_authored_fixture"
+      },
+      {
+        "id": "negative",
+        "suite": "challenge",
+        "args": [
+          [
+            -9,
+            -3,
+            -5,
+            -1
+          ]
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": -4
+        },
+        "provenance": "self_authored_fixture"
+      },
+      {
+        "id": "single",
+        "suite": "challenge",
+        "args": [
+          [
+            7
+          ]
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 7
+        },
+        "provenance": "self_authored_fixture"
+      },
+      {
+        "id": "empty",
+        "suite": "challenge",
+        "args": [
+          []
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "raises",
+          "type": "ValueError"
+        },
+        "provenance": "self_authored_fixture"
+      }
+    ]
+  },
+  "candidate": {
+    "source": "def median(values):\n    ordered = sorted(values)\n    return ordered[(len(ordered) - 1) // 2]\n",
+    "provenance": {
+      "kind": "user_pasted",
+      "label": "User-entered candidate"
+    }
+  },
+  "hashes": {
+    "original": "1fd2e56c6432599ea37b89baa172c0965d5db27d6ae38811d1d399b90d4983f2",
+    "candidate": "1fd2e56c6432599ea37b89baa172c0965d5db27d6ae38811d1d399b90d4983f2",
+    "contract": "f2e596e460f21e3bd5d4701e50ff38b4871ec6e6472c6d961ae934a4f960546a",
+    "cases": "25a4676d1b8fa1e9602286f923b3d8f34bc7a59254a0d87a9c297f04fc367cc0"
+  },
+  "original": {
+    "rows": [
+      {
+        "id": "odd",
+        "suite": "example",
+        "args": [
+          [
+            3,
+            1,
+            2
+          ]
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 2
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": 2,
+          "caseId": "odd",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 4
+        },
+        "result": "pass"
+      },
+      {
+        "id": "two",
+        "suite": "example",
+        "args": [
+          [
+            2,
+            8
+          ]
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 5
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": 2,
+          "caseId": "two",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 2
+        },
+        "result": "fail"
+      },
+      {
+        "id": "four",
+        "suite": "challenge",
+        "args": [
+          [
+            10,
+            2,
+            8,
+            4
+          ]
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 6
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": 4,
+          "caseId": "four",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 2
+        },
+        "result": "fail"
+      },
+      {
+        "id": "negative",
+        "suite": "challenge",
+        "args": [
+          [
+            -9,
+            -3,
+            -5,
+            -1
+          ]
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": -4
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": -5,
+          "caseId": "negative",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 2
+        },
+        "result": "fail"
+      },
+      {
+        "id": "single",
+        "suite": "challenge",
+        "args": [
+          [
+            7
+          ]
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 7
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": 7,
+          "caseId": "single",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "pass"
+      },
+      {
+        "id": "empty",
+        "suite": "challenge",
+        "args": [
+          []
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "raises",
+          "type": "ValueError"
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "raised",
+          "exceptionType": "IndexError",
+          "message": "list index out of range",
+          "caseId": "empty",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "fail"
+      }
+    ],
+    "summary": {
+      "total": 6,
+      "passed": 2,
+      "failed": 4,
+      "blocked": 0,
+      "incomplete": 0
+    },
+    "verdict": "failed"
+  },
+  "proposed": {
+    "rows": [
+      {
+        "id": "odd",
+        "suite": "example",
+        "args": [
+          [
+            3,
+            1,
+            2
+          ]
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 2
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": 2,
+          "caseId": "odd",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 3
+        },
+        "result": "pass"
+      },
+      {
+        "id": "two",
+        "suite": "example",
+        "args": [
+          [
+            2,
+            8
+          ]
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 5
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": 2,
+          "caseId": "two",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 2
+        },
+        "result": "fail"
+      },
+      {
+        "id": "four",
+        "suite": "challenge",
+        "args": [
+          [
+            10,
+            2,
+            8,
+            4
+          ]
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 6
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": 4,
+          "caseId": "four",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 2
+        },
+        "result": "fail"
+      },
+      {
+        "id": "negative",
+        "suite": "challenge",
+        "args": [
+          [
+            -9,
+            -3,
+            -5,
+            -1
+          ]
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": -4
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": -5,
+          "caseId": "negative",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 2
+        },
+        "result": "fail"
+      },
+      {
+        "id": "single",
+        "suite": "challenge",
+        "args": [
+          [
+            7
+          ]
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 7
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": 7,
+          "caseId": "single",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 2
+        },
+        "result": "pass"
+      },
+      {
+        "id": "empty",
+        "suite": "challenge",
+        "args": [
+          []
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "raises",
+          "type": "ValueError"
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "raised",
+          "exceptionType": "IndexError",
+          "message": "list index out of range",
+          "caseId": "empty",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "fail"
+      }
+    ],
+    "summary": {
+      "total": 6,
+      "passed": 2,
+      "failed": 4,
+      "blocked": 0,
+      "incomplete": 0
+    },
+    "verdict": "failed"
+  },
+  "challengesExcludedFromRepairPrompt": null,
+  "limitations": [
+    "Passing listed tests is not proof of correctness.",
+    "Local supported-subset execution; not a hardened public sandbox.",
+    "Challenge independence is only supported for an unchanged recorded repair basis; it is unknown for pasted/teaching candidates.",
+    "Unsigned report hashes detect changes but are not cryptographic attestation."
+  ]
+}

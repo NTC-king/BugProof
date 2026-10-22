@@ -1,0 +1,361 @@
+{
+  "schemaVersion": 1,
+  "runId": "79f9f11a-cda3-48d5-a9b3-b79d7fa70570",
+  "createdAt": "2026-10-22T14:42:30.048Z",
+  "app": {
+    "version": "0.1.0",
+    "sourceRevision": "working-tree; see repository and release record",
+    "policyHashes": [
+      "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8"
+    ]
+  },
+  "runtime": {
+    "name": "Pyodide",
+    "version": "314.0.7"
+  },
+  "task": {
+    "functionName": "ceil_div",
+    "source": "def ceil_div(a, b):\n    return a // b\n",
+    "contract": "For integer a and positive integer b, return the smallest integer greater than or equal to a/b. b <= 0 raises ValueError.",
+    "examples": [
+      {
+        "id": "fraction",
+        "suite": "example",
+        "args": [
+          3,
+          2
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 2
+        },
+        "provenance": "self_authored_fixture"
+      },
+      {
+        "id": "exact",
+        "suite": "example",
+        "args": [
+          6,
+          3
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 2
+        },
+        "provenance": "self_authored_fixture"
+      }
+    ],
+    "challenges": [
+      {
+        "id": "negative",
+        "suite": "challenge",
+        "args": [
+          -3,
+          2
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": -1
+        },
+        "provenance": "self_authored_fixture"
+      },
+      {
+        "id": "negative_exact",
+        "suite": "challenge",
+        "args": [
+          -4,
+          2
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": -2
+        },
+        "provenance": "self_authored_fixture"
+      },
+      {
+        "id": "zero",
+        "suite": "challenge",
+        "args": [
+          3,
+          0
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "raises",
+          "type": "ValueError"
+        },
+        "provenance": "self_authored_fixture"
+      }
+    ]
+  },
+  "candidate": {
+    "source": "def ceil_div(a, b):\n    return a // b\n",
+    "provenance": {
+      "kind": "user_pasted",
+      "label": "User-entered candidate"
+    }
+  },
+  "hashes": {
+    "original": "b7750ef0b868540bd47615f6a546b28461e575e682517cf0f0a1829bb5168e0b",
+    "candidate": "b7750ef0b868540bd47615f6a546b28461e575e682517cf0f0a1829bb5168e0b",
+    "contract": "4968b6da415e7f96d772383701ed0b7413d7d634efdc4d3d7004799634fae70b",
+    "cases": "940d2d7de1190184302831c19a37de88502f427bf4b7fd3ef96fd2280699a04f"
+  },
+  "original": {
+    "rows": [
+      {
+        "id": "fraction",
+        "suite": "example",
+        "args": [
+          3,
+          2
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 2
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": 1,
+          "caseId": "fraction",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 3
+        },
+        "result": "fail"
+      },
+      {
+        "id": "exact",
+        "suite": "example",
+        "args": [
+          6,
+          3
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 2
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": 2,
+          "caseId": "exact",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "pass"
+      },
+      {
+        "id": "negative",
+        "suite": "challenge",
+        "args": [
+          -3,
+          2
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": -1
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": -2,
+          "caseId": "negative",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "fail"
+      },
+      {
+        "id": "negative_exact",
+        "suite": "challenge",
+        "args": [
+          -4,
+          2
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": -2
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": -2,
+          "caseId": "negative_exact",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "pass"
+      },
+      {
+        "id": "zero",
+        "suite": "challenge",
+        "args": [
+          3,
+          0
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "raises",
+          "type": "ValueError"
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "raised",
+          "exceptionType": "ZeroDivisionError",
+          "message": "division by zero",
+          "caseId": "zero",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "fail"
+      }
+    ],
+    "summary": {
+      "total": 5,
+      "passed": 2,
+      "failed": 3,
+      "blocked": 0,
+      "incomplete": 0
+    },
+    "verdict": "failed"
+  },
+  "proposed": {
+    "rows": [
+      {
+        "id": "fraction",
+        "suite": "example",
+        "args": [
+          3,
+          2
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 2
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": 1,
+          "caseId": "fraction",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 3
+        },
+        "result": "fail"
+      },
+      {
+        "id": "exact",
+        "suite": "example",
+        "args": [
+          6,
+          3
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": 2
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": 2,
+          "caseId": "exact",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "pass"
+      },
+      {
+        "id": "negative",
+        "suite": "challenge",
+        "args": [
+          -3,
+          2
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": -1
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": -2,
+          "caseId": "negative",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "fail"
+      },
+      {
+        "id": "negative_exact",
+        "suite": "challenge",
+        "args": [
+          -4,
+          2
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": -2
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": -2,
+          "caseId": "negative_exact",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "pass"
+      },
+      {
+        "id": "zero",
+        "suite": "challenge",
+        "args": [
+          3,
+          0
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "raises",
+          "type": "ValueError"
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "raised",
+          "exceptionType": "ZeroDivisionError",
+          "message": "division by zero",
+          "caseId": "zero",
+          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "elapsedMs": 1
+        },
+        "result": "fail"
+      }
+    ],
+    "summary": {
+      "total": 5,
+      "passed": 2,
+      "failed": 3,
+      "blocked": 0,
+      "incomplete": 0
+    },
+    "verdict": "failed"
+  },
+  "challengesExcludedFromRepairPrompt": null,
+  "limitations": [
+    "Passing listed tests is not proof of correctness.",
+    "Local supported-subset execution; not a hardened public sandbox.",
+    "Challenge independence is only supported for an unchanged recorded repair basis; it is unknown for pasted/teaching candidates.",
+    "Unsigned report hashes detect changes but are not cryptographic attestation."
+  ]
+}

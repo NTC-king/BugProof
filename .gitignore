@@ -1,0 +1,21 @@
+# Development dependencies and generated artifacts
+node_modules/
+dist/
+coverage/
+test-results/
+playwright-report/
+.cache/
+
+# Personal learning context and local credentials
+/devpost/learner-profile.md
+.env
+.env.*
+!.env.example
+*.local
+
+# User-generated evidence can contain submitted source and inputs
+/artifacts/private/
+
+# Local editor and operating-system files
+.DS_Store
+Thumbs.db

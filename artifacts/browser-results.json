@@ -1,0 +1,486 @@
+{
+  "generatedAt": "2026-10-22T14:43:46.475Z",
+  "browser": "155.0.4283.62",
+  "findings": [
+    {
+      "check": "worker cannot fetch trusted API under own CSP",
+      "status": "pass"
+    },
+    {
+      "check": "median teaching candidate passes visible examples but fails independent challenge",
+      "status": "pass"
+    },
+    {
+      "check": "reference candidate passes all listed median cases",
+      "status": "pass"
+    },
+    {
+      "check": "downloaded evidence matches actual displayed run",
+      "status": "pass"
+    },
+    {
+      "check": "runner frame cannot access parent DOM",
+      "status": "pass"
+    },
+    {
+      "check": "imports rejected by real Python AST policy; edits invalidate evidence",
+      "status": "pass"
+    },
+    {
+      "check": "parent watchdog terminates policy-accepted long computation without a passing verdict",
+      "status": "pass"
+    },
+    {
+      "check": "manual cancellation awards no verdict",
+      "status": "pass"
+    },
+    {
+      "check": "deep Python syntax rejected by explicit AST depth limit",
+      "status": "pass"
+    },
+    {
+      "check": "explicit reset restores selected example and invalidates evidence",
+      "status": "pass"
+    },
+    {
+      "check": "editing during execution cancels the old revision and stale results do not return",
+      "status": "pass"
+    },
+    {
+      "check": "malformed case JSON gives an error without execution or a passing verdict",
+      "status": "pass"
+    },
+    {
+      "check": "unconfigured live-repair UI reports an honest no-key error without an external model call",
+      "status": "pass"
+    },
+    {
+      "check": "390px layout has no horizontal page overflow",
+      "status": "pass"
+    }
+  ],
+  "evaluation": [
+    {
+      "fixture": "median",
+      "variant": "original_mutant",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": false,
+      "challengeFailures": 3,
+      "cases": 6,
+      "report": "artifacts/evaluation/median-original_mutant.json"
+    },
+    {
+      "fixture": "median",
+      "variant": "teaching_mutant",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": true,
+      "challengeFailures": 2,
+      "cases": 6,
+      "report": "artifacts/evaluation/median-teaching_mutant.json"
+    },
+    {
+      "fixture": "median",
+      "variant": "extra_mutant_1",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": false,
+      "challengeFailures": 4,
+      "cases": 6,
+      "report": "artifacts/evaluation/median-extra_mutant_1.json"
+    },
+    {
+      "fixture": "median",
+      "variant": "reference",
+      "expectedCorrect": true,
+      "verdict": "pass_on_listed_tests",
+      "examplesPass": true,
+      "challengeFailures": 0,
+      "cases": 6,
+      "report": "artifacts/evaluation/median-reference.json"
+    },
+    {
+      "fixture": "clamp",
+      "variant": "original_mutant",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": false,
+      "challengeFailures": 1,
+      "cases": 5,
+      "report": "artifacts/evaluation/clamp-original_mutant.json"
+    },
+    {
+      "fixture": "clamp",
+      "variant": "teaching_mutant",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": true,
+      "challengeFailures": 1,
+      "cases": 5,
+      "report": "artifacts/evaluation/clamp-teaching_mutant.json"
+    },
+    {
+      "fixture": "clamp",
+      "variant": "extra_mutant_1",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": false,
+      "challengeFailures": 3,
+      "cases": 5,
+      "report": "artifacts/evaluation/clamp-extra_mutant_1.json"
+    },
+    {
+      "fixture": "clamp",
+      "variant": "reference",
+      "expectedCorrect": true,
+      "verdict": "pass_on_listed_tests",
+      "examplesPass": true,
+      "challengeFailures": 0,
+      "cases": 5,
+      "report": "artifacts/evaluation/clamp-reference.json"
+    },
+    {
+      "fixture": "unique",
+      "variant": "original_mutant",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": false,
+      "challengeFailures": 2,
+      "cases": 4,
+      "report": "artifacts/evaluation/unique-original_mutant.json"
+    },
+    {
+      "fixture": "unique",
+      "variant": "teaching_mutant",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": true,
+      "challengeFailures": 2,
+      "cases": 4,
+      "report": "artifacts/evaluation/unique-teaching_mutant.json"
+    },
+    {
+      "fixture": "unique",
+      "variant": "extra_mutant_1",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": false,
+      "challengeFailures": 2,
+      "cases": 4,
+      "report": "artifacts/evaluation/unique-extra_mutant_1.json"
+    },
+    {
+      "fixture": "unique",
+      "variant": "reference",
+      "expectedCorrect": true,
+      "verdict": "pass_on_listed_tests",
+      "examplesPass": true,
+      "challengeFailures": 0,
+      "cases": 4,
+      "report": "artifacts/evaluation/unique-reference.json"
+    },
+    {
+      "fixture": "chunks",
+      "variant": "original_mutant",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": true,
+      "challengeFailures": 3,
+      "cases": 6,
+      "report": "artifacts/evaluation/chunks-original_mutant.json"
+    },
+    {
+      "fixture": "chunks",
+      "variant": "teaching_mutant",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": true,
+      "challengeFailures": 2,
+      "cases": 6,
+      "report": "artifacts/evaluation/chunks-teaching_mutant.json"
+    },
+    {
+      "fixture": "chunks",
+      "variant": "extra_mutant_1",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": false,
+      "challengeFailures": 4,
+      "cases": 6,
+      "report": "artifacts/evaluation/chunks-extra_mutant_1.json"
+    },
+    {
+      "fixture": "chunks",
+      "variant": "reference",
+      "expectedCorrect": true,
+      "verdict": "pass_on_listed_tests",
+      "examplesPass": true,
+      "challengeFailures": 0,
+      "cases": 6,
+      "report": "artifacts/evaluation/chunks-reference.json"
+    },
+    {
+      "fixture": "mean",
+      "variant": "original_mutant",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": false,
+      "challengeFailures": 2,
+      "cases": 5,
+      "report": "artifacts/evaluation/mean-original_mutant.json"
+    },
+    {
+      "fixture": "mean",
+      "variant": "teaching_mutant",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": true,
+      "challengeFailures": 1,
+      "cases": 5,
+      "report": "artifacts/evaluation/mean-teaching_mutant.json"
+    },
+    {
+      "fixture": "mean",
+      "variant": "extra_mutant_1",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": false,
+      "challengeFailures": 3,
+      "cases": 5,
+      "report": "artifacts/evaluation/mean-extra_mutant_1.json"
+    },
+    {
+      "fixture": "mean",
+      "variant": "reference",
+      "expectedCorrect": true,
+      "verdict": "pass_on_listed_tests",
+      "examplesPass": true,
+      "challengeFailures": 0,
+      "cases": 5,
+      "report": "artifacts/evaluation/mean-reference.json"
+    },
+    {
+      "fixture": "sorted",
+      "variant": "original_mutant",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": false,
+      "challengeFailures": 0,
+      "cases": 5,
+      "report": "artifacts/evaluation/sorted-original_mutant.json"
+    },
+    {
+      "fixture": "sorted",
+      "variant": "teaching_mutant",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": true,
+      "challengeFailures": 1,
+      "cases": 5,
+      "report": "artifacts/evaluation/sorted-teaching_mutant.json"
+    },
+    {
+      "fixture": "sorted",
+      "variant": "extra_mutant_1",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": false,
+      "challengeFailures": 3,
+      "cases": 5,
+      "report": "artifacts/evaluation/sorted-extra_mutant_1.json"
+    },
+    {
+      "fixture": "sorted",
+      "variant": "reference",
+      "expectedCorrect": true,
+      "verdict": "pass_on_listed_tests",
+      "examplesPass": true,
+      "challengeFailures": 0,
+      "cases": 5,
+      "report": "artifacts/evaluation/sorted-reference.json"
+    },
+    {
+      "fixture": "first",
+      "variant": "original_mutant",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": false,
+      "challengeFailures": 0,
+      "cases": 5,
+      "report": "artifacts/evaluation/first-original_mutant.json"
+    },
+    {
+      "fixture": "first",
+      "variant": "teaching_mutant",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": true,
+      "challengeFailures": 2,
+      "cases": 5,
+      "report": "artifacts/evaluation/first-teaching_mutant.json"
+    },
+    {
+      "fixture": "first",
+      "variant": "reference",
+      "expectedCorrect": true,
+      "verdict": "pass_on_listed_tests",
+      "examplesPass": true,
+      "challengeFailures": 0,
+      "cases": 5,
+      "report": "artifacts/evaluation/first-reference.json"
+    },
+    {
+      "fixture": "ceil",
+      "variant": "original_mutant",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": false,
+      "challengeFailures": 2,
+      "cases": 5,
+      "report": "artifacts/evaluation/ceil-original_mutant.json"
+    },
+    {
+      "fixture": "ceil",
+      "variant": "teaching_mutant",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": true,
+      "challengeFailures": 1,
+      "cases": 5,
+      "report": "artifacts/evaluation/ceil-teaching_mutant.json"
+    },
+    {
+      "fixture": "ceil",
+      "variant": "reference",
+      "expectedCorrect": true,
+      "verdict": "pass_on_listed_tests",
+      "examplesPass": true,
+      "challengeFailures": 0,
+      "cases": 5,
+      "report": "artifacts/evaluation/ceil-reference.json"
+    },
+    {
+      "fixture": "intersection",
+      "variant": "original_mutant",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": false,
+      "challengeFailures": 1,
+      "cases": 4,
+      "report": "artifacts/evaluation/intersection-original_mutant.json"
+    },
+    {
+      "fixture": "intersection",
+      "variant": "teaching_mutant",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": true,
+      "challengeFailures": 1,
+      "cases": 4,
+      "report": "artifacts/evaluation/intersection-teaching_mutant.json"
+    },
+    {
+      "fixture": "intersection",
+      "variant": "reference",
+      "expectedCorrect": true,
+      "verdict": "pass_on_listed_tests",
+      "examplesPass": true,
+      "challengeFailures": 0,
+      "cases": 4,
+      "report": "artifacts/evaluation/intersection-reference.json"
+    },
+    {
+      "fixture": "ratio",
+      "variant": "original_mutant",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": false,
+      "challengeFailures": 1,
+      "cases": 5,
+      "report": "artifacts/evaluation/ratio-original_mutant.json"
+    },
+    {
+      "fixture": "ratio",
+      "variant": "teaching_mutant",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": true,
+      "challengeFailures": 1,
+      "cases": 5,
+      "report": "artifacts/evaluation/ratio-teaching_mutant.json"
+    },
+    {
+      "fixture": "ratio",
+      "variant": "reference",
+      "expectedCorrect": true,
+      "verdict": "pass_on_listed_tests",
+      "examplesPass": true,
+      "challengeFailures": 0,
+      "cases": 5,
+      "report": "artifacts/evaluation/ratio-reference.json"
+    },
+    {
+      "fixture": "rotate",
+      "variant": "original_mutant",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": false,
+      "challengeFailures": 0,
+      "cases": 5,
+      "report": "artifacts/evaluation/rotate-original_mutant.json"
+    },
+    {
+      "fixture": "rotate",
+      "variant": "teaching_mutant",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": true,
+      "challengeFailures": 1,
+      "cases": 5,
+      "report": "artifacts/evaluation/rotate-teaching_mutant.json"
+    },
+    {
+      "fixture": "rotate",
+      "variant": "reference",
+      "expectedCorrect": true,
+      "verdict": "pass_on_listed_tests",
+      "examplesPass": true,
+      "challengeFailures": 0,
+      "cases": 5,
+      "report": "artifacts/evaluation/rotate-reference.json"
+    },
+    {
+      "fixture": "prefix",
+      "variant": "original_mutant",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": false,
+      "challengeFailures": 2,
+      "cases": 5,
+      "report": "artifacts/evaluation/prefix-original_mutant.json"
+    },
+    {
+      "fixture": "prefix",
+      "variant": "teaching_mutant",
+      "expectedCorrect": false,
+      "verdict": "failed",
+      "examplesPass": true,
+      "challengeFailures": 2,
+      "cases": 5,
+      "report": "artifacts/evaluation/prefix-teaching_mutant.json"
+    },
+    {
+      "fixture": "prefix",
+      "variant": "reference",
+      "expectedCorrect": true,
+      "verdict": "pass_on_listed_tests",
+      "examplesPass": true,
+      "challengeFailures": 0,
+      "cases": 5,
+      "report": "artifacts/evaluation/prefix-reference.json"
+    }
+  ],
+  "modelTests": "No live model request: no key configured. Provider tests use response doubles.",
+  "limits": "These checks do not prove adversarial sandbox soundness or broad repair accuracy."
+}
