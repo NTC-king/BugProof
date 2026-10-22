@@ -23,25 +23,31 @@ Setup needs network access to obtain packages. Normal verification uses locally 
 4. Edit a case/source: previous evidence is invalidated. Cancellation/timeouts do not award a new pass.
 5. Export JSON evidence containing sources, cases, actual outcomes, runtime/policy hashes and provenance. Exports may contain sensitive code.
 
-All teaching/reference/mutant candidates are hand-authored, not live model samples. The source diff is a simple line-presence comparison, not an automatically applied patch.
+All teaching/reference/mutant candidates are hand-authored, not live model samples. The source diff is an ordered line comparison with line numbers and a 400-line-per-version cap, not an automatically applied patch.
+
+The first issue card shows the exact input, expected result and observed result. Table filters only change the displayed rows; they never change the full verdict. Original-to-candidate improvement/regression counts refer to the listed checks, not a general correctness score.
+
+Use **Save workspace JSON** and **Open workspace JSON** to preserve a task/candidate explicitly. These are different from evidence reports: opening a workspace validates data, clears old evidence, resets provider consent and labels the candidate as imported. It does not execute code or call a model. No automatic browser storage is used. Files contain your source/cases; review them before sharing. Invalid imports leave current work unchanged.
 
 ## Optional live repair
 
 Verification and pasted candidates need no key. For live repair, create an ignored `.env` from `.env.example`, configure your own authorized `BUGPROOF_GEMINI_KEY` locally, restart, review provider data handling/costs, and check the UI consent box. **Never paste credentials into chat or commit them.**
 
-The default model is `gemini-3.5-flash-lite`. The proxy uses a fixed provider endpoint, exact Host/Origin/session checks, bounded JSON/output and three requests per minute. No paid fallback or automatic retry exists. A key's presence does not establish a free quota or monetary cap.
+The default model is `gemini-3.5-flash-lite`. The proxy uses a fixed provider endpoint (redirects refused), exact Host/Origin/session checks, a 64 KiB streamed reply cap, a 45-second combined request/read deadline and three requests per minute. No paid fallback or automatic retry exists. Cancelling/disconnecting aborts the upstream connection, but cannot undo provider work or charges already incurred. A key's presence does not establish a free quota or monetary cap.
 
-Only source, contract and visible examples are sent; challenges are excluded. Recorded basis hashes invalidate independence claims if inputs are subsequently changed. Independence is unknown for pasted/teaching candidates and is not secrecy against the app owner.
+Only source, contract and normalized visible examples are sent; challenges and extra case metadata are excluded. Recorded basis hashes bind the original, contract, visible cases and exact generated candidate. Input-overlap checks use canonical JSON, independent of object-key order or expected answer. This does not detect every semantically equivalent Python call or prove secrecy/statistical independence. Exclusion is unknown for pasted/imported/teaching candidates. A comparison cannot receive a passing verdict without matching recorded execution-policy hashes for every case in both versions.
 
 **No live provider request has been verified during initial implementation.** Provider tests use explicit response doubles. Do not confuse their passing count with AI repair performance.
 
 ## Supported Python and safety
 
-One synchronous function with finite JSON arguments/results; approved direct built-ins, arithmetic, conditions, indexing, bounded for loops and list/set/dict comprehensions. Imports, attributes/methods, classes, decorators, annotations, defaults, recursion, generators, dynamic evaluation, files/network/processes and candidate package installation are unsupported.
+One synchronous function with finite JSON arguments/results; approved direct built-ins, arithmetic, conditions, indexing, bounded for loops and list/set/dict comprehensions. Returned objects need string keys; tuples, non-finite numbers and implicit key conversions are not supported JSON evidence. Imports, attributes/methods, nested/helper functions, classes, decorators, annotations, defaults, recursion, generators, dynamic evaluation, files/network/processes and candidate package installation are unsupported.
 
 The AST policy is in `runner/harness.py`. Python executes only in browser Pyodide, never through host Python, Node or a shell. A worker alone is not a secure sandbox. See [docs/THREAT_MODEL.md](docs/THREAT_MODEL.md) for controls and residual memory/adversarial risks. Do not expose either local port publicly.
 
 ## Checks
+
+Run `verify-local.ps1` for build, unit/server tests and the browser journey, or `verify-local.ps1 -Evaluate` to include all 42 hand-authored candidates. The tests make no real model call. Node commands are also available directly:
 
 ```powershell
 node node_modules/typescript/bin/tsc --noEmit
@@ -50,7 +56,7 @@ node --test tests/*.test.mjs
 node tests/browser.mjs --evaluate
 ```
 
-Browser tests use the explicit existing Edge path; adjust it for another environment. They start/stop their own server if needed. Latest completed results are in `artifacts/browser-results.json`, with exact candidate reports in `artifacts/evaluation`. Private screenshots/sample exports are under ignored `.cache`. See [docs/EVALUATION_PROTOCOL.md](docs/EVALUATION_PROTOCOL.md) before interpreting counts.
+Browser tests use the explicit existing Edge path; adjust it for another environment. They start/stop their own server if needed. Full completed results are in `artifacts/browser-results.json`, with exact candidate reports in `artifacts/evaluation`; smaller smoke runs use `artifacts/browser-smoke-results.json` so they cannot overwrite the full evaluation summary. Private screenshots/sample exports are under ignored `.cache`. Source formatting is reproducible with `npm run format` / `npm run format:check`. See [docs/EVALUATION_PROTOCOL.md](docs/EVALUATION_PROTOCOL.md) before interpreting counts, and [docs/UPGRADE_0_2.md](docs/UPGRADE_0_2.md) for the upgrade record.
 
 ## Project and competition state
 

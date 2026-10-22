@@ -1,1 +1,138 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BugProof — source map</title><style>body{font:16px/1.7 system-ui,sans-serif;max-width:850px;margin:40px auto;padding:0 24px;background:#f5f4ed;color:#203433}h1{font-family:Georgia,serif;font-size:42px;line-height:1.1}h2{font-size:20px;margin-top:35px}.flow{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.flow b{border:1px solid #b7c6b0;background:#fffef9;padding:16px;border-radius:8px}code{background:#e8edde;padding:2px 5px;overflow-wrap:anywhere}a{color:#315f40}small{color:#586a52}li{margin:10px 0}</style></head><body><p><small>REFERENCE ROUTE · NOT A CLAIM OF COMPLETED USER REVIEW</small></p><h1>From a proposed fix<br>to recorded evidence.</h1><p>BugProof runs one supported Python function in a separate browser origin. The model supplies a candidate; the application—not the model—compares actual results to explicit expectations.</p><div class="flow" aria-label="Input to execution to evidence"><b>Choose &amp; run</b><span>→</span><b>Restricted worker</b><span>→</span><b>Compare &amp; export</b></div><h2>Three source stops</h2><ol><li><code>src/App.tsx</code> — <code>run</code> freezes the entered task/candidate, invokes both runs and rejects stale revisions. <code>requestRepair</code> sends only visible examples after consent.</li><li><code>src/runner.ts</code> — <code>execute</code> validates cross-origin messages and cancellation. <code>runner/frame.mjs</code> owns worker deadlines; <code>runner/harness.py</code> defines the supported AST policy. Python runs in browser Pyodide, not host Python.</li><li><code>src/domain.mjs</code> — <code>assess</code>, <code>verdict</code> and <code>makeReport</code> compare outputs, withhold passes for incomplete evidence and record sources/cases/policy hashes. The UI renders these records and exports JSON.</li></ol><h2>To change this, start here</h2><ul><li>Task contracts, visible/challenge cases and teaching candidates: <code>src/fixtures.mjs</code>.</li><li>Visual layout and spacing: <code>src/App.tsx</code> and <code>src/styles.css</code>.</li><li>Result semantics and provenance: <code>src/domain.mjs</code>, with tests in <code>tests/domain.test.mjs</code> and <code>tests/provenance.test.mjs</code>.</li><li>Optional live provider: <code>server/repair.mjs</code>. Never add credentials to source or this map.</li></ul><h2>A practice to reuse</h2><p>Make the evidence explicit before declaring success. An initial browser-test wait could read the original's intermediate verdict before candidate verification finished. <code>tests/browser.mjs → waitDone</code> now waits for the run to end. Separately, a sorted-list fixture used an unsupported generator expression: the evaluation correctly stopped, and the fixture was rewritten within the existing policy. A green headline must correspond to the state and behavior actually checked.</p><h2>Run again</h2><p>In the project directory, run <code>start-local.ps1</code>, then open <code>http://127.0.0.1:4100</code>. Both local ports 4100 and 4101 are required. The real-browser checks are <code>node tests/browser.mjs</code>; the extended owned-fixture evaluation adds <code>--evaluate</code>.</p><p><small>Working-tree map prepared October 22, 2026, before the first source checkpoint. This snapshot can drift; consult the repository and latest test artifacts. No hands-on learner activity or reflection is claimed by this reference page.</small></p></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>BugProof — source map</title>
+    <style>
+      body {
+        font:
+          16px/1.7 system-ui,
+          sans-serif;
+        max-width: 850px;
+        margin: 40px auto;
+        padding: 0 24px;
+        background: #f5f4ed;
+        color: #203433;
+      }
+      h1 {
+        font-family: Georgia, serif;
+        font-size: 42px;
+        line-height: 1.1;
+      }
+      h2 {
+        font-size: 20px;
+        margin-top: 35px;
+      }
+      .flow {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .flow b {
+        border: 1px solid #b7c6b0;
+        background: #fffef9;
+        padding: 16px;
+        border-radius: 8px;
+      }
+      code {
+        background: #e8edde;
+        padding: 2px 5px;
+        overflow-wrap: anywhere;
+      }
+      a {
+        color: #315f40;
+      }
+      small {
+        color: #586a52;
+      }
+      li {
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <p><small>REFERENCE ROUTE · NOT A CLAIM OF COMPLETED USER REVIEW</small></p>
+    <h1>From a proposed fix<br />to recorded evidence.</h1>
+    <p>
+      BugProof runs one supported Python function in a separate browser origin. The model supplies a
+      candidate; the application—not the model—compares actual results to explicit expectations.
+    </p>
+    <div class="flow" aria-label="Input to execution to evidence">
+      <b>Choose &amp; run</b><span>→</span><b>Restricted worker</b><span>→</span
+      ><b>Compare &amp; export</b>
+    </div>
+    <h2>Three source stops</h2>
+    <ol>
+      <li>
+        <code>src/App.tsx</code> — <code>run</code> freezes the entered task/candidate, invokes both
+        runs and rejects stale revisions. <code>requestRepair</code> sends only visible examples
+        after consent.
+      </li>
+      <li>
+        <code>src/runner.ts</code> — <code>execute</code> validates cross-origin messages and
+        cancellation. <code>runner/frame.mjs</code> owns worker deadlines;
+        <code>runner/harness.py</code> defines the supported AST policy. Python runs in browser
+        Pyodide, not host Python.
+      </li>
+      <li>
+        <code>src/domain.mjs</code> — <code>assess</code>, <code>verdict</code> and
+        <code>makeReport</code> compare outputs, withhold passes for incomplete evidence and record
+        sources/cases/policy hashes. <code>src/components/EvidenceView.tsx → EvidenceView</code>
+        renders the first issue, filters and counts. A passing comparison also requires matching
+        policy evidence for both versions.
+      </li>
+    </ol>
+    <h2>To change this, start here</h2>
+    <ul>
+      <li>
+        Task contracts, visible/challenge cases and teaching candidates:
+        <code>src/fixtures.mjs</code>.
+      </li>
+      <li>Visual layout and spacing: <code>src/App.tsx</code> and <code>src/styles.css</code>.</li>
+      <li>
+        Portable workspace validation: <code>src/workspace.mjs → parseWorkspace</code>. Imported
+        candidates never inherit trusted model provenance or previous verdicts.
+      </li>
+      <li>
+        Ordered line comparison: <code>src/diff.mjs → lineDiff</code> and
+        <code>src/components/EvidenceView.tsx → SourceDiff</code>.
+      </li>
+      <li>
+        Result semantics and provenance: <code>src/domain.mjs</code>, with tests in
+        <code>tests/domain.test.mjs</code> and <code>tests/provenance.test.mjs</code>.
+      </li>
+      <li>
+        Optional live provider: <code>server/repair.mjs</code>. Never add credentials to source or
+        this map.
+      </li>
+    </ul>
+    <h2>A practice to reuse</h2>
+    <p>
+      Make the evidence explicit before declaring success. An initial browser-test wait could read
+      the original's intermediate verdict before candidate verification finished.
+      <code>tests/browser.mjs → waitDone</code> now waits for the run to end. Separately, a
+      sorted-list fixture used an unsupported generator expression: the evaluation correctly
+      stopped, and the fixture was rewritten within the existing policy. A green headline must
+      correspond to the state and behavior actually checked.
+    </p>
+    <h2>Run again</h2>
+    <p>
+      In the project directory, run <code>start-local.ps1</code>, then open
+      <code>http://127.0.0.1:4100</code>. Both local ports 4100 and 4101 are required. The
+      real-browser checks are <code>node tests/browser.mjs</code>; the extended owned-fixture
+      evaluation adds <code>--evaluate</code>. On Windows, <code>verify-local.ps1</code> runs the
+      build, unit/server checks and browser journey; <code>-Evaluate</code> includes all owned
+      candidates. The tests do not call a real model.
+    </p>
+    <p>
+      <small
+        >Updated for the 0.2 working tree on October 22, 2026, based on source checkpoint 98e16b4
+        plus the upgrade changes. This snapshot can drift; consult the repository and latest test
+        artifacts. No hands-on learner activity or reflection is claimed by this reference
+        page.</small
+      >
+    </p>
+  </body>
+</html>

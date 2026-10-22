@@ -1,6 +1,6 @@
 # Implementation status
 
-Updated: 2026-10-22, after the completed 14:43:46 UTC browser evaluation.
+Updated: 2026-10-22, after the completed 16:57:05 UTC browser upgrade verification.
 
 ## Working locally
 
@@ -8,7 +8,8 @@ Updated: 2026-10-22, after the completed 14:43:46 UTC browser evaluation.
 - React/TypeScript workbench, editable cases, original-versus-candidate verification, cancellation, and JSON evidence export.
 - Real Python in a disposable Pyodide browser worker on a separate local origin; explicit supported-code policy, watchdogs and no host Python execution.
 - Optional server-side model adapter with consent, provenance, challenge exclusion, rate limit and honest no-key handling. Live behavior is not yet verified.
-- Production build and 25 unit/server tests pass. Actual Edge browser run: 14 checks pass; 30 deliberately faulty candidates fail declared checks; 12 reference candidates pass their listed cases across 12 tasks. These are hand-authored fixtures, not AI accuracy measurements.
+- Production build and 41 unit/server tests pass. Actual Edge browser run: 22 checks pass; full evaluation rejects 30 deliberately faulty candidates and passes 12 references on their listed cases across 12 tasks. These are hand-authored fixtures, not AI accuracy measurements. Exact completed runs are recorded in `docs/UPGRADE_0_2.md`.
+- Upgrade: portable workspace files, ordered line diff, first-issue explanations, table filters, JSON formatting, stricter output/provenance/policy checks, server-side request cancellation and a one-command verification launcher. No automatic persistence was added.
 - Official six-skill pack installed from the pinned source, upstream notice retained, local Git repository initialized. Local checkpoint status is recorded in Git history, not inferred from this note.
 - Private profile, secrets, dependencies and caches are ignored. No public repository, deployment, billing, registration or submission has been performed.
 

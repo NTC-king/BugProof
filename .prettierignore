@@ -1,0 +1,6 @@
+.agents/
+.cache/
+artifacts/
+node_modules/
+dist/
+devpost/learner-profile.md

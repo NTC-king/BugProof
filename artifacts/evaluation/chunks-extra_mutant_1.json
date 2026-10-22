@@ -1,12 +1,12 @@
 {
-  "schemaVersion": 1,
-  "runId": "5dc55142-213f-40a5-b128-8f6a1583378b",
-  "createdAt": "2026-10-22T14:41:18.749Z",
+  "schemaVersion": 2,
+  "runId": "98406e34-b121-4a56-819a-5d60190b66be",
+  "createdAt": "2026-10-22T16:52:18.022Z",
   "app": {
-    "version": "0.1.0",
+    "version": "0.2.0",
     "sourceRevision": "working-tree; see repository and release record",
     "policyHashes": [
-      "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8"
+      "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4"
     ]
   },
   "runtime": {
@@ -153,7 +153,7 @@
     "original": "f213032234bb105cc2bf95c74b617a8efdf5db4b69ab57e621a2a495c8607543",
     "candidate": "05916628ac933f87c2e181241d70977ad723091fa3b047d3111f8f9cf1fd0981",
     "contract": "940120996d79764e9660742ebfba8b34d16a3641991ad19d62cf652a23ea38d3",
-    "cases": "03bc4cca1eee7072a9b39c114e53fbafbb7a74ed786d2c68a64a4c3a0eeb8f62"
+    "cases": "d7951d7bb45f63b18d5911b46545255827364cc3d87f3d5a80464009483d7d9e"
   },
   "original": {
     "rows": [
@@ -197,7 +197,7 @@
             ]
           ],
           "caseId": "even",
-          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
           "elapsedMs": 4
         },
         "result": "pass"
@@ -222,8 +222,8 @@
           "exceptionType": "ValueError",
           "message": "range() arg 3 must not be zero",
           "caseId": "zero",
-          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
-          "elapsedMs": 2
+          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
+          "elapsedMs": 4
         },
         "result": "pass"
       },
@@ -261,8 +261,8 @@
             ]
           ],
           "caseId": "remainder",
-          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
-          "elapsedMs": 2
+          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
+          "elapsedMs": 3
         },
         "result": "fail"
       },
@@ -289,8 +289,8 @@
           "status": "returned",
           "value": [],
           "caseId": "short",
-          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
-          "elapsedMs": 2
+          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
+          "elapsedMs": 1
         },
         "result": "fail"
       },
@@ -311,8 +311,8 @@
           "status": "returned",
           "value": [],
           "caseId": "empty",
-          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
-          "elapsedMs": 1
+          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
+          "elapsedMs": 3
         },
         "result": "pass"
       },
@@ -335,8 +335,8 @@
           "status": "returned",
           "value": [],
           "caseId": "negative",
-          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
-          "elapsedMs": 1
+          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
+          "elapsedMs": 2
         },
         "result": "fail"
       }
@@ -383,7 +383,7 @@
           "status": "returned",
           "value": null,
           "caseId": "even",
-          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
           "elapsedMs": 3
         },
         "result": "fail"
@@ -407,7 +407,7 @@
           "status": "returned",
           "value": null,
           "caseId": "zero",
-          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
           "elapsedMs": 1
         },
         "result": "fail"
@@ -441,7 +441,7 @@
           "status": "returned",
           "value": null,
           "caseId": "remainder",
-          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
           "elapsedMs": 1
         },
         "result": "fail"
@@ -469,8 +469,8 @@
           "status": "returned",
           "value": null,
           "caseId": "short",
-          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
-          "elapsedMs": 1
+          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
+          "elapsedMs": 2
         },
         "result": "fail"
       },
@@ -491,7 +491,7 @@
           "status": "returned",
           "value": null,
           "caseId": "empty",
-          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
           "elapsedMs": 1
         },
         "result": "fail"
@@ -515,7 +515,7 @@
           "status": "returned",
           "value": null,
           "caseId": "negative",
-          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
           "elapsedMs": 1
         },
         "result": "fail"
@@ -530,11 +530,16 @@
     },
     "verdict": "failed"
   },
+  "executionIntegrity": {
+    "policyConsistent": true,
+    "reason": "Both versions completed under the same recorded policy hash."
+  },
   "challengesExcludedFromRepairPrompt": null,
   "limitations": [
     "Passing listed tests is not proof of correctness.",
     "Local supported-subset execution; not a hardened public sandbox.",
     "Challenge independence is only supported for an unchanged recorded repair basis; it is unknown for pasted/teaching candidates.",
+    "Overlap checks compare canonical JSON call inputs, not all semantically equivalent Python calls; they do not prove secrecy or statistical independence.",
     "Unsigned report hashes detect changes but are not cryptographic attestation."
   ]
 }

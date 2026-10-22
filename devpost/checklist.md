@@ -50,13 +50,18 @@ Build mode: fast, per explicit user instruction to code without routine stopping
 
 ## Final Review
 - [ ] Feedback resolved and entrant confirms ready to ship
+- [x] Upgrade implementation/mechanical verification requested 2026-10-22: reliable prompt-exposure checks, server cancellation/output bounds, true source diff, clearer failures, portable workspaces, and regression verification. This does not mark entrant feedback/review complete.
 
 ## Code Tour and App Map
 - [ ] Learning wrap-up based on actual implementation
 - [ ] Optional reflection offered, not invented
 - [ ] App map generated and shown
 
+The 0.2 reference map is regenerated and was rendered in Edge with JavaScript disabled and no HTTP requests. Source stops are prepared, not a claim that the entrant performed a tour or reflection. No additional learning interview was required for this upgrade request.
+
 ## Revisions
+- Upgrade verification completed: 41 unit/server checks; final 22 browser checks; 42-candidate full rerun; all saved report source/case/policy hashes audited. See `docs/UPGRADE_0_2.md` for separate run timestamps and the explicit test-only policy-response mutation. The runner's nested-helper loophole and lossy output conversion were closed without expanding Python permissions.
+- 2026-10-22 upgrade authorization: entrant asked to improve/upgrade the existing project as much as feasible. Preserve the kernel, stack, memory-only default and local-only boundary; add bounded editing/evidence refinements without adding hosting, accounts, automatic storage or model billing. Live-provider/user-review gates remain open.
 - 2026-10-22: Explicit instruction to code without routine pausing takes precedence over default per-checkpoint interview cadence. Mechanical completion does not imply that the entrant has performed a hands-on check. Those boxes stay open.
 - The first integrated checkpoint includes the already verified implementations of slices 1 and 2, model-adapter code and evaluation tools. No earlier commits are fabricated. Slice 3 remains unchecked until a genuine authorized live model request succeeds; slice 4 remains unchecked pending final entrant review/release checks.
 - Slice 1 verification: production build, domain/server tests and real browser execution/CSP checks pass. Slice 2 verification: editing, cancellation, malformed JSON, stale-result prevention and exported evidence pass. Full measured results are in `docs/IMPLEMENTATION_STATUS.md`.

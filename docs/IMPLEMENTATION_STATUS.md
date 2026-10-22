@@ -8,6 +8,8 @@ The local UI runs the original and candidate through real browser Python, compar
 
 ## Completed checks
 
+The initial results below are the historical 0.1 baseline. **Current 0.2:** production build and 41 unit/server tests pass; final 22-check browser run passed at 2026-10-22T16:57:05.459Z. Full 42-candidate rerun completed at 16:54:53 UTC with all 30 faulty variants rejected and all 12 references passing their listed cases. See `docs/UPGRADE_0_2.md` for exact evidence, hash audit, limitations and test-only response mutation.
+
 - Strict TypeScript check and Vite production build: passed.
 - Documented Windows launcher `start-local.ps1`: executed successfully after stopping the owned development server; rebuilt and started both local listeners. Health endpoint checked after startup.
 - Node unit/server tests: 25 passed, 0 failed. Provider tests explicitly use response doubles.

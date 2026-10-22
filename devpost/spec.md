@@ -26,8 +26,12 @@ Task/candidate/case editors and revision/cancellation state; implements Task Inp
 Separate static origin, own worker CSP, no credentials, disposable runtime, supported AST subset and parent watchdog. Implements Execution and Verification. Worker isolation is not by itself a security guarantee; memory DoS and adversarial soundness remain limitations.
 ### Domain and Reports
 Schema validation, finite JSON comparisons, verdict aggregation and SHA-256 revision evidence. Implements Evidence and Export.
+
+The 0.2 refinement uses canonical JSON for semantic input-overlap detection, binds live provenance to the exact generated candidate, and validates all returned JSON before scoring. Bounded line comparison and portable workspace parsing live in small pure modules. Explicit workspace imports reset candidate provenance; no browser storage is added.
 ### Model Proxy
 Fixed provider endpoint, strict Origin/Host/session token checks, bounded payload/rate/output, no secrets sent to client. Implements Candidate Repair. [Provider documentation](https://ai.google.dev/gemini-api/docs/structured-output).
+
+Client disconnection aborts the upstream fetch where supported; cancellation cannot undo provider work/charges already incurred. Streamed provider replies have a byte cap and one combined timeout/abort signal. No automatic retry is added.
 
 ## Data Model
 Task source/name/contract plus examples/challenges; cases with args/kwargs and value-or-exception expectation; candidate with provenance/model; case outcomes with actual value/status; report with frozen hashes and exact evidence. Memory-only; explicit JSON export. Expectations never enter the Python worker.

@@ -15,3 +15,5 @@ These public development fixtures are not a held-out model benchmark. A genuine 
 - The first extended run stopped at the sorted-list fixture: its source used a generator expression outside the declared supported subset. Five preceding fixture groups completed. The fixture was rewritten with a list comprehension, preserving its intended behavior without loosening the execution policy. The failed run is not reported as a complete evaluation.
 
 Latest completed results must be identified by their actual timestamp and source revision. Provider unit tests use response doubles; no live model request was performed in the initial implementation.
+
+The 0.2 upgrade uses report schema v2 and separately saves smoke runs to `artifacts/browser-smoke-results.json`, preserving the full fixture aggregate. A controlled browser test appends a comment to one served harness response to create a policy-hash mismatch without changing function outputs. Its purpose is to verify that the app withholds a passing comparison and shows the policy warning. It is not a benchmark candidate or a live provider result. See `docs/UPGRADE_0_2.md` for actual completed timestamps and evidence audit.

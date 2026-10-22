@@ -28,6 +28,8 @@ Actual Python, original/candidate separation, independent challenge data exclude
 Configured server-side AI adapter; no key in the browser. Pasted, teaching, recorded, and live candidates have distinct provenance. Missing provider is an honest error, not a fake fix.
 ### Evidence and Export
 Revision-bound results, case details, runtime/model metadata and source/suite hashes. Exports may contain source and must be an explicit user action.
+
+Upgrade refinements authorized 2026-10-22: use a real bounded line diff, explain the first failing check and filter case rows by outcome. Allow explicit workspace JSON download/open to preserve work without automatic persistence. Imported candidates do not inherit a trusted live-model provenance claim.
 ### Cancellation and Editing
 Cancel terminates active execution. Editing relevant input invalidates results and stale responses cannot replace a newer revision.
 

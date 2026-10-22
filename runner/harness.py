@@ -40,6 +40,8 @@ def _validate(source, function_name):
     if function_name in permitted_calls or '__' in function_name:
         raise PolicyError('Function name conflicts with a reserved built-in.')
     for node in nodes:
+        if isinstance(node, ast.FunctionDef) and node is not fn:
+            raise PolicyError('Nested/helper function definitions are unsupported.')
         if type(node) not in _ALLOWED:
             raise PolicyError('Unsupported Python construct: ' + type(node).__name__)
         if isinstance(node, ast.arg) and (node.annotation or '__' in node.arg or node.arg in permitted_calls):
@@ -60,6 +62,27 @@ def _validate(source, function_name):
             raise PolicyError('Async comprehensions are unsupported.')
     return compile(tree, '<submitted-function>', 'exec')
 
+def _validate_result(value, depth=0):
+    if depth > 8:
+        raise ValueError('Returned JSON nesting exceeds 8 levels.')
+    if value is None or type(value) is bool:
+        return
+    if type(value) in (int, float) and math.isfinite(value) and abs(value) <= 1e9:
+        return
+    if type(value) is str and len(value) <= 4096:
+        return
+    if type(value) is list and len(value) <= 200:
+        for item in value:
+            _validate_result(item, depth + 1)
+        return
+    if type(value) is dict and len(value) <= 200:
+        for key, item in value.items():
+            if type(key) is not str or key in ('__proto__', 'constructor', 'prototype'):
+                raise ValueError('Returned object keys must be supported strings; key coercion is not allowed.')
+            _validate_result(item, depth + 1)
+        return
+    raise ValueError('Return value is outside the supported finite JSON limits.')
+
 def _execute_case_json(payload_json):
     payload = json.loads(payload_json)
     try:
@@ -77,9 +100,10 @@ def _execute_case_json(payload_json):
     except Exception as exc:
         return json.dumps({'status': 'raised', 'exceptionType': type(exc).__name__, 'message': str(exc)[:1000]})
     try:
+        _validate_result(result)
         encoded = json.dumps({'status': 'returned', 'value': result}, allow_nan=False)
         if len(encoded.encode()) > 8192:
             return json.dumps({'status': 'runtime_error', 'message': 'Returned output exceeds 8 KiB.'})
         return encoded
-    except Exception:
-        return json.dumps({'status': 'runtime_error', 'message': 'Return value is not supported finite JSON.'})
+    except Exception as exc:
+        return json.dumps({'status': 'runtime_error', 'message': str(exc)[:1000]})

@@ -1,12 +1,12 @@
 {
-  "schemaVersion": 1,
-  "runId": "bf89adb3-4ec5-4d2b-b2ec-5587ba865897",
-  "createdAt": "2026-10-22T14:41:46.443Z",
+  "schemaVersion": 2,
+  "runId": "5b7810d0-b2f3-47e8-8e8d-c3d679013b9d",
+  "createdAt": "2026-10-22T16:52:46.485Z",
   "app": {
-    "version": "0.1.0",
+    "version": "0.2.0",
     "sourceRevision": "working-tree; see repository and release record",
     "policyHashes": [
-      "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8"
+      "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4"
     ]
   },
   "runtime": {
@@ -113,7 +113,7 @@
     "original": "a6b80dc4494f0e424a47973b39e6e4199caa2b63a067cfa38faa7309e7a1381c",
     "candidate": "4cba8ac3d0500b8026951f566d36832817fa4873e004724eac4b16016873570f",
     "contract": "2754c783b73f3e7a149ec719be990b10d4106f2979ee0f958cb6af4324c82dd9",
-    "cases": "18e28901b9e95c6cbe8ece674216971e6788161497e2584047fa97736464c72f"
+    "cases": "03a211c8f62f614bb4491468248aab202b080876365ea0a4766326a3eaea9747"
   },
   "original": {
     "rows": [
@@ -136,7 +136,7 @@
           "status": "returned",
           "value": 1,
           "caseId": "pair",
-          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
           "elapsedMs": 3
         },
         "result": "fail"
@@ -158,7 +158,7 @@
           "exceptionType": "ZeroDivisionError",
           "message": "division by zero",
           "caseId": "empty",
-          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
           "elapsedMs": 1
         },
         "result": "fail"
@@ -183,7 +183,7 @@
           "status": "returned",
           "value": 1,
           "caseId": "three",
-          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
           "elapsedMs": 1
         },
         "result": "pass"
@@ -209,7 +209,7 @@
           "status": "returned",
           "value": 1,
           "caseId": "four",
-          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
           "elapsedMs": 1
         },
         "result": "fail"
@@ -233,8 +233,8 @@
           "status": "returned",
           "value": -3,
           "caseId": "negative",
-          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
-          "elapsedMs": 2
+          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
+          "elapsedMs": 1
         },
         "result": "fail"
       }
@@ -269,8 +269,8 @@
           "status": "returned",
           "value": 1.5,
           "caseId": "pair",
-          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
-          "elapsedMs": 3
+          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
+          "elapsedMs": 4
         },
         "result": "pass"
       },
@@ -291,8 +291,8 @@
           "exceptionType": "ValueError",
           "message": "empty",
           "caseId": "empty",
-          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
-          "elapsedMs": 1
+          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
+          "elapsedMs": 2
         },
         "result": "pass"
       },
@@ -316,7 +316,7 @@
           "status": "returned",
           "value": 1,
           "caseId": "three",
-          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
           "elapsedMs": 2
         },
         "result": "pass"
@@ -342,7 +342,7 @@
           "status": "returned",
           "value": 1.25,
           "caseId": "four",
-          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
           "elapsedMs": 2
         },
         "result": "pass"
@@ -366,7 +366,7 @@
           "status": "returned",
           "value": -2.5,
           "caseId": "negative",
-          "policyHash": "62580b312c7c94bfd37a9b6c31db6995df668239482ef4d278a8b396b54620a8",
+          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
           "elapsedMs": 2
         },
         "result": "pass"
@@ -381,11 +381,16 @@
     },
     "verdict": "pass_on_listed_tests"
   },
+  "executionIntegrity": {
+    "policyConsistent": true,
+    "reason": "Both versions completed under the same recorded policy hash."
+  },
   "challengesExcludedFromRepairPrompt": null,
   "limitations": [
     "Passing listed tests is not proof of correctness.",
     "Local supported-subset execution; not a hardened public sandbox.",
     "Challenge independence is only supported for an unchanged recorded repair basis; it is unknown for pasted/teaching candidates.",
+    "Overlap checks compare canonical JSON call inputs, not all semantically equivalent Python calls; they do not prove secrecy or statistical independence.",
     "Unsigned report hashes detect changes but are not cryptographic attestation."
   ]
 }

@@ -1,0 +1,97 @@
+{
+  "generatedAt": "2026-10-22T16:57:05.459Z",
+  "browser": "155.0.4283.62",
+  "findings": [
+    {
+      "check": "worker cannot fetch trusted API under own CSP",
+      "status": "pass"
+    },
+    {
+      "check": "median teaching candidate passes visible examples but fails independent challenge",
+      "status": "pass"
+    },
+    {
+      "check": "reference candidate passes all listed median cases",
+      "status": "pass"
+    },
+    {
+      "check": "downloaded evidence matches actual displayed run",
+      "status": "pass"
+    },
+    {
+      "check": "runner frame cannot access parent DOM",
+      "status": "pass"
+    },
+    {
+      "check": "imports rejected by real Python AST policy; edits invalidate evidence",
+      "status": "pass"
+    },
+    {
+      "check": "nested helper definitions cannot shadow approved built-in call names",
+      "status": "pass"
+    },
+    {
+      "check": "parent watchdog terminates policy-accepted long computation without a passing verdict",
+      "status": "pass"
+    },
+    {
+      "check": "manual cancellation awards no verdict",
+      "status": "pass"
+    },
+    {
+      "check": "deep Python syntax rejected by explicit AST depth limit",
+      "status": "pass"
+    },
+    {
+      "check": "explicit reset restores selected example and invalidates evidence",
+      "status": "pass"
+    },
+    {
+      "check": "editing during execution cancels the old revision and stale results do not return",
+      "status": "pass"
+    },
+    {
+      "check": "malformed case JSON gives an error without execution or a passing verdict",
+      "status": "pass"
+    },
+    {
+      "check": "unconfigured live-repair UI reports an honest no-key error without an external model call",
+      "status": "pass"
+    },
+    {
+      "check": "workspace download/import preserves source and cases without execution, provider calls or trusted provenance",
+      "status": "pass"
+    },
+    {
+      "check": "first failing check is explained and table filters never change the full verdict",
+      "status": "pass"
+    },
+    {
+      "check": "ordered source diff renders original/candidate line numbers",
+      "status": "pass"
+    },
+    {
+      "check": "malformed workspace import preserves the current code and valid evidence",
+      "status": "pass"
+    },
+    {
+      "check": "case JSON formatting retains data and invalidates old evidence",
+      "status": "pass"
+    },
+    {
+      "check": "actual Python dictionary-key coercion and tuple returns cannot earn a JSON pass",
+      "status": "pass"
+    },
+    {
+      "check": "matching outputs cannot pass when executed policy versions differ (controlled harness-response mutation)",
+      "status": "pass"
+    },
+    {
+      "check": "390px populated evidence layout has no horizontal page overflow",
+      "status": "pass"
+    }
+  ],
+  "evaluation": [],
+  "modelTests": "No live model request was made by these tests. Provider unit/HTTP tests use explicit response doubles.",
+  "limits": "These checks do not prove adversarial sandbox soundness or broad repair accuracy."
+}

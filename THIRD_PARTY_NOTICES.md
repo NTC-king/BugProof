@@ -23,6 +23,7 @@ The lockfile is authoritative for exact transitive dependencies. Inspected insta
 | vite | 8.3.5 | MIT |
 | typescript | 5.9.3 | Apache-2.0 |
 | playwright | 1.64.1 | Apache-2.0 |
+| prettier (development formatting only) | 3.6.2 | MIT |
 
 No node_modules or runtime distribution is committed. Installation obtains the upstream packages; the local runner serves the installed Pyodide assets. Review upstream/transitive CPython/runtime notices before any redistribution or hosted deployment; these top-level labels do not constitute a complete redistribution audit. Preserve the notices distributed with dependencies.
 

@@ -1,18 +1,115 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { fixtures } from '../src/fixtures.mjs';
-import { validateTask, equalJSON, assess, verdict, makeReport, repairPayload } from '../src/domain.mjs';
-test('all owned fixtures have valid independent cases', () => { for (const f of fixtures) { const t = validateTask(f); assert.ok(t.examples.length); assert.ok(t.challenges.length); } });
+import {
+  validateTask,
+  equalJSON,
+  assess,
+  verdict,
+  makeReport,
+  repairPayload,
+} from '../src/domain.mjs';
+test('all owned fixtures have valid independent cases', () => {
+  for (const f of fixtures) {
+    const t = validateTask(f);
+    assert.ok(t.examples.length);
+    assert.ok(t.challenges.length);
+  }
+});
 test('booleans and numbers are different', () => assert.equal(equalJSON(true, 1), false));
-test('object key order is irrelevant; list order is relevant', () => { assert.ok(equalJSON({ a: 1, b: 2 }, { b: 2, a: 1 })); assert.equal(equalJSON([1, 2], [2, 1]), false); });
-test('numeric tolerance is explicit', () => { assert.equal(equalJSON(.1 + .2, .3), false); assert.equal(equalJSON(.1 + .2, .3, 1e-8), true); });
-test('missing output cannot pass', () => { const t = validateTask(fixtures[0]); assert.equal(verdict(assess([...t.examples, ...t.challenges], [])), 'inconclusive'); });
-test('a partial suite cannot pass', () => { const t = validateTask(fixtures[0]); const outcomes = [{ caseId: 'odd', status: 'returned', value: 2 }]; assert.equal(verdict(assess([...t.examples, ...t.challenges], outcomes)), 'inconclusive'); });
-test('expected exceptions match type', () => { const c = [{ id: 'e', suite: 'challenge', expect: { kind: 'raises', type: 'ValueError' } }]; assert.equal(verdict(assess(c, [{ caseId: 'e', status: 'raised', exceptionType: 'ValueError' }])), 'pass_on_listed_tests'); assert.equal(verdict(assess(c, [{ caseId: 'e', status: 'raised', exceptionType: 'TypeError' }])), 'failed'); });
-test('unsupported output is incomplete even if an exception was expected', () => { const c = [{ id: 'e', suite: 'challenge', expect: { kind: 'raises', type: 'TypeError' } }]; assert.equal(verdict(assess(c, [{ caseId: 'e', status: 'runtime_error' }])), 'inconclusive'); });
-test('no challenges means examples-only, not full pass', () => assert.equal(verdict(assess([{ id: 'x', suite: 'example', expect: { kind: 'value', value: 1 } }], [{ caseId: 'x', status: 'returned', value: 1 }])), 'examples_only'));
-test('duplicates and unexpected outcomes are rejected', () => { const c = [{ id: 'x', expect: { kind: 'value', value: 1 } }]; assert.throws(() => assess(c, [{ caseId: 'wrong' }])); assert.throws(() => assess(c, [{ caseId: 'x' }, { caseId: 'x' }])); });
-test('duplicate ids, nonfinite values, and malformed expectations are rejected', () => { assert.throws(() => validateTask({ ...fixtures[0], challenges: fixtures[0].examples })); assert.throws(() => validateTask({ ...fixtures[0], examples: [{ id: 'x', args: [NaN], expect: { kind: 'value', value: 0 } }] })); assert.throws(() => validateTask({ ...fixtures[0], examples: [{ id: 'x', args: [], expect: { kind: 'value' } }] })); });
-test('repair payload never includes independent challenges', () => { const payload = repairPayload(fixtures[0]); assert.equal(Object.hasOwn(payload, 'challenges'), false); assert.equal(JSON.stringify(payload).includes('"four"'), false); });
-test('oversized/deep JSON and invalid tolerances are rejected', () => { assert.throws(() => validateTask({ ...fixtures[0], examples: [{ id: 'big', args: [Array(201).fill(0)], expect: { kind: 'value', value: 0 } }] })); let v = 0; for (let i = 0; i < 10; i++) v = [v]; assert.throws(() => validateTask({ ...fixtures[0], examples: [{ id: 'deep', args: [v], expect: { kind: 'value', value: 0 } }] })); assert.throws(() => validateTask({ ...fixtures[0], examples: [{ id: 'tol', args: [], expect: { kind: 'value', value: 0, tolerance: Infinity } }] })); });
-test('report preserves exact sources, hashes, provenance and missing evidence', async () => { const f = fixtures[0]; const report = await makeReport(f, f.correct, [], [], { kind: 'teaching_fixture' }, 'test'); assert.equal(report.proposed.verdict, 'inconclusive'); assert.match(report.hashes.original, /^[a-f0-9]{64}$/); assert.equal(report.candidate.source, f.correct); assert.equal(report.candidate.provenance.kind, 'teaching_fixture'); assert.equal(report.challengesExcludedFromRepairPrompt, null); assert.ok(report.proposed.summary.incomplete); });
+test('object key order is irrelevant; list order is relevant', () => {
+  assert.ok(equalJSON({ a: 1, b: 2 }, { b: 2, a: 1 }));
+  assert.equal(equalJSON([1, 2], [2, 1]), false);
+});
+test('numeric tolerance is explicit', () => {
+  assert.equal(equalJSON(0.1 + 0.2, 0.3), false);
+  assert.equal(equalJSON(0.1 + 0.2, 0.3, 1e-8), true);
+});
+test('missing output cannot pass', () => {
+  const t = validateTask(fixtures[0]);
+  assert.equal(verdict(assess([...t.examples, ...t.challenges], [])), 'inconclusive');
+});
+test('a partial suite cannot pass', () => {
+  const t = validateTask(fixtures[0]);
+  const outcomes = [{ caseId: 'odd', status: 'returned', value: 2 }];
+  assert.equal(verdict(assess([...t.examples, ...t.challenges], outcomes)), 'inconclusive');
+});
+test('expected exceptions match type', () => {
+  const c = [{ id: 'e', suite: 'challenge', expect: { kind: 'raises', type: 'ValueError' } }];
+  assert.equal(
+    verdict(assess(c, [{ caseId: 'e', status: 'raised', exceptionType: 'ValueError' }])),
+    'pass_on_listed_tests',
+  );
+  assert.equal(
+    verdict(assess(c, [{ caseId: 'e', status: 'raised', exceptionType: 'TypeError' }])),
+    'failed',
+  );
+});
+test('unsupported output is incomplete even if an exception was expected', () => {
+  const c = [{ id: 'e', suite: 'challenge', expect: { kind: 'raises', type: 'TypeError' } }];
+  assert.equal(verdict(assess(c, [{ caseId: 'e', status: 'runtime_error' }])), 'inconclusive');
+});
+test('no challenges means examples-only, not full pass', () =>
+  assert.equal(
+    verdict(
+      assess(
+        [{ id: 'x', suite: 'example', expect: { kind: 'value', value: 1 } }],
+        [{ caseId: 'x', status: 'returned', value: 1 }],
+      ),
+    ),
+    'examples_only',
+  ));
+test('duplicates and unexpected outcomes are rejected', () => {
+  const c = [{ id: 'x', expect: { kind: 'value', value: 1 } }];
+  assert.throws(() => assess(c, [{ caseId: 'wrong' }]));
+  assert.throws(() => assess(c, [{ caseId: 'x' }, { caseId: 'x' }]));
+});
+test('duplicate ids, nonfinite values, and malformed expectations are rejected', () => {
+  assert.throws(() => validateTask({ ...fixtures[0], challenges: fixtures[0].examples }));
+  assert.throws(() =>
+    validateTask({
+      ...fixtures[0],
+      examples: [{ id: 'x', args: [NaN], expect: { kind: 'value', value: 0 } }],
+    }),
+  );
+  assert.throws(() =>
+    validateTask({ ...fixtures[0], examples: [{ id: 'x', args: [], expect: { kind: 'value' } }] }),
+  );
+});
+test('repair payload never includes independent challenges', () => {
+  const payload = repairPayload(fixtures[0]);
+  assert.equal(Object.hasOwn(payload, 'challenges'), false);
+  assert.equal(JSON.stringify(payload).includes('"four"'), false);
+});
+test('oversized/deep JSON and invalid tolerances are rejected', () => {
+  assert.throws(() =>
+    validateTask({
+      ...fixtures[0],
+      examples: [{ id: 'big', args: [Array(201).fill(0)], expect: { kind: 'value', value: 0 } }],
+    }),
+  );
+  let v = 0;
+  for (let i = 0; i < 10; i++) v = [v];
+  assert.throws(() =>
+    validateTask({
+      ...fixtures[0],
+      examples: [{ id: 'deep', args: [v], expect: { kind: 'value', value: 0 } }],
+    }),
+  );
+  assert.throws(() =>
+    validateTask({
+      ...fixtures[0],
+      examples: [{ id: 'tol', args: [], expect: { kind: 'value', value: 0, tolerance: Infinity } }],
+    }),
+  );
+});
+test('report preserves exact sources, hashes, provenance and missing evidence', async () => {
+  const f = fixtures[0];
+  const report = await makeReport(f, f.correct, [], [], { kind: 'teaching_fixture' }, 'test');
+  assert.equal(report.proposed.verdict, 'inconclusive');
+  assert.match(report.hashes.original, /^[a-f0-9]{64}$/);
+  assert.equal(report.candidate.source, f.correct);
+  assert.equal(report.candidate.provenance.kind, 'teaching_fixture');
+  assert.equal(report.challengesExcludedFromRepairPrompt, null);
+  assert.ok(report.proposed.summary.incomplete);
+});
