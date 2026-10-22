@@ -2,6 +2,8 @@
 
 Requested by the entrant on 2026-10-22: improve the existing local prototype. The kernel/stack and local-only boundary are preserved. No trading files, public hosting, accounts, billing or submission actions were added.
 
+Local code/evidence checkpoint: `519ee38`. Later documentation-only checkpoints may follow it; this is not a public repository or release.
+
 ## Usability
 
 - Explicit save/open workspace JSON with size/schema checks, preserved work on malformed imports, reset consent and untrusted imported-candidate provenance. No automatic storage.
