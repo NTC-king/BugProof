@@ -1,14 +1,14 @@
 # Implementation status
 
-Updated: 2026-10-22, after the completed 16:57:05 UTC browser upgrade verification.
+Updated: 2026-10-22, after the completed 17:22:28 UTC genuine live-model check.
 
 ## Working locally
 
 - Separate new project at `F:\BugProof`; unrelated trading projects were not modified.
 - React/TypeScript workbench, editable cases, original-versus-candidate verification, cancellation, and JSON evidence export.
 - Real Python in a disposable Pyodide browser worker on a separate local origin; explicit supported-code policy, watchdogs and no host Python execution.
-- Optional server-side model adapter with consent, provenance, challenge exclusion, rate limit and honest no-key handling. Live behavior is not yet verified.
-- Production build and 41 unit/server tests pass. Actual Edge browser run: 22 checks pass; full evaluation rejects 30 deliberately faulty candidates and passes 12 references on their listed cases across 12 tasks. These are hand-authored fixtures, not AI accuracy measurements. Exact completed runs are recorded in `docs/UPGRADE_0_2.md`.
+- Server-side model adapter with consent, provenance, challenge exclusion, rate limit and honest no-key handling. Genuine live behavior was verified on 2026-10-22: one median repair request, HTTP 200, 6/6 listed cases passed; see `docs/LIVE_SMOKE_2026-10-22.md`. This is one integration example, not a model benchmark.
+- Production build and 43 unit/server tests pass, including two opt-in live-test guard checks. The prior Edge browser run has 22 passing checks; full controlled evaluation rejects 30 deliberately faulty candidates and passes 12 references on their listed cases across 12 tasks. Those are hand-authored fixtures, not AI accuracy measurements. Exact controlled runs are recorded in `docs/UPGRADE_0_2.md`; the separate genuine model result is in `docs/LIVE_SMOKE_2026-10-22.md`.
 - Upgrade: portable workspace files, ordered line diff, first-issue explanations, table filters, JSON formatting, stricter output/provenance/policy checks, server-side request cancellation and a one-command verification launcher. No automatic persistence was added.
 - Official six-skill pack installed from the pinned source, upstream notice retained, local Git repository initialized. Local checkpoint status is recorded in Git history, not inferred from this note.
 - Private profile, secrets, dependencies and caches are ignored. No public repository, deployment, billing, registration or submission has been performed.

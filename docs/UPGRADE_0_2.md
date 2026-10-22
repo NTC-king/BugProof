@@ -34,4 +34,4 @@ Development-test corrections: an imported provenance label is visually uppercase
 
 ## Still not established
 
-No real model request has been verified. These fixtures are public hand-authored development tests, not held-out AI repair scores. User hands-on review, final licensing/publishing decisions, demo video and human-written submission remain open. Memory exhaustion and adversarial browser/runtime risks remain; this is not a hardened public execution service.
+At the upgrade checkpoint no real model request had been verified. Subsequently, one genuine median repair passed all 6 listed cases; see `docs/LIVE_SMOKE_2026-10-22.md`. These fixtures are public hand-authored development tests, not held-out AI repair scores. User hands-on review, final licensing/publishing decisions, demo video and human-written submission remain open. Memory exhaustion and adversarial browser/runtime risks remain; this is not a hardened public execution service.

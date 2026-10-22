@@ -1,0 +1,27 @@
+{
+  "startedAt": "2026-10-22T17:22:01.965Z",
+  "integration": "passed",
+  "model": "gemini-3.5-flash-lite",
+  "fixture": "median",
+  "requests": 1,
+  "accountCheck": "Operator confirmed a replacement key, Free Tier and billing off; no billing setting was changed or independently verified through this API.",
+  "evidence": "artifacts/live/median-evidence.json",
+  "limitations": "One public hand-authored fixture is an integration smoke test, not a held-out model benchmark or a correctness guarantee.",
+  "responseHTTP": 200,
+  "providerRoundTripMs": 18989,
+  "candidateVerdict": "pass_on_listed_tests",
+  "candidateCounts": {
+    "total": 6,
+    "passed": 6,
+    "failed": 0,
+    "blocked": 0,
+    "incomplete": 0
+  },
+  "usage": {
+    "promptTokenCount": 297,
+    "candidatesTokenCount": 120,
+    "totalTokenCount": 417
+  },
+  "promptChallengeExclusion": true,
+  "completedAt": "2026-10-22T17:22:28.884Z"
+}

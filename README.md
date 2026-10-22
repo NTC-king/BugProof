@@ -37,7 +37,9 @@ The default model is `gemini-3.5-flash-lite`. The proxy uses a fixed provider en
 
 Only source, contract and normalized visible examples are sent; challenges and extra case metadata are excluded. Recorded basis hashes bind the original, contract, visible cases and exact generated candidate. Input-overlap checks use canonical JSON, independent of object-key order or expected answer. This does not detect every semantically equivalent Python call or prove secrecy/statistical independence. Exclusion is unknown for pasted/imported/teaching candidates. A comparison cannot receive a passing verdict without matching recorded execution-policy hashes for every case in both versions.
 
-**No live provider request has been verified during initial implementation.** Provider tests use explicit response doubles. Do not confuse their passing count with AI repair performance.
+**Live integration verified on October 22, 2026:** one genuine Gemini request returned a median repair that passed all 6 listed cases (2 visible, 4 excluded challenges). The original passed 2/6. See [the live smoke record](docs/LIVE_SMOKE_2026-10-22.md) and `artifacts/live/`. This one public fixture is not a model-accuracy benchmark. Ordinary unit/browser tests still use no real model calls; provider unit tests use explicit response doubles.
+
+For a deliberate repeat only, after confirming your replacement key and Free Tier/billing-off status, use `test-live.ps1 -FreeTierConfirmed`. It uses the existing production build and permits one model request with no retry. It is never run by the normal verification command.
 
 ## Supported Python and safety
 

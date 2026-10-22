@@ -4,11 +4,11 @@ Date: 2026-10-22. Local proof of concept; not submitted or published.
 
 ## What works
 
-The local UI runs the original and candidate through real browser Python, compares actual results with explicit expectations, separates visible examples from challenges, and exports a revision-bound JSON report. Input changes invalidate old evidence; cancellation and timeouts cannot create a passing verdict. The model adapter is implemented, but its real external behavior remains unverified without an authorized key.
+The local UI runs the original and candidate through real browser Python, compares actual results with explicit expectations, separates visible examples from challenges, and exports a revision-bound JSON report. Input changes invalidate old evidence; cancellation and timeouts cannot create a passing verdict. Genuine model integration is now verified on one median fixture; see `docs/LIVE_SMOKE_2026-10-22.md` for the actual request, token counts, 6/6 result and limits.
 
 ## Completed checks
 
-The initial results below are the historical 0.1 baseline. **Current 0.2:** production build and 41 unit/server tests pass; final 22-check browser run passed at 2026-10-22T16:57:05.459Z. Full 42-candidate rerun completed at 16:54:53 UTC with all 30 faulty variants rejected and all 12 references passing their listed cases. See `docs/UPGRADE_0_2.md` for exact evidence, hash audit, limitations and test-only response mutation.
+The initial results below are the historical 0.1 baseline. **Current 0.2:** production build and 43 unit/server tests pass; the 22-check browser run passed at 2026-10-22T16:57:05.459Z. Full 42-candidate rerun completed at 16:54:53 UTC with all 30 faulty variants rejected and all 12 references passing their listed cases. A separate genuine model request completed at 17:22:28 UTC, and its generated candidate passed all 6 listed median cases. See `docs/UPGRADE_0_2.md` and `docs/LIVE_SMOKE_2026-10-22.md` for exact evidence and limitations.
 
 - Strict TypeScript check and Vite production build: passed.
 - Documented Windows launcher `start-local.ps1`: executed successfully after stopping the owned development server; rebuilt and started both local listeners. Health endpoint checked after startup.
@@ -29,7 +29,7 @@ Evidence: `artifacts/browser-results.json` and the 42 reports under `artifacts/e
 
 ## Remaining gates
 
-- Genuine model call: configure an authorized key locally, restart, consent and test a non-confidential fixture. No secret belongs in chat. Confirm provider/model compatibility and quota/cost behavior; mocks cannot establish these.
+- Ongoing account/quota/data-handling checks for future live use. The first genuine model smoke test passed after user-confirmed Free Tier/billing-off status; no billing/account settings were changed. A successful request does not independently audit an account's billing configuration.
 - Entrant hands-on review and actual feedback. Agent tests do not substitute for user review.
 - Learning wrap-up/app-map walkthrough, without inventing a learner reflection.
 - Public licensing/ownership review and explicit publication authorization. Dependency/upstream notices are retained; a project license is not selected automatically.

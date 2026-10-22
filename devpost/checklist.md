@@ -25,7 +25,7 @@ Build mode: fast, per explicit user instruction to code without routine stopping
   Verify (mechanical): Malformed inputs, incomplete verdicts, stale edits, export and browser journeys.
   Learner check: Edit a case, rerun, and inspect exported JSON.
   Commit: `Add editable cases cancellation and evidence reports`
-- [ ] **3. Live model repair adapter and honest failure handling exist**
+- [x] **3. Live model repair adapter and honest failure handling exist**
   Becomes usable: A configured provider proposes a candidate; an unconfigured provider gives a useful error.
   Why now: Add model integration only after deterministic verification works.
   PRD ref: `prd.md > Candidate Repair`
@@ -60,6 +60,7 @@ Build mode: fast, per explicit user instruction to code without routine stopping
 The 0.2 reference map is regenerated and was rendered in Edge with JavaScript disabled and no HTTP requests. Source stops are prepared, not a claim that the entrant performed a tour or reflection. No additional learning interview was required for this upgrade request.
 
 ## Revisions
+- 2026-10-22: User configured a replacement key and explicitly confirmed Free Tier with billing off, then authorized a genuine sample test without further questions. One real browser/proxy/model request succeeded; the generated median passed 6/6 listed cases under matching policy hashes. Exact record: `docs/LIVE_SMOKE_2026-10-22.md`. This closes slice 3's mechanical integration gate, not the final human app-review gate.
 - Upgrade verification completed: 41 unit/server checks; final 22 browser checks; 42-candidate full rerun; all saved report source/case/policy hashes audited. See `docs/UPGRADE_0_2.md` for separate run timestamps and the explicit test-only policy-response mutation. The runner's nested-helper loophole and lossy output conversion were closed without expanding Python permissions.
 - 2026-10-22 upgrade authorization: entrant asked to improve/upgrade the existing project as much as feasible. Preserve the kernel, stack, memory-only default and local-only boundary; add bounded editing/evidence refinements without adding hosting, accounts, automatic storage or model billing. Live-provider/user-review gates remain open.
 - 2026-10-22: Explicit instruction to code without routine pausing takes precedence over default per-checkpoint interview cadence. Mechanical completion does not imply that the entrant has performed a hands-on check. Those boxes stay open.

@@ -51,4 +51,4 @@ Optional Gemini adapter, exact model ID configured server-side. No provider requ
 Invalid code/data -> useful error; initialization/execution timeout -> terminate worker/inconclusive; provider missing/unavailable -> preserve work and show honest no-key/error state. Do not switch to host execution.
 
 ## Decisions and Open Issues
-The entrant approved implementation of the displayed plan and requested no routine pauses. Record fast mode, but leave final hands-on review unperformed. The first genuine technical uncertainty is whether the pinned runtime works under the proposed CSP; prove this early. Live-provider access, final user review, and public submission remain unverified.
+The entrant approved implementation of the displayed plan and requested no routine pauses. Record fast mode, but leave final hands-on review unperformed. The runtime/CSP uncertainty was resolved by actual browser tests. Genuine live-provider integration was verified on one median fixture on 2026-10-22 after the entrant confirmed a replacement key and Free Tier/billing-off status. See `docs/LIVE_SMOKE_2026-10-22.md`. Final user review and public submission remain unperformed.
