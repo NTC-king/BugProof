@@ -3,7 +3,9 @@ import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { fixtures } from '../src/fixtures.mjs';
-import { APP_VERSION } from '../src/domain.mjs';
+import { APP_VERSION, repairPayload } from '../src/domain.mjs';
+import { workspaceDocument } from '../src/workspace.mjs';
+import { generateRepair } from '../server/repair.mjs';
 import { readFile } from 'node:fs/promises';
 const origin = 'http://127.0.0.1:4100';
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -268,6 +270,74 @@ try {
     releaseRepair();
     await page.unroute(repairURL, holdRepair);
   }
+  await page.getByRole('button', { name: 'Reset example', exact: true }).click();
+  const rejectMalformedRepair = (route) =>
+    route.fulfill({ status: 200, json: { source: fixtures[0].correct } });
+  await page.route(repairURL, rejectMalformedRepair);
+  try {
+    await page.getByLabel(/Allow sending this non-confidential/).check();
+    await page.getByRole('button', { name: /Request live repair/ }).click();
+    await page.getByRole('alert').waitFor();
+    assert.match(await page.getByRole('alert').innerText(), /invalid candidate metadata/);
+    assert.equal(
+      await page.getByLabel('Candidate Python function').inputValue(),
+      fixtures[0].inadequate,
+    );
+    assert.match(await page.getByTestId('provenance').innerText(), /teaching fixture/i);
+    assert.equal(await page.getByTestId('verdict').count(), 0);
+    findings.push({
+      check:
+        'malformed repair metadata is rejected without a page crash or candidate change (API response double)',
+      status: 'pass',
+    });
+  } finally {
+    await page.unroute(repairURL, rejectMalformedRepair);
+  }
+  const repairDouble = await generateRepair(
+    { ...repairPayload(fixtures[0]), consent: true },
+    {
+      key: 'browser-test-placeholder-never-sent',
+      model: 'browser-response-double',
+      fetchImpl: async () =>
+        Response.json({
+          candidates: [
+            {
+              content: {
+                parts: [
+                  {
+                    text: JSON.stringify({
+                      source: fixtures[0].correct,
+                      explanation:
+                        'Controlled browser API response double, not a real model result.',
+                    }),
+                  },
+                ],
+              },
+            },
+          ],
+        }),
+    },
+  );
+  const acceptRepairDouble = (route) => route.fulfill({ status: 200, json: repairDouble });
+  await page.route(repairURL, acceptRepairDouble);
+  try {
+    await page.getByRole('button', { name: /Request live repair/ }).click();
+    await page.waitForFunction(() =>
+      document.querySelector('[role="status"]').textContent.includes('Live candidate received'),
+    );
+    assert.equal(
+      await page.getByLabel('Candidate Python function').inputValue(),
+      fixtures[0].correct,
+    );
+    assert.equal(await page.getByTestId('verdict').count(), 0);
+    findings.push({
+      check:
+        'complete repair metadata is accepted but does not create a verdict (API response double)',
+      status: 'pass',
+    });
+  } finally {
+    await page.unroute(repairURL, acceptRepairDouble);
+  }
   const evaluation = [];
   // Portable workspaces are data only. Opening one must not execute code or call a model.
   await page.getByRole('button', { name: 'Reset example', exact: true }).click();
@@ -350,6 +420,66 @@ try {
     check: 'case JSON formatting retains data and invalidates old evidence',
     status: 'pass',
   });
+  const largeWorkspace = workspaceDocument(
+    {
+      ...fixtures[0],
+      examples: Array.from({ length: 32 }, (_, index) => ({
+        id: `large_${index}`,
+        args: [Array(200).fill(1000000000)],
+        expect: { kind: 'value', value: 1000000000 },
+      })),
+      challenges: [],
+    },
+    fixtures[0].correct,
+  );
+  assert.ok(Buffer.byteLength(JSON.stringify(largeWorkspace.task.examples, null, 2)) > 131072);
+  await page.getByLabel('Workspace JSON file', { exact: true }).setInputFiles({
+    name: 'large-valid.json',
+    mimeType: 'application/json',
+    buffer: Buffer.from(JSON.stringify(largeWorkspace)),
+  });
+  await page.waitForFunction(() =>
+    document.querySelector('[role="status"]').textContent.includes('Workspace opened locally'),
+  );
+  await page.getByRole('button', { name: 'Format examples JSON', exact: true }).click();
+  assert.match(await page.getByRole('status').innerText(), /kept compact/);
+  const compactCases = await page.getByLabel('Visible examples JSON').inputValue();
+  assert.ok(Buffer.byteLength(compactCases) <= 131072);
+  assert.deepEqual(JSON.parse(compactCases), largeWorkspace.task.examples);
+  await page.getByRole('button', { name: 'Run original', exact: true }).click();
+  await waitDone(page);
+  assert.match(await page.getByTestId('verdict').innerText(), /32\/32 passed/);
+  findings.push({
+    check:
+      'large valid workspace stays editable and executes all 32 cases after compact-safe formatting',
+    status: 'pass',
+  });
+  const largeVerdict = await page.getByTestId('verdict').innerText();
+  const tooWide = {
+    ...largeWorkspace,
+    task: {
+      ...largeWorkspace.task,
+      examples: Array.from({ length: 16 }, (_, i) => ({
+        id: `wide_${i}`,
+        args: ['x'.repeat(3000), 'y'.repeat(3000), 'z'.repeat(3000)],
+        expect: { kind: 'value', value: 0 },
+      })),
+    },
+  };
+  await page.getByLabel('Workspace JSON file', { exact: true }).setInputFiles({
+    name: 'unusable-suite.json',
+    mimeType: 'application/json',
+    buffer: Buffer.from(JSON.stringify(tooWide)),
+  });
+  await page.getByRole('alert').waitFor();
+  assert.match(await page.getByRole('alert').innerText(), /editor's 128 KiB limit/);
+  assert.equal(await page.getByLabel('Visible examples JSON').inputValue(), compactCases);
+  assert.equal(await page.getByTestId('verdict').innerText(), largeVerdict);
+  findings.push({
+    check: 'unrepresentable workspace import preserves current code, cases and valid evidence',
+    status: 'pass',
+  });
+  await page.getByLabel('Teaching example').selectOption('median');
   await page.getByLabel('Function name', { exact: true }).fill('output_test');
   await page
     .getByLabel('Behavior contract', { exact: true })

@@ -1,9 +1,12 @@
 import { validateTask, validateSource } from './domain.mjs';
+import { formatCaseText } from './case-text.mjs';
 
 export const WORKSPACE_LIMIT = 256 * 1024;
 export function workspaceDocument(task, candidate) {
   const t = validateTask(task);
   validateSource(candidate);
+  formatCaseText(t.examples, 'Visible examples');
+  formatCaseText(t.challenges, 'Challenges');
   return { format: 'bugproof-workspace', version: 1, task: t, candidate };
 }
 export function parseWorkspace(text) {

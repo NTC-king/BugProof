@@ -1,6 +1,8 @@
 # Measured implementation status
 
-Date: 2026-10-22. Local proof of concept; not submitted or published.
+Date: 2026-10-24. Local proof of concept; not submitted or published.
+
+**Current 0.3.1 full check:** 63 unit/server tests, 30 browser checks, strict TypeScript, production build and actual Windows CMD startup passed. All 42 candidate comparisons (211 candidate cases) and the saved-report audit passed: 30 faulty variants rejected and 12 references passing listed cases. Fixed large-workspace editor bounds, malformed repair-response acceptance and incomplete prompt-input exclusion evidence. No new real model request; test servers stopped. See `docs/FULL_CHECK_2026-10-24.md` for exact timestamps, failed attempts, privacy checks and limits. The October 22 records below are historical.
 
 ## What works
 
@@ -8,7 +10,7 @@ The local UI runs the original and candidate through real browser Python, compar
 
 ## Completed checks
 
-The current release-quality pass is version 0.3, with schema-3 observed runtime evidence, consent-revocation cancellation, bounded request handling, setup cleanup and result navigation. See `docs/RELEASE_0_3.md` for the current verification record, including failures found during testing. The 0.1 and 0.2 results below are historical, not the current release label.
+The earlier release-quality pass was version 0.3, with schema-3 observed runtime evidence, consent-revocation cancellation, bounded request handling, setup cleanup and result navigation. See `docs/RELEASE_0_3.md` for that verification record, including failures found during testing. The 0.1, 0.2 and October 22 results below are historical, not the current release label.
 
 **0.3 quality checkpoint (`59e3f6a`):** 47 unit/server checks pass; strict TypeScript, production build and actual Command Prompt startup/health pass. The strict browser evaluation completed at `2026-10-22T17:56:05.399Z`: 26 browser checks, 42 complete candidate comparisons, 211 candidate case checks, all 30 known faulty variants rejected and all 12 references passing listed cases. The saved-report audit passed. No new live model request was made. Runtime observed: Pyodide 314.0.7 / CPython 3.14.2. A prior partial-original run was rejected by the audit and is documented in the release record.
 

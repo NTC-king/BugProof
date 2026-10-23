@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { fixtures } from '../src/fixtures.mjs';
-import { repairPayload } from '../src/domain.mjs';
+import { repairPayload, validateRepairResult } from '../src/domain.mjs';
 import { generateRepair, prepareRepair, readBoundedJSON } from '../server/repair.mjs';
 const request = () => ({ ...repairPayload(fixtures[0]), consent: true });
 test('consent required', () =>
@@ -54,6 +54,7 @@ test('bounded fixed-endpoint request and labeled live response', async () => {
   assert.equal(captured.init.body.includes('"four"'), false);
   assert.equal(out.provenance.kind, 'live_model');
   assert.equal(out.source, fixtures[0].correct);
+  assert.deepEqual(validateRepairResult(out), out, 'Actual server result matches the UI contract.');
 });
 test('malformed model JSON is rejected', async () => {
   await assert.rejects(

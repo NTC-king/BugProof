@@ -1,9 +1,9 @@
 {
   "schemaVersion": 3,
-  "runId": "974e17f7-6f05-43c3-89f8-492212624147",
-  "createdAt": "2026-10-22T17:54:58.353Z",
+  "runId": "b4f42c20-34cd-4ed8-80db-e72344c4da99",
+  "createdAt": "2026-10-23T23:26:30.432Z",
   "app": {
-    "version": "0.3.0",
+    "version": "0.3.1",
     "sourceRevision": "working-tree; see repository and release record",
     "policyHashes": [
       "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4"
@@ -160,159 +160,6 @@
             "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
             "implementation": "cpython"
           },
-          "elapsedMs": 3
-        },
-        "result": "fail"
-      },
-      {
-        "id": "empty",
-        "suite": "example",
-        "args": [
-          [],
-          [
-            1
-          ]
-        ],
-        "kwargs": {},
-        "expect": {
-          "kind": "value",
-          "value": []
-        },
-        "provenance": "self_authored_fixture",
-        "outcome": {
-          "status": "returned",
-          "value": [],
-          "caseId": "empty",
-          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
-          "runtime": {
-            "pyodide": "314.0.7",
-            "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
-            "implementation": "cpython"
-          },
-          "elapsedMs": 1
-        },
-        "result": "pass"
-      },
-      {
-        "id": "order",
-        "suite": "challenge",
-        "args": [
-          [
-            3,
-            1,
-            2,
-            3
-          ],
-          [
-            2,
-            3
-          ]
-        ],
-        "kwargs": {},
-        "expect": {
-          "kind": "value",
-          "value": [
-            3,
-            2
-          ]
-        },
-        "provenance": "self_authored_fixture",
-        "outcome": {
-          "status": "returned",
-          "value": [
-            3,
-            2,
-            3
-          ],
-          "caseId": "order",
-          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
-          "runtime": {
-            "pyodide": "314.0.7",
-            "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
-            "implementation": "cpython"
-          },
-          "elapsedMs": 1
-        },
-        "result": "fail"
-      },
-      {
-        "id": "none",
-        "suite": "challenge",
-        "args": [
-          [
-            1,
-            2
-          ],
-          [
-            3
-          ]
-        ],
-        "kwargs": {},
-        "expect": {
-          "kind": "value",
-          "value": []
-        },
-        "provenance": "self_authored_fixture",
-        "outcome": {
-          "status": "returned",
-          "value": [],
-          "caseId": "none",
-          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
-          "runtime": {
-            "pyodide": "314.0.7",
-            "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
-            "implementation": "cpython"
-          },
-          "elapsedMs": 1
-        },
-        "result": "pass"
-      }
-    ],
-    "summary": {
-      "total": 4,
-      "passed": 2,
-      "failed": 2,
-      "blocked": 0,
-      "incomplete": 0
-    },
-    "verdict": "failed"
-  },
-  "proposed": {
-    "rows": [
-      {
-        "id": "duplicates",
-        "suite": "example",
-        "args": [
-          [
-            1,
-            1,
-            2
-          ],
-          [
-            1
-          ]
-        ],
-        "kwargs": {},
-        "expect": {
-          "kind": "value",
-          "value": [
-            1
-          ]
-        },
-        "provenance": "self_authored_fixture",
-        "outcome": {
-          "status": "returned",
-          "value": [
-            1,
-            1
-          ],
-          "caseId": "duplicates",
-          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
-          "runtime": {
-            "pyodide": "314.0.7",
-            "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
-            "implementation": "cpython"
-          },
           "elapsedMs": 2
         },
         "result": "fail"
@@ -416,7 +263,160 @@
             "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
             "implementation": "cpython"
           },
-          "elapsedMs": 1
+          "elapsedMs": 2
+        },
+        "result": "pass"
+      }
+    ],
+    "summary": {
+      "total": 4,
+      "passed": 2,
+      "failed": 2,
+      "blocked": 0,
+      "incomplete": 0
+    },
+    "verdict": "failed"
+  },
+  "proposed": {
+    "rows": [
+      {
+        "id": "duplicates",
+        "suite": "example",
+        "args": [
+          [
+            1,
+            1,
+            2
+          ],
+          [
+            1
+          ]
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": [
+            1
+          ]
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": [
+            1,
+            1
+          ],
+          "caseId": "duplicates",
+          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
+          "runtime": {
+            "pyodide": "314.0.7",
+            "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
+            "implementation": "cpython"
+          },
+          "elapsedMs": 2
+        },
+        "result": "fail"
+      },
+      {
+        "id": "empty",
+        "suite": "example",
+        "args": [
+          [],
+          [
+            1
+          ]
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": []
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": [],
+          "caseId": "empty",
+          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
+          "runtime": {
+            "pyodide": "314.0.7",
+            "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
+            "implementation": "cpython"
+          },
+          "elapsedMs": 2
+        },
+        "result": "pass"
+      },
+      {
+        "id": "order",
+        "suite": "challenge",
+        "args": [
+          [
+            3,
+            1,
+            2,
+            3
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": [
+            3,
+            2
+          ]
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": [
+            3,
+            2,
+            3
+          ],
+          "caseId": "order",
+          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
+          "runtime": {
+            "pyodide": "314.0.7",
+            "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
+            "implementation": "cpython"
+          },
+          "elapsedMs": 2
+        },
+        "result": "fail"
+      },
+      {
+        "id": "none",
+        "suite": "challenge",
+        "args": [
+          [
+            1,
+            2
+          ],
+          [
+            3
+          ]
+        ],
+        "kwargs": {},
+        "expect": {
+          "kind": "value",
+          "value": []
+        },
+        "provenance": "self_authored_fixture",
+        "outcome": {
+          "status": "returned",
+          "value": [],
+          "caseId": "none",
+          "policyHash": "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4",
+          "runtime": {
+            "pyodide": "314.0.7",
+            "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
+            "implementation": "cpython"
+          },
+          "elapsedMs": 2
         },
         "result": "pass"
       }

@@ -1,9 +1,9 @@
 {
   "schemaVersion": 3,
-  "runId": "4ea7f4d1-bf53-4b44-a05c-2891ebd59b38",
-  "createdAt": "2026-10-22T17:55:26.228Z",
+  "runId": "4a85c8de-218f-43e0-9bff-fad1c534add8",
+  "createdAt": "2026-10-23T23:26:57.615Z",
   "app": {
-    "version": "0.3.0",
+    "version": "0.3.1",
     "sourceRevision": "working-tree; see repository and release record",
     "policyHashes": [
       "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4"

@@ -31,6 +31,8 @@ The first issue card shows the exact input, expected result and observed result.
 
 Use **Save workspace JSON** and **Open workspace JSON** to preserve a task/candidate explicitly. These are different from evidence reports: opening a workspace validates data, clears old evidence, resets provider consent and labels the candidate as imported. It does not execute code or call a model. No automatic browser storage is used. Files contain your source/cases; review them before sharing. Invalid imports leave current work unchanged.
 
+Version 0.3.1 keeps large suites compact when indentation would exceed the 128 KiB editor limit, without removing any cases. Imports that cannot fit even compactly are rejected before replacing current work. Malformed repair-response metadata is also rejected before candidate state changes.
+
 ## Optional live repair
 
 Verification and pasted candidates need no key. For live repair, create an ignored `.env` from `.env.example`, configure your own authorized `BUGPROOF_GEMINI_KEY` locally, restart, review provider data handling/costs, and check the UI consent box. **Never paste credentials into chat or commit them.**
@@ -40,6 +42,8 @@ The default model is `gemini-3.5-flash-lite`. The proxy uses a fixed provider en
 Only source, contract and normalized visible examples are sent; challenges and extra case metadata are excluded. Recorded basis hashes bind the original, contract, visible cases and exact generated candidate. Input-overlap checks use canonical JSON, independent of object-key order or expected answer. This does not detect every semantically equivalent Python call or prove secrecy/statistical independence. Exclusion is unknown for pasted/imported/teaching candidates. A comparison cannot receive a passing verdict without matching recorded execution-policy hashes for every case in both versions.
 
 Version 0.3 evidence uses schema 3 and also records the observed Python version, implementation and Pyodide version from the actual worker. Missing, mismatched or unpinned runtime metadata prevents a passing comparison. These are unsigned local records, not remote runtime attestation. Unchecking provider consent cancels a pending repair; it does not cancel local verification or undo data already transmitted.
+
+The 0.3.1 prompt-exclusion check additionally requires the recorded input-hash list to match every visible input exactly; missing or partial records cannot support an exclusion claim.
 
 **Live integration verified on October 22, 2026:** one genuine Gemini request returned a median repair that passed all 6 listed cases (2 visible, 4 excluded challenges). The original passed 2/6. See [the live smoke record](docs/LIVE_SMOKE_2026-10-22.md) and `artifacts/live/`. This one public fixture is not a model-accuracy benchmark. Ordinary unit/browser tests still use no real model calls; provider unit tests use explicit response doubles.
 
@@ -68,6 +72,8 @@ Browser tests use the explicit existing Edge path; adjust it for another environ
 
 This is separate from every trading project. The entrant explicitly approved implementing the displayed detailed proposal and requested fast execution; planning files retain that basis. No separate interview, hands-on final review, public repository, registration or submission is invented. Public name, license selection, submission prose, narration, legal/account actions and publishing remain entrant decisions/release gates.
 
-See [the acceptance audit](docs/ACCEPTANCE_AUDIT.md) for each core requirement, its evidence and the remaining human-review/release gates. The latest post-install verification passes 55 unit/server checks and 26 browser checks; the full fixture set is independently audited for all 42 distinct expected candidates.
+See [the acceptance audit](docs/ACCEPTANCE_AUDIT.md) for each core requirement, its evidence and the remaining human-review/release gates. The October 24 full check passes 63 unit/server checks and 30 browser checks; the full fixture set is independently audited for all 42 distinct expected candidates. The earlier October 22 post-install check passed 55 unit/server and 26 browser checks.
+
+The subsequent October 24 full check and bug fixes are recorded in [docs/FULL_CHECK_2026-10-24.md](docs/FULL_CHECK_2026-10-24.md); the October 22 audit/results remain historical records.
 
 The official Learn pack is pinned under `.agents/skills` to commit `a0f065781873e8a7ed9a9a705a8dafa6a0810439`; its MIT notice is retained. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). The personal learner profile, credentials, caches and private evidence are ignored, but ignore rules do not erase Git history. The original research proposal remains in the separate research_reports directory recorded in the project setup documents.

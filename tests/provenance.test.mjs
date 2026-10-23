@@ -72,3 +72,20 @@ test('no challenges does not earn an independence claim', async () => {
   const r = await makeReport(t, fixtures[0].correct, [], [], await provenance(t), 'test');
   assert.equal(r.challengesExcludedFromRepairPrompt, false);
 });
+
+for (const [name, hashes] of [
+  ['empty', []],
+  ['incomplete', ['a'.repeat(64)]],
+  ['incorrect', ['b'.repeat(64), 'c'.repeat(64)]],
+]) {
+  test(`${name} recorded prompt inputs cannot support an exclusion claim`, async () => {
+    const t = validateTask({
+      ...fixtures[0],
+      challenges: [{ ...fixtures[0].examples[0], id: 'overlap' }],
+    });
+    const p = await provenance(t);
+    p.basis.promptInputHashes = hashes;
+    const r = await makeReport(t, fixtures[0].correct, [], [], p, 'test');
+    assert.equal(r.challengesExcludedFromRepairPrompt, false);
+  });
+}

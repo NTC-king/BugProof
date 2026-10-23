@@ -6,7 +6,7 @@ export const LIMITS = Object.freeze({
   array: 200,
 });
 export const RUNTIME_VERSION = '314.0.7';
-export const APP_VERSION = '0.3.0';
+export const APP_VERSION = '0.3.1';
 export function jsonValue(value, depth = 0) {
   if (depth > LIMITS.depth) throw new Error('JSON nesting exceeds 8 levels.');
   if (value === null || typeof value === 'boolean') return;
@@ -202,6 +202,53 @@ export function repairPayload(task) {
     examples: t.examples.map(({ id, args, kwargs, expect }) => ({ id, args, kwargs, expect })),
   };
 }
+export function validateRepairResult(data) {
+  const invalid = () => {
+    throw new Error(
+      'Local repair service returned invalid candidate metadata. No candidate was accepted.',
+    );
+  };
+  if (!data || typeof data !== 'object' || Array.isArray(data)) invalid();
+  validateSource(data.source);
+  const p = data.provenance;
+  const validHash = (value) => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
+  if (
+    typeof data.explanation !== 'string' ||
+    data.explanation.length > 6000 ||
+    !p ||
+    p.kind !== 'live_model' ||
+    typeof p.model !== 'string' ||
+    !/^[a-z0-9.-]{1,80}$/.test(p.model) ||
+    typeof p.generatedAt !== 'string' ||
+    p.generatedAt.length > 40 ||
+    !Number.isFinite(Date.parse(p.generatedAt)) ||
+    p.challengeExposure !== 'excluded_from_request' ||
+    !p.basis ||
+    !['sourceHash', 'candidateHash', 'contractHash', 'examplesHash'].every((key) =>
+      validHash(p.basis[key]),
+    ) ||
+    !Array.isArray(p.basis.promptInputHashes) ||
+    !p.basis.promptInputHashes.length ||
+    p.basis.promptInputHashes.length > LIMITS.cases ||
+    !p.basis.promptInputHashes.every(validHash)
+  )
+    invalid();
+  if (
+    p.usage !== null &&
+    (!p.usage ||
+      typeof p.usage !== 'object' ||
+      Array.isArray(p.usage) ||
+      Object.entries(p.usage).some(
+        ([key, value]) =>
+          !['promptTokenCount', 'candidatesTokenCount', 'totalTokenCount'].includes(key) ||
+          !Number.isSafeInteger(value) ||
+          value < 0 ||
+          value > 1e9,
+      ))
+  )
+    invalid();
+  return structuredClone({ source: data.source, explanation: data.explanation, provenance: p });
+}
 // Stable object-key order; arrays retain order. Callers provide validated finite JSON.
 export function canonicalJSON(value) {
   if (Array.isArray(value)) return '[' + value.map(canonicalJSON).join(',') + ']';
@@ -278,6 +325,7 @@ export async function makeReport(
   if (provenance.kind === 'live_model') {
     const basis = provenance.basis;
     const challengeHashes = await Promise.all(t.challenges.map(caseInputHash));
+    const visibleInputHashes = await Promise.all(t.examples.map(caseInputHash));
     independent = Boolean(
       t.challenges.length &&
         basis &&
@@ -286,7 +334,9 @@ export async function makeReport(
         basis.contractHash === hashes.contract &&
         basis.examplesHash === (await hash(repairPayload(t).examples)) &&
         Array.isArray(basis.promptInputHashes) &&
-        challengeHashes.every((h) => !basis.promptInputHashes.includes(h)),
+        basis.promptInputHashes.length === visibleInputHashes.length &&
+        visibleInputHashes.every((h, i) => basis.promptInputHashes[i] === h) &&
+        challengeHashes.every((h) => !visibleInputHashes.includes(h)),
     );
   }
   return {

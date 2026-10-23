@@ -38,6 +38,8 @@ Task source/name/contract plus examples/challenges; cases with args/kwargs and v
 
 Version 0.3/schema 3 adds observed Python/Pyodide runtime metadata to every outcome. A passing comparison requires complete matching policy hashes and runtime metadata across both versions, with the observed Pyodide version equal to the package pin. Runtime records are local unsigned evidence, not attestation. Historic schema-2 live artifacts are retained unchanged.
 
+The 0.3.1 repair requires a complete exact recorded visible-input hash list before supporting prompt exclusion. The UI validates repair response metadata before accepting candidate state. `src/case-text.mjs` provides shared 128 KiB parsing/formatting bounds: indentation falls back to compact JSON without data loss, and imports too large for an editor are rejected before replacing current work.
+
 ## File Structure
 `src/App.tsx`, `src/main.tsx`, `src/styles.css`: workbench.
 `src/domain.mjs`, `src/fixtures.mjs`, `src/runner.ts`: validation, examples, bridge.

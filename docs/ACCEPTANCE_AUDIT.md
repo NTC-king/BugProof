@@ -1,5 +1,7 @@
 # Completion audit — local BugProof proof of concept
 
+Historical October 22 snapshot. Version 0.3.1 subsequently changes application behavior to fix demonstrated edge cases; see `docs/FULL_CHECK_2026-10-24.md` for that separate full-check record. This document is not relabeled as a new user review or live-provider test.
+
 Date: 2026-10-22. Requirements come from the approved `devpost/scope.md`, `prd.md`, `spec.md` and `checklist.md`, not from whichever tests happen to pass. Application source is the `59e3f6a` checkpoint; this follow-up changes the evidence auditor/tests and documentation only.
 
 ## Conclusion

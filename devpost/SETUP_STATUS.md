@@ -1,6 +1,8 @@
 # Implementation status
 
-Updated: 2026-10-22, after the 0.3 strict browser evaluation completed at 17:56:05 UTC and its saved-evidence audit passed. Current verification details and test failures are recorded in `docs/RELEASE_0_3.md`; the prior live-model result stays historical.
+Updated: 2026-10-24. The 0.3.1 full check passed 63 unit/server tests, 30 browser checks, all 42 candidate comparisons (211 candidate cases), the saved-report audit, strict TypeScript, build and actual CMD startup. Three concrete workspace/repair-evidence bugs were fixed. Mobile and offline app-map checks passed, no real model request was made, and test servers were stopped. See `docs/FULL_CHECK_2026-10-24.md`. Entrant hands-on review remains open.
+
+Historical October 22 verification: the 0.3 strict browser evaluation completed at 17:56:05 UTC and its saved-evidence audit passed. Those details and test failures are recorded in `docs/RELEASE_0_3.md`; the prior live-model result stays historical.
 
 Follow-up: the actual Windows install/verify commands passed after lockfile reinstallation. The suite now has 55 passing tests, including eight evaluation-index regressions; the fresh 26-check browser smoke completed at 18:05:34 UTC. See `docs/ACCEPTANCE_AUDIT.md` for requirement-level evidence and the remaining entrant-review gate. No app feature, provider call or public action was added.
 

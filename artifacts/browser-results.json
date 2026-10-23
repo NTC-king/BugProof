@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T17:56:05.399Z",
+  "generatedAt": "2026-10-23T23:27:37.600Z",
   "browser": "155.0.4283.62",
   "findings": [
     {
@@ -71,6 +71,14 @@
       "status": "pass"
     },
     {
+      "check": "malformed repair metadata is rejected without a page crash or candidate change (API response double)",
+      "status": "pass"
+    },
+    {
+      "check": "complete repair metadata is accepted but does not create a verdict (API response double)",
+      "status": "pass"
+    },
+    {
       "check": "workspace download/import preserves source and cases without execution, provider calls or trusted provenance",
       "status": "pass"
     },
@@ -88,6 +96,14 @@
     },
     {
       "check": "case JSON formatting retains data and invalidates old evidence",
+      "status": "pass"
+    },
+    {
+      "check": "large valid workspace stays editable and executes all 32 cases after compact-safe formatting",
+      "status": "pass"
+    },
+    {
+      "check": "unrepresentable workspace import preserves current code, cases and valid evidence",
       "status": "pass"
     },
     {

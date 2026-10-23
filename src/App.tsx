@@ -9,22 +9,15 @@ import {
   verdict,
   makeReport,
   repairPayload,
+  validateRepairResult,
 } from './domain.mjs';
 import { workspaceDocument, parseWorkspace, WORKSPACE_LIMIT } from './workspace.mjs';
+import { parseCaseText, formatCaseText } from './case-text.mjs';
 import { execute } from './runner';
 import { EvidenceView, SourceDiff } from './components/EvidenceView';
 
 const pretty = (value: any) => JSON.stringify(value, null, 2);
 const RUNNER_ORIGIN = 'http://127.0.0.1:4101';
-function parseCases(text: string, label: string) {
-  if (new TextEncoder().encode(text).length > 131072)
-    throw new Error(`${label}: JSON text exceeds 128 KiB.`);
-  try {
-    return JSON.parse(text);
-  } catch {
-    throw new Error(`${label}: invalid JSON. Check quotes, commas and brackets.`);
-  }
-}
 function downloadJSON(value: any, name: string) {
   const url = URL.createObjectURL(new Blob([pretty(value)], { type: 'application/json' }));
   const link = document.createElement('a');
@@ -157,17 +150,21 @@ export default function App() {
       functionName,
       source,
       contract,
-      examples: parseCases(examples, 'Visible examples'),
-      challenges: parseCases(challenges, 'Challenges'),
+      examples: parseCaseText(examples, 'Visible examples'),
+      challenges: parseCaseText(challenges, 'Challenges'),
     });
   }
   function formatCases(which: 'examples' | 'challenges') {
     try {
-      const value = parseCases(which === 'examples' ? examples : challenges, which);
-      if (!Array.isArray(value)) throw new Error('Cases must be a JSON array.');
+      const value = parseCaseText(which === 'examples' ? examples : challenges, which);
+      const formatted = formatCaseText(value, which);
       invalidate();
-      (which === 'examples' ? setExamples : setChallenges)(pretty(value));
-      setStatus('JSON formatted. Rerun to create fresh evidence.');
+      (which === 'examples' ? setExamples : setChallenges)(formatted.text);
+      setStatus(
+        formatted.compact
+          ? 'JSON kept compact to stay within the editor limit. No case data was changed.'
+          : 'JSON formatted. Rerun to create fresh evidence.',
+      );
     } catch (e: any) {
       setError(e.message);
     }
@@ -190,6 +187,8 @@ export default function App() {
     try {
       if (file.size > WORKSPACE_LIMIT) throw new Error('Workspace file exceeds 256 KiB.');
       const data = parseWorkspace(await file.text());
+      const exampleText = formatCaseText(data.task.examples, 'Visible examples');
+      const challengeText = formatCaseText(data.task.challenges, 'Challenges');
       if (current !== revision.current)
         throw new Error(
           'Inputs changed while opening the file. Import cancelled; your work was preserved.',
@@ -199,8 +198,8 @@ export default function App() {
       setFunctionName(data.task.functionName);
       setSource(data.task.source);
       setContract(data.task.contract);
-      setExamples(pretty(data.task.examples));
-      setChallenges(pretty(data.task.challenges));
+      setExamples(exampleText.text);
+      setChallenges(challengeText.text);
       setCandidate(data.candidate);
       setConsent(false);
       setProvenance({
@@ -306,10 +305,10 @@ export default function App() {
       const data = await response.json();
       if (!response.ok) throw new Error(data.error ?? 'Repair request failed.');
       if (current !== revision.current || abort.signal.aborted) return;
-      validateSource(data.source);
-      setCandidate(data.source);
-      setProvenance(data.provenance);
-      setExplanation(data.explanation);
+      const accepted = validateRepairResult(data);
+      setCandidate(accepted.source);
+      setProvenance(accepted.provenance);
+      setExplanation(accepted.explanation);
       setStatus('Live candidate received, not yet verified. Run verification before trusting it.');
     } catch (e: any) {
       if (current === revision.current) {
