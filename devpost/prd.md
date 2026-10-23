@@ -16,6 +16,8 @@ Source: `scope.md > The Core Loop` and `The Unique Kernel`.
 ## Screens and Layout
 One responsive workbench: header/status, task/contract, side-by-side original/candidate editors, separate editable case suites, controls, and evidence table.
 
+October 24 visual refinement: a three-step guide, clearly differentiated original/proposed-fix editors, readable input/expected-answer previews with JSON editing tucked into native details, and separate original/fix result scores. Use plain verdict labels and explain the limited meaning of a pass. Previews are not validation or execution and do not discard test data.
+
 ## Look and Feel
 Carry forward `scope.md > Inspiration & Identity`: warm background, dark ink, monospaced code, accessible focus and text labels; color is not the sole status indicator.
 

@@ -65,6 +65,33 @@ try {
   });
   page.on('pageerror', (e) => consoleErrors.push(e.message));
   await page.goto(origin, { waitUntil: 'networkidle' });
+  assert.equal(
+    await page.getByRole('navigation', { name: 'How to use BugProof' }).getByRole('link').count(),
+    3,
+  );
+  assert.equal(await page.locator('.case-json[open]').count(), 0);
+  assert.match(
+    await page.getByRole('region', { name: 'Example tests', exact: true }).innerText(),
+    /odd[\s\S]*Expected[\s\S]*2/,
+  );
+  assert.match(
+    await page.getByRole('region', { name: 'Extra tests', exact: true }).innerText(),
+    /four[\s\S]*Expected[\s\S]*6/,
+  );
+  await page.getByText('Edit examples · JSON', { exact: true }).click();
+  await page.getByText('Edit extra tests · JSON', { exact: true }).click();
+  assert.deepEqual(
+    JSON.parse(await page.getByLabel('Visible examples JSON').inputValue()),
+    fixtures[0].examples,
+  );
+  assert.deepEqual(
+    JSON.parse(await page.getByLabel('Independent challenges JSON').inputValue()),
+    fixtures[0].challenges,
+  );
+  findings.push({
+    check: 'plain-language guide and compact test previews preserve full editable JSON',
+    status: 'pass',
+  });
   await page.waitForFunction(
     () =>
       [...document.querySelectorAll('button')].some(
@@ -87,7 +114,21 @@ try {
   assert.equal(networkProbe, 'blocked');
   findings.push({ check: 'worker cannot fetch trusted API under own CSP', status: 'pass' });
   await waitDone(page);
-  assert.match(await page.getByTestId('verdict').innerText(), /Failed a declared check/);
+  assert.match(await page.getByTestId('verdict').innerText(), /Some tests failed/);
+  assert.match(await page.getByTestId('verdict').innerText(), /expected answer/);
+  assert.equal(await page.locator('.version-score').count(), 2);
+  assert.match(
+    await page.locator('.version-score').first().innerText(),
+    /Original code[\s\S]*2\s*\/\s*6 tests passed/,
+  );
+  assert.match(
+    await page.locator('.version-score').last().innerText(),
+    /Proposed fix[\s\S]*4\s*\/\s*6 tests passed/,
+  );
+  findings.push({
+    check: 'failed fix has a plain explanation and separate original/fix scores',
+    status: 'pass',
+  });
   assert.match(await page.locator('.suite-counts').innerText(), /2\s*\/\s*2 passed/);
   findings.push({
     check: 'median teaching candidate passes visible examples but fails independent challenge',
@@ -98,7 +139,17 @@ try {
   assert.equal(await page.getByTestId('verdict').count(), 0);
   await page.getByRole('button', { name: /Verify both versions/ }).click();
   await waitDone(page);
-  assert.match(await page.getByTestId('verdict').innerText(), /Pass on listed tests/);
+  assert.match(await page.getByTestId('verdict').innerText(), /All listed tests passed/);
+  assert.match(
+    await page.getByTestId('verdict').innerText(),
+    /Untested inputs can still contain bugs/,
+  );
+  assert.match(await page.locator('.version-score').first().innerText(), /Some tests failed/);
+  assert.match(await page.locator('.version-score').last().innerText(), /6\s*\/\s*6 tests passed/);
+  findings.push({
+    check: 'passing fix stays distinct from faulty original and retains limited-test warning',
+    status: 'pass',
+  });
   findings.push({ check: 'reference candidate passes all listed median cases', status: 'pass' });
   const downloadPromise = page.waitForEvent('download');
   await page.getByRole('button', { name: /Export evidence JSON/ }).click();
@@ -582,7 +633,7 @@ try {
         const verdictText = await page.getByTestId('verdict').innerText();
         assert.match(
           verdictText,
-          variant.correct ? /Pass on listed tests/ : /Failed a declared check/,
+          variant.correct ? /All listed tests passed/ : /Some tests failed/,
         );
         const promise = page.waitForEvent('download');
         await page.getByRole('button', { name: /Export evidence JSON/ }).click();

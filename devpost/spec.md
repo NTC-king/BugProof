@@ -19,6 +19,8 @@ React/TypeScript with [Vite](https://vite.dev/guide/); Node HTTP server; [Pyodid
 ## Look and Feel
 Custom CSS with readable monospaced editors, warm neutral surfaces, ink text, strong focus, accessible status labels. Implements `prd.md > Look and Feel`.
 
+The 0.3.2 feedback pass uses amber for original-code identity, blue for proposed-fix identity, blue/purple example/extra-test labels, and explicit words/symbols for outcome states. `src/components/CaseSuite.tsx` shows up to four compact read-only case previews and preserves the complete JSON editor behind a native disclosure. Verdict wording is simplified without changing report keys or scoring. Result cards compare both versions; untested-input and supported-subset limits remain visible.
+
 ## Components
 ### Workbench
 Task/candidate/case editors and revision/cancellation state; implements Task Input and Cancellation and Editing.

@@ -2,12 +2,26 @@ import { useEffect, useMemo, useState } from 'react';
 import { lineDiff } from '../diff.mjs';
 
 const labels: Record<string, string> = {
-  pass_on_listed_tests: 'Pass on listed tests',
-  examples_only: 'Examples pass · no challenge',
-  failed: 'Failed a declared check',
+  pass_on_listed_tests: 'All listed tests passed',
+  examples_only: 'Examples passed · no extra tests',
+  failed: 'Some tests failed',
   blocked: 'Unsupported code blocked',
   inconclusive: 'Incomplete · no pass awarded',
 };
+const meanings: Record<string, string> = {
+  pass_on_listed_tests:
+    'Every test you provided matched its expected answer. Untested inputs can still contain bugs.',
+  examples_only:
+    'The examples matched, but there are no extra tests to challenge this code. This is a weaker check.',
+  failed:
+    'At least one result did not match your expected answer. See exactly what went wrong below.',
+  blocked:
+    'This code uses something outside the supported Python subset. It was not accepted as a pass.',
+  inconclusive:
+    'The run did not produce complete, consistent results. Try again or inspect the issue below.',
+};
+const verdictSymbol = (value: string) =>
+  value === 'pass_on_listed_tests' ? '✓' : value === 'failed' ? '×' : '!';
 function output(outcome: any) {
   return outcome?.status === 'returned'
     ? JSON.stringify(outcome.value)
@@ -73,10 +87,11 @@ export function EvidenceView({ report, baseline }: { report: any; baseline: any 
         <span className="empty-icon" aria-hidden="true">
           ✓?
         </span>
-        <h3>No verdict without a run.</h3>
+        <h3>Ready for your first check</h3>
         <p>
-          Start with the median example. Its teaching candidate passes the visible examples
-          <br className="desktop-break" /> but misses a four-item edge case. Execute it to see why.
+          Click “Verify both versions” to run the code against your tests.
+          <br className="desktop-break" /> The median demo shows why passing a few examples is not
+          enough.
         </p>
       </div>
     );
@@ -103,17 +118,43 @@ export function EvidenceView({ report, baseline }: { report: any; baseline: any 
     ).length ?? 0;
   return (
     <>
+      {report && (
+        <section className="version-comparison" aria-label="Original and fix comparison">
+          {[
+            ['Original code', report.original],
+            ['Proposed fix', report.proposed],
+          ].map(([name, version]: any) => (
+            <div key={name} className={`version-score score-${version.verdict}`}>
+              <span>{name}</span>
+              <strong>
+                {version.summary.passed}
+                <small> / {version.summary.total} tests passed</small>
+              </strong>
+              <p>
+                <span aria-hidden="true">{verdictSymbol(version.verdict)}</span>{' '}
+                {labels[version.verdict]}
+              </p>
+            </div>
+          ))}
+        </section>
+      )}
       <div className={`verdict-banner verdict-${result.verdict}`} data-testid="verdict">
-        <span>{report ? 'CANDIDATE VERDICT' : 'ORIGINAL VERDICT'}</span>
-        <h3>{labels[result.verdict]}</h3>
+        <span>{report ? 'PROPOSED FIX · RESULT' : 'ORIGINAL CODE · RESULT'}</span>
+        <h3>
+          <span className="verdict-symbol" aria-hidden="true">
+            {verdictSymbol(result.verdict)}
+          </span>
+          {labels[result.verdict]}
+        </h3>
+        <p className="verdict-meaning">{meanings[result.verdict]}</p>
         <p>
           {result.summary.passed}/{result.summary.total} passed · {result.summary.failed} failed ·{' '}
           {result.summary.incomplete} incomplete · {result.summary.blocked} blocked
         </p>
         {report && (
           <p className="comparison-delta">
-            Compared with original: {improved} failed checks now pass · {regressed} passing checks
-            now fail
+            Compared with the original: {improved} previously failing tests now pass · {regressed}{' '}
+            previously passing tests now fail
           </p>
         )}
         {report && !report.executionIntegrity?.comparisonConsistent && (
@@ -127,8 +168,11 @@ export function EvidenceView({ report, baseline }: { report: any; baseline: any 
           {['example', 'challenge'].map((suite) => {
             const rows = report.proposed.rows.filter((r: any) => r.suite === suite);
             return (
-              <div key={suite}>
-                <span>{suite === 'example' ? 'VISIBLE EXAMPLES' : 'INDEPENDENT CHALLENGES'}</span>
+              <div
+                key={suite}
+                className={suite === 'example' ? 'counts-examples' : 'counts-challenges'}
+              >
+                <span>{suite === 'example' ? 'EXAMPLES' : 'EXTRA TESTS'}</span>
                 <strong>
                   {rows.filter((r: any) => r.result === 'pass').length}
                   <small> / {rows.length} passed</small>
@@ -142,21 +186,21 @@ export function EvidenceView({ report, baseline }: { report: any; baseline: any 
         <section className="first-issue" aria-label="First issue explained">
           <div>
             <span className="step-label">
-              {issue.result === 'fail' ? 'FIRST FAILING CHECK' : 'WHY THIS IS NOT A PASS'}
+              {issue.result === 'fail' ? 'HERE IS THE FIRST MISMATCH' : 'WHY THIS IS NOT A PASS'}
             </span>
             <h3>
-              {issue.id} <small>{issue.suite}</small>
+              {issue.id} <small>{issue.suite === 'challenge' ? 'Extra test' : 'Example'}</small>
             </h3>
           </div>
           <dl>
             <div>
-              <dt>Call input</dt>
+              <dt>Input we tested</dt>
               <dd>
                 <code>{JSON.stringify({ args: issue.args, kwargs: issue.kwargs })}</code>
               </dd>
             </div>
             <div>
-              <dt>Expected</dt>
+              <dt>Expected answer</dt>
               <dd>
                 <code>{expected(issue)}</code>
                 {issue.expect.tolerance !== undefined && (
@@ -165,7 +209,7 @@ export function EvidenceView({ report, baseline }: { report: any; baseline: any 
               </dd>
             </div>
             <div>
-              <dt>Observed</dt>
+              <dt>Actual answer</dt>
               <dd>
                 <code>{output(issue.outcome)}</code>
               </dd>
@@ -174,7 +218,7 @@ export function EvidenceView({ report, baseline }: { report: any; baseline: any 
           <p>
             {issue.outcome.message ||
               (issue.result === 'fail'
-                ? 'The observed result does not match this case’s explicit expectation. The contract is not checked beyond the listed expectations.'
+                ? 'These answers do not match, so this test failed. Check that your expected answer is correct too.'
                 : 'This case did not produce supported complete evidence. It cannot count as passed.')}
           </p>
         </section>
@@ -211,7 +255,10 @@ export function EvidenceView({ report, baseline }: { report: any; baseline: any 
           {visibleRows.length} of {result.rows.length} cases shown
         </span>
       </div>
-      <div className="table-wrap">
+      <p className="table-hint">
+        More columns → Scroll the table sideways to compare both versions.
+      </p>
+      <div className="table-wrap" tabIndex={0} aria-label="Scrollable test results">
         <table>
           <caption className="sr-only">
             Actual outcomes compared with explicit case expectations
@@ -220,9 +267,15 @@ export function EvidenceView({ report, baseline }: { report: any; baseline: any 
             <tr>
               <th scope="col">Case / suite</th>
               <th scope="col">Expected</th>
-              <th scope="col">Original</th>
-              {report && <th scope="col">Candidate</th>}
-              <th scope="col">Result</th>
+              <th scope="col" className="column-original">
+                Original code
+              </th>
+              {report && (
+                <th scope="col" className="column-candidate">
+                  Proposed fix
+                </th>
+              )}
+              <th scope="col">{report ? 'Fix result' : 'Result'}</th>
             </tr>
           </thead>
           <tbody>
@@ -230,10 +283,12 @@ export function EvidenceView({ report, baseline }: { report: any; baseline: any 
               const original = report?.original.rows.find((o: any) => o.id === row.id)?.outcome;
               const observedOriginal = report ? original : row.outcome;
               return (
-                <tr key={row.id}>
+                <tr key={row.id} className={`case-row row-${row.result}`}>
                   <td>
                     <strong>{row.id}</strong>
-                    <small>{row.suite}</small>
+                    <small className={`suite-tag tag-${row.suite}`}>
+                      {row.suite === 'challenge' ? 'Extra test' : 'Example'}
+                    </small>
                     <details>
                       <summary>Input</summary>
                       <code>{JSON.stringify({ args: row.args, kwargs: row.kwargs })}</code>
@@ -254,7 +309,13 @@ export function EvidenceView({ report, baseline }: { report: any; baseline: any 
                     </td>
                   )}
                   <td>
-                    <span className={`result-chip ${row.result}`}>{row.result}</span>
+                    <span className={`result-chip ${row.result}`}>
+                      {row.result === 'pass'
+                        ? '✓ Pass'
+                        : row.result === 'fail'
+                          ? '× Fail'
+                          : row.result}
+                    </span>
                   </td>
                 </tr>
               );

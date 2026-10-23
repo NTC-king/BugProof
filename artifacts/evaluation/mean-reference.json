@@ -1,9 +1,9 @@
 {
   "schemaVersion": 3,
-  "runId": "dd25c763-942e-4a0b-ba10-e14f9e1a7bc5",
-  "createdAt": "2026-10-23T23:25:29.285Z",
+  "runId": "4c27eaff-165b-486f-b7da-3f216829e5d8",
+  "createdAt": "2026-10-23T23:52:10.120Z",
   "app": {
-    "version": "0.3.1",
+    "version": "0.3.2",
     "sourceRevision": "working-tree; see repository and release record",
     "policyHashes": [
       "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4"
@@ -149,7 +149,7 @@
             "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
             "implementation": "cpython"
           },
-          "elapsedMs": 3
+          "elapsedMs": 4
         },
         "result": "fail"
       },
@@ -176,7 +176,7 @@
             "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
             "implementation": "cpython"
           },
-          "elapsedMs": 1
+          "elapsedMs": 2
         },
         "result": "fail"
       },
@@ -206,7 +206,7 @@
             "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
             "implementation": "cpython"
           },
-          "elapsedMs": 1
+          "elapsedMs": 2
         },
         "result": "pass"
       },
@@ -334,7 +334,7 @@
             "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
             "implementation": "cpython"
           },
-          "elapsedMs": 1
+          "elapsedMs": 2
         },
         "result": "pass"
       },

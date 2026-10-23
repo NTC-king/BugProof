@@ -42,13 +42,17 @@ select:focus-visible,
 summary:focus-visible {
   outline: 3px solid #32766a;
 }
+a:focus-visible {
+  outline: 3px solid #32766a;
+  outline-offset: 4px;
+}
 main {
   max-width: 1360px;
   margin: 0 auto;
   padding: 0 54px;
 }
 .masthead {
-  height: 112px;
+  height: 88px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -103,10 +107,10 @@ main {
   font-size: 10px;
 }
 .intro {
-  padding: 60px 0 50px;
+  padding: 40px 0 30px;
   display: grid;
   grid-template-columns: 1.4fr 1fr;
-  gap: 50px;
+  gap: 40px;
   align-items: center;
 }
 .eyebrow,
@@ -120,9 +124,9 @@ main {
   margin: 0 0 16px;
 }
 h1 {
-  font-size: 58px;
+  font-size: 48px;
   line-height: 1.08;
-  letter-spacing: -2.8px;
+  letter-spacing: -1.8px;
   margin: 0 0 18px;
   font-weight: 650;
 }
@@ -138,17 +142,68 @@ h1 em {
   margin: 0;
 }
 .principle {
-  border-left: 1px solid #cbd3c4;
-  padding: 16px 0 16px 38px;
+  border: 1px solid #d8ddd2;
+  border-radius: 10px;
+  background: #eeefe5;
+  padding: 22px;
 }
 .principle p {
-  font-size: 23px;
+  font-size: 19px;
   line-height: 1.5;
-  margin: 17px 0 20px;
+  margin: 12px 0;
   letter-spacing: -0.4px;
 }
 .principle strong {
   font-weight: 600;
+}
+.principle a {
+  color: #2d5141;
+  font-size: 12px;
+  text-underline-offset: 4px;
+}
+.journey {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 26px;
+}
+.journey a {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  color: #29463c;
+  border: 1px solid #d8ddd2;
+  border-radius: 8px;
+  background: #fffef9;
+  text-decoration: none;
+}
+.journey a:hover {
+  border-color: #728c77;
+  background: #f7faf1;
+}
+.journey a > span {
+  display: grid;
+  place-items: center;
+  align-self: flex-start;
+  flex: 0 0 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: #e8eddf;
+  font:
+    600 12px Consolas,
+    monospace;
+}
+.journey strong,
+.journey small {
+  display: block;
+}
+.journey strong {
+  font-size: 13px;
+}
+.journey small {
+  color: #5c6b64;
+  font-size: 11px;
+  margin-top: 3px;
 }
 .fine {
   font-size: 11px;
@@ -210,7 +265,7 @@ h2 {
   padding: 22px 26px 24px;
 }
 .task-details label {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 650;
   color: #4c6255;
   letter-spacing: 0.3px;
@@ -246,6 +301,23 @@ h2 {
   overflow: hidden;
   background: #fafbf7;
 }
+.editor-original {
+  border-color: #d9c4b1;
+  border-top: 3px solid #a97851;
+}
+.editor-candidate {
+  border-color: #b5c9e2;
+  border-top: 3px solid #386aa4;
+}
+.editor-original .editor-head {
+  background: #f7eee4;
+}
+.editor-candidate .editor-head {
+  background: #ecf2fb;
+}
+.editor-candidate .code-input {
+  background: #fafcff;
+}
 .editor-head {
   display: flex;
   justify-content: space-between;
@@ -256,7 +328,7 @@ h2 {
   gap: 8px;
 }
 .editor-head h3 {
-  font-size: 12px;
+  font-size: 14px;
   margin: 0;
   font-weight: 600;
   display: flex;
@@ -278,7 +350,7 @@ h2 {
   background: #ad7961;
 }
 .candidate-dot {
-  background: #568265;
+  background: #386aa4;
 }
 .code-input {
   resize: vertical;
@@ -289,7 +361,7 @@ h2 {
   background: transparent;
   padding: 19px;
   font:
-    12px/1.85 Consolas,
+    13px/1.85 Consolas,
     'Courier New',
     monospace;
   color: #263e35;
@@ -304,7 +376,7 @@ h2 {
   gap: 10px;
   padding: 9px 12px;
   border-top: 1px solid #e1e6da;
-  background: #f4f7ef;
+  background: #eff4fc;
 }
 .provenance {
   font-size: 9px;
@@ -316,7 +388,7 @@ h2 {
   letter-spacing: 0.7px;
 }
 .text-button {
-  font-size: 10px;
+  font-size: 12px;
   color: #365e45;
   background: none;
   border: 0;
@@ -325,7 +397,7 @@ h2 {
   text-underline-offset: 3px;
 }
 .disclosure {
-  font-size: 10px;
+  font-size: 11px;
   color: #677569;
   margin: 13px 26px 20px;
   line-height: 1.6;
@@ -333,8 +405,84 @@ h2 {
 .case-suites {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  align-items: start;
   gap: 18px;
   padding: 0 26px 24px;
+}
+.test-heading {
+  border-top: 1px solid #e1e6d9;
+  padding: 22px 26px 16px;
+  scroll-margin-top: 20px;
+}
+.test-heading p {
+  margin: 7px 0 0;
+  font-size: 12px;
+  color: #5c6b64;
+}
+.case-suite {
+  min-width: 0;
+  border: 1px solid #c4d5e7;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fffef9;
+}
+.suite-challenges {
+  border-color: #d4c4df;
+}
+.suite-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 15px;
+  background: #edf3fa;
+}
+.suite-challenges .suite-heading {
+  background: #f3edf7;
+}
+.suite-heading h3 {
+  margin: 0 0 3px;
+  font-size: 14px;
+}
+.suite-heading p {
+  margin: 0;
+  font-size: 11px;
+  color: #566570;
+}
+.case-count {
+  margin-left: auto;
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: 600;
+}
+.preview-row {
+  padding: 12px 15px;
+  border-top: 1px solid #e8e9e1;
+}
+.preview-row > strong {
+  display: block;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+  margin-bottom: 5px;
+}
+.preview-row > div {
+  display: grid;
+  grid-template-columns: 65px minmax(0, 1fr);
+  gap: 8px;
+  margin-top: 3px;
+  font-size: 11px;
+}
+.preview-row > div > span {
+  color: #5c6b64;
+}
+.preview-row code {
+  font-family: Consolas, monospace;
+  overflow-wrap: anywhere;
+}
+.preview-note,
+.json-help {
+  margin: 12px 15px;
+  font-size: 11px;
+  color: #5c6b64;
 }
 details summary {
   cursor: pointer;
@@ -342,37 +490,29 @@ details summary {
 summary {
   font-size: 11px;
 }
-.case-suites details {
-  border: 1px solid #dde3d5;
-  border-radius: 6px;
+.case-suites .case-json {
+  border-top: 1px solid #dde3d5;
   overflow: hidden;
 }
-.case-suites summary {
+.case-json summary {
   padding: 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: #f8f9f3;
-  flex-wrap: wrap;
-}
-.case-suites summary > span:last-child {
-  font-size: 9px;
-  color: #6c796c;
-  margin-left: auto;
+  color: #36506e;
+  background: #f7f9fb;
+  font-weight: 600;
 }
 .suite-icon {
   font-size: 9px;
-  background: #e6ebde;
-  border: 1px solid #ced8c2;
+  background: #e0ebf8;
+  border: 1px solid #b7cde7;
   border-radius: 3px;
   padding: 1px 5px;
   font-family: Consolas, monospace;
-  color: #42613b;
+  color: #345778;
 }
 .challenge-icon {
-  background: #f5e9d1;
-  border-color: #e3d0a6;
-  color: #755b20;
+  background: #e9def2;
+  border-color: #cbb3dc;
+  color: #6a447f;
 }
 .json-input {
   width: 100%;
@@ -405,7 +545,7 @@ button.primary,
 button.secondary,
 .cancel {
   border-radius: 5px;
-  font-size: 11px;
+  font-size: 13px;
   padding: 10px 15px;
   font-weight: 600;
   border: 1px solid #cdd6c5;
@@ -463,11 +603,11 @@ button.secondary,
   border-top: 1px solid #e0e5d6;
 }
 .live-repair h3 {
-  font-size: 12px;
+  font-size: 14px;
   margin: 0 0 4px;
 }
 .live-repair p {
-  font-size: 10px;
+  font-size: 11px;
   color: #657361;
   margin: 0 0 9px;
 }
@@ -478,7 +618,7 @@ button.secondary,
   display: flex;
   align-items: flex-start;
   gap: 6px;
-  font-size: 10px;
+  font-size: 12px;
   max-width: 690px;
   color: #52644f;
 }
@@ -557,15 +697,18 @@ button.secondary,
   font-size: 24px;
   letter-spacing: -0.5px;
   margin: 5px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 .verdict-banner p {
   font-size: 11px;
   margin: 0;
 }
 .verdict-failed {
-  background: #fff1e6;
-  border-color: #ba744b;
-  color: #844723;
+  background: #fff0ed;
+  border-color: #b95143;
+  color: #873b32;
 }
 .verdict-pass_on_listed_tests {
   background: #edf5e8;
@@ -579,6 +722,58 @@ button.secondary,
   border-color: #ac8836;
   color: #715714;
 }
+.verdict-banner .verdict-meaning {
+  font-size: 13px;
+  margin: 8px 0 12px;
+  max-width: 760px;
+}
+.verdict-symbol {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 30px;
+  height: 30px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 22px;
+}
+.version-comparison {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 22px 26px 0;
+  gap: 16px;
+}
+.version-score {
+  padding: 17px;
+  border: 1px solid #d8ddd2;
+  border-top: 3px solid #9b833b;
+  border-radius: 7px;
+  min-width: 0;
+}
+.version-score > span {
+  font-size: 13px;
+  font-weight: 600;
+}
+.version-score > strong {
+  display: block;
+  font-size: 30px;
+  margin: 5px 0;
+}
+.version-score small {
+  font-size: 12px;
+  font-weight: 400;
+}
+.version-score p {
+  margin: 0;
+  font-size: 12px;
+}
+.score-failed {
+  border-top-color: #b95143;
+  background: #fff8f5;
+}
+.score-pass_on_listed_tests {
+  border-top-color: #61874c;
+  background: #f4f9f0;
+}
 .suite-counts {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -589,6 +784,14 @@ button.secondary,
   padding: 15px 18px;
   border: 1px solid #dfe5d5;
   border-radius: 5px;
+}
+.suite-counts .counts-examples {
+  border-color: #c4d5e7;
+  background: #f4f8fc;
+}
+.suite-counts .counts-challenges {
+  border-color: #d4c4df;
+  background: #f8f4fb;
 }
 .suite-counts span {
   display: block;
@@ -610,6 +813,13 @@ button.secondary,
 .table-wrap {
   overflow: auto;
   margin: 0 26px 24px;
+}
+.table-hint {
+  display: none;
+}
+.table-wrap:focus-visible {
+  outline: 3px solid #32766a;
+  outline-offset: 3px;
 }
 table {
   border-collapse: collapse;
@@ -660,8 +870,32 @@ td details summary {
   font-weight: 600;
 }
 .result-chip.fail {
-  background: #fae5d5;
-  color: #8c4b22;
+  background: #fbe1db;
+  color: #873b32;
+}
+.row-fail {
+  background: #fff7f3;
+}
+.column-original {
+  background: #f7eee4;
+  color: #805533;
+}
+.column-candidate {
+  background: #ecf2fb;
+  color: #345778;
+}
+.suite-tag {
+  width: fit-content;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+.tag-example {
+  background: #edf3fa;
+  color: #345778;
+}
+.tag-challenge {
+  background: #f0e8f6;
+  color: #6a447f;
 }
 .result-chip.blocked,
 .result-chip.incomplete {
@@ -870,6 +1104,17 @@ footer > span {
   gap: 14px;
   margin: 0;
 }
+.first-issue dl > div {
+  padding: 12px;
+  background: #fffef9;
+  border: 1px solid #e3d9c7;
+  border-radius: 5px;
+  min-width: 0;
+}
+.first-issue dl > div:last-child {
+  background: #fff0ed;
+  border-color: #e5b6a9;
+}
 .first-issue dt {
   font-size: 9px;
   color: #6a705e;
@@ -947,6 +1192,28 @@ footer > span {
   }
 }
 @media (max-width: 650px) {
+  .table-hint {
+    display: block;
+    margin: 0 18px 10px;
+    font-size: 11px;
+    color: #52664e;
+  }
+  .journey {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .journey a {
+    padding: 12px;
+  }
+  .version-comparison {
+    grid-template-columns: 1fr;
+    margin-left: 18px;
+    margin-right: 18px;
+    gap: 10px;
+  }
+  .test-heading {
+    padding: 18px;
+  }
   .workspace-files {
     padding: 16px 18px;
   }

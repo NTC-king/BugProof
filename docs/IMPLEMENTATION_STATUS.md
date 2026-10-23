@@ -2,7 +2,9 @@
 
 Date: 2026-10-24. Local proof of concept; not submitted or published.
 
-**Current 0.3.1 full check:** 63 unit/server tests, 30 browser checks, strict TypeScript, production build and actual Windows CMD startup passed. All 42 candidate comparisons (211 candidate cases) and the saved-report audit passed: 30 faulty variants rejected and 12 references passing listed cases. Fixed large-workspace editor bounds, malformed repair-response acceptance and incomplete prompt-input exclusion evidence. No new real model request; test servers stopped. See `docs/FULL_CHECK_2026-10-24.md` for exact timestamps, failed attempts, privacy checks and limits. The October 22 records below are historical.
+**Current 0.3.2 interface:** simpler verdicts, distinct original/fix editors and result cards, readable case previews with collapsed JSON editing, and a three-step guide. Passed 63 unit/server tests, 33 browser checks, all 42 candidate comparisons / 211 candidate cases and the saved-report audit. Final-build keyboard, malformed/deep-preview, desktop/mobile and offline-map review passed with zero page errors and zero repair attempts. See `docs/UI_REFINEMENT_2026-10-24.md`. The configured local app was restored for use; final entrant retry/sign-off remains open.
+
+**Previous 0.3.1 full check:** 63 unit/server tests, 30 browser checks, strict TypeScript, production build and actual Windows CMD startup passed. All 42 candidate comparisons (211 candidate cases) and the saved-report audit passed: 30 faulty variants rejected and 12 references passing listed cases. Fixed large-workspace editor bounds, malformed repair-response acceptance and incomplete prompt-input exclusion evidence. No new real model request; test servers stopped. See `docs/FULL_CHECK_2026-10-24.md` for exact timestamps, failed attempts, privacy checks and limits. The October 22 records below are historical.
 
 ## What works
 

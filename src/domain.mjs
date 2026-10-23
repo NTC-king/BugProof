@@ -6,7 +6,7 @@ export const LIMITS = Object.freeze({
   array: 200,
 });
 export const RUNTIME_VERSION = '314.0.7';
-export const APP_VERSION = '0.3.1';
+export const APP_VERSION = '0.3.2';
 export function jsonValue(value, depth = 0) {
   if (depth > LIMITS.depth) throw new Error('JSON nesting exceeds 8 levels.');
   if (value === null || typeof value === 'boolean') return;

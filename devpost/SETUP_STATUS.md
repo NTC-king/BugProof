@@ -1,5 +1,9 @@
 # Implementation status
 
+Current version: **0.3.2**, October 24. Visual simplification and final-build UI review passed, alongside 63 unit/server tests, 33 full-run browser checks, 42 candidate comparisons and the saved-report audit. See `docs/UI_REFINEMENT_2026-10-24.md`. The configured local app was restored without reloading the entrant's tab. Save edits before refreshing. Entrant retry/sign-off remains open; no new real model request was made.
+
+The records below describe earlier checkpoints.
+
 Updated: 2026-10-24. The 0.3.1 full check passed 63 unit/server tests, 30 browser checks, all 42 candidate comparisons (211 candidate cases), the saved-report audit, strict TypeScript, build and actual CMD startup. Three concrete workspace/repair-evidence bugs were fixed. Mobile and offline app-map checks passed, no real model request was made, and test servers were stopped. See `docs/FULL_CHECK_2026-10-24.md`. Entrant hands-on review remains open.
 
 Historical October 22 verification: the 0.3 strict browser evaluation completed at 17:56:05 UTC and its saved-evidence audit passed. Those details and test failures are recorded in `docs/RELEASE_0_3.md`; the prior live-model result stays historical.

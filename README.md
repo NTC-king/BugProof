@@ -27,6 +27,8 @@ Setup needs network access to obtain packages. Normal verification uses locally 
 
 All teaching/reference/mutant candidates are hand-authored, not live model samples. The source diff is an ordered line comparison with line numbers and a 400-line-per-version cap, not an automatically applied patch.
 
+The 0.3.2 interface separates **Original code** from **Proposed fix**, shows both scores side by side, and explains its verdict in plain language. **Some tests failed** means an expected answer did not match; **All listed tests passed** means only the provided cases passed, not that every possible input is correct. The test cards show input/expected-answer previews. Open **Edit examples · JSON** or **Edit extra tests · JSON** for the full editable data; previews show at most four cases and never remove the rest.
+
 The first issue card shows the exact input, expected result and observed result. Table filters only change the displayed rows; they never change the full verdict. Original-to-candidate improvement/regression counts refer to the listed checks, not a general correctness score.
 
 Use **Save workspace JSON** and **Open workspace JSON** to preserve a task/candidate explicitly. These are different from evidence reports: opening a workspace validates data, clears old evidence, resets provider consent and labels the candidate as imported. It does not execute code or call a model. No automatic browser storage is used. Files contain your source/cases; review them before sharing. Invalid imports leave current work unchanged.
@@ -68,11 +70,13 @@ node tests/browser.mjs --evaluate
 
 Browser tests use the explicit existing Edge path; adjust it for another environment. They start/stop their own server if needed. Full completed results are in `artifacts/browser-results.json`, with exact candidate reports in `artifacts/evaluation`; smaller smoke runs use `artifacts/browser-smoke-results.json` so they cannot overwrite the full evaluation summary. `node tests/audit-evidence.mjs` audits a completed full evaluation without calling a model. Private screenshots/sample exports are under ignored `.cache`. Source formatting is reproducible with `npm run format` / `npm run format:check`. See [docs/EVALUATION_PROTOCOL.md](docs/EVALUATION_PROTOCOL.md) before interpreting counts, [docs/RELEASE_0_3.md](docs/RELEASE_0_3.md) for this quality pass, and [docs/UPGRADE_0_2.md](docs/UPGRADE_0_2.md) for the historical upgrade record.
 
+With the local launcher running, `node tests/ui-review.mjs` checks the simplified interface, keyboard editing, malformed/deep preview data, desktop/mobile layout and offline map without permitting repair calls. Its summary is saved in `artifacts/ui-review-results.json`; screenshots stay in ignored `.cache/`.
+
 ## Project and competition state
 
 This is separate from every trading project. The entrant explicitly approved implementing the displayed detailed proposal and requested fast execution; planning files retain that basis. No separate interview, hands-on final review, public repository, registration or submission is invented. Public name, license selection, submission prose, narration, legal/account actions and publishing remain entrant decisions/release gates.
 
-See [the acceptance audit](docs/ACCEPTANCE_AUDIT.md) for each core requirement, its evidence and the remaining human-review/release gates. The October 24 full check passes 63 unit/server checks and 30 browser checks; the full fixture set is independently audited for all 42 distinct expected candidates. The earlier October 22 post-install check passed 55 unit/server and 26 browser checks.
+See [the acceptance audit](docs/ACCEPTANCE_AUDIT.md) for each core requirement, its evidence and the remaining human-review/release gates. The latest October 24 interface pass has 63 passing unit/server checks, 33 full-run browser checks, all 42 distinct fixture comparisons and a final-build desktop/mobile/keyboard preview review. See [the 0.3.2 review record](docs/UI_REFINEMENT_2026-10-24.md) for exact run boundaries. The earlier 0.3.1 check passed 63 unit/server and 30 browser checks; the October 22 post-install check passed 55 unit/server and 26 browser checks.
 
 The subsequent October 24 full check and bug fixes are recorded in [docs/FULL_CHECK_2026-10-24.md](docs/FULL_CHECK_2026-10-24.md); the October 22 audit/results remain historical records.
 

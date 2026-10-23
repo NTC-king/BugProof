@@ -1,9 +1,9 @@
 {
   "schemaVersion": 3,
-  "runId": "a4002b68-1d82-4c5c-b465-20daed9bde07",
-  "createdAt": "2026-10-23T23:23:51.601Z",
+  "runId": "e60537b1-3d97-4fe7-b3e2-312f27345d16",
+  "createdAt": "2026-10-23T23:50:33.543Z",
   "app": {
-    "version": "0.3.1",
+    "version": "0.3.2",
     "sourceRevision": "working-tree; see repository and release record",
     "policyHashes": [
       "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4"
@@ -286,7 +286,7 @@
             "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
             "implementation": "cpython"
           },
-          "elapsedMs": 1
+          "elapsedMs": 2
         },
         "result": "pass"
       },
@@ -474,7 +474,7 @@
             "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
             "implementation": "cpython"
           },
-          "elapsedMs": 2
+          "elapsedMs": 1
         },
         "result": "fail"
       },

@@ -15,6 +15,7 @@ import { workspaceDocument, parseWorkspace, WORKSPACE_LIMIT } from './workspace.
 import { parseCaseText, formatCaseText } from './case-text.mjs';
 import { execute } from './runner';
 import { EvidenceView, SourceDiff } from './components/EvidenceView';
+import { CaseSuite } from './components/CaseSuite';
 
 const pretty = (value: any) => JSON.stringify(value, null, 2);
 const RUNNER_ORIGIN = 'http://127.0.0.1:4101';
@@ -344,7 +345,7 @@ export default function App() {
             <strong>
               BugProof<span className="dot">.</span>
             </strong>
-            <span className="brand-caption">REPAIR EVIDENCE WORKBENCH</span>
+            <span className="brand-caption">TEST THE FIX. SEE THE DIFFERENCE.</span>
           </div>
         </div>
         <div className="local-tag">
@@ -354,34 +355,52 @@ export default function App() {
       </header>
       <section className="intro">
         <div>
-          <p className="eyebrow">DON’T JUST TRUST THE FIX.</p>
+          <p className="eyebrow">A SECOND CHECK FOR AI-GENERATED CODE</p>
           <h1>
-            Put the repair
+            Does the fix
             <br />
-            <em>to the test.</em>
+            <em>actually work?</em>
           </h1>
           <p className="lede">
-            Run the original. Challenge the candidate.
-            <br />
-            See what the evidence actually supports.
+            Compare the original Python code with a proposed fix. See the exact tests it passes—and
+            the ones it misses.
           </p>
         </div>
         <aside className="principle">
-          <span className="step-label">THE IMPORTANT DISTINCTION</span>
+          <span className="step-label">FIRST TIME? TRY THE DEMO</span>
           <p>
-            “Passed my examples”
-            <br />
-            isn’t the same as
-            <br />
-            <strong>“survived the edge cases.”</strong>
+            The median demo has a fix that <strong>looks right, but misses a bug.</strong>
           </p>
-          <span className="fine">Listed tests are evidence—not proof of correctness.</span>
+          <a href="#workspace">Choose it below, then verify both versions →</a>
         </aside>
       </section>
+      <nav className="journey" aria-label="How to use BugProof">
+        <a href="#workspace">
+          <span>1</span>
+          <div>
+            <strong>Choose the code</strong>
+            <small>Original on the left, proposed fix on the right.</small>
+          </div>
+        </a>
+        <a href="#test-cases">
+          <span>2</span>
+          <div>
+            <strong>Check your tests</strong>
+            <small>Examples + extra tests the AI does not see.</small>
+          </div>
+        </a>
+        <a href="#evidence">
+          <span>3</span>
+          <div>
+            <strong>Run & compare</strong>
+            <small>See expected answers next to actual results.</small>
+          </div>
+        </a>
+      </nav>
       <section className="workspace" id="workspace" aria-label="Repair workspace">
         <div className="workspace-heading">
           <h2>
-            <span className="section-number">01</span> Choose your case
+            <span className="section-number">01</span> Your code
           </h2>
           <button
             className="text-button"
@@ -391,7 +410,7 @@ export default function App() {
             Reset example
           </button>
           <label className="fixture-picker">
-            Owned teaching example
+            Start with a demo
             <select
               aria-label="Teaching example"
               value={selected}
@@ -449,7 +468,7 @@ export default function App() {
             />
           </label>
           <label className="contract">
-            Behavior contract
+            What should this function do?
             <textarea
               aria-label="Behavior contract"
               rows={3}
@@ -463,12 +482,12 @@ export default function App() {
           </label>
         </div>
         <div className="editors">
-          <section className="editor">
+          <section className="editor editor-original">
             <div className="editor-head">
               <h3>
-                <span className="code-dot original-dot" /> Original function
+                <span className="code-dot original-dot" /> Original code
               </h3>
-              <span>PYTHON · SUPPORTED SUBSET</span>
+              <span>BEFORE</span>
             </div>
             <textarea
               aria-label="Original Python function"
@@ -482,12 +501,12 @@ export default function App() {
               }}
             />
           </section>
-          <section className="editor">
+          <section className="editor editor-candidate">
             <div className="editor-head">
               <h3>
-                <span className="code-dot candidate-dot" /> Proposed candidate
+                <span className="code-dot candidate-dot" /> Proposed fix
               </h3>
-              <span>NOT AUTO-APPLIED</span>
+              <span>AFTER · TEST BEFORE TRUSTING</span>
             </div>
             <textarea
               aria-label="Candidate Python function"
@@ -529,43 +548,28 @@ export default function App() {
           and dynamic evaluation are blocked. Tests compare listed return values/exceptions—not
           every statement in the contract.
         </p>
+        <div className="test-heading" id="test-cases">
+          <h2>
+            <span className="section-number">02</span> Your tests
+          </h2>
+          <p>
+            Each test is an input and the answer you expect. Both code versions run against the same
+            tests.
+          </p>
+        </div>
         <div className="case-suites">
           {(['examples', 'challenges'] as const).map((which) => (
-            <details open key={which}>
-              <summary>
-                <span className={`suite-icon ${which === 'challenges' ? 'challenge-icon' : ''}`}>
-                  {which === 'examples' ? 'E' : 'C'}
-                </span>
-                <strong>
-                  {which === 'examples' ? 'Visible examples' : 'Independent challenges'}
-                </strong>
-                <span>
-                  {which === 'examples'
-                    ? 'Included in repair requests'
-                    : 'Excluded from repair requests'}
-                </span>
-              </summary>
-              <label className="sr-only" htmlFor={which}>
-                {which === 'examples' ? 'Visible examples JSON' : 'Independent challenges JSON'}
-              </label>
-              <textarea
-                id={which}
-                maxLength={131072}
-                className="json-input"
-                spellCheck={false}
-                value={which === 'examples' ? examples : challenges}
-                onChange={(e) => {
-                  invalidate();
-                  (which === 'examples' ? setExamples : setChallenges)(e.target.value);
-                }}
-              />
-              <div className="case-toolbar">
-                <button className="text-button" disabled={busy} onClick={() => formatCases(which)}>
-                  Format {which} JSON
-                </button>
-                <span>args · kwargs · expect · unique id</span>
-              </div>
-            </details>
+            <CaseSuite
+              key={which}
+              which={which}
+              text={which === 'examples' ? examples : challenges}
+              busy={busy}
+              onChange={(text) => {
+                invalidate();
+                (which === 'examples' ? setExamples : setChallenges)(text);
+              }}
+              onFormat={() => formatCases(which)}
+            />
           ))}
         </div>
         <details className="support-details">
@@ -661,7 +665,7 @@ export default function App() {
       <section className="evidence" id="evidence" tabIndex={-1} aria-label="Execution evidence">
         <div className="evidence-heading">
           <h2>
-            <span className="section-number">02</span> Follow the evidence
+            <span className="section-number">03</span> Your results
           </h2>
           <button
             className="secondary small"

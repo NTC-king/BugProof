@@ -1,5 +1,7 @@
 # Full local check — 2026-10-24
 
+Historical 0.3.1 record. The latest aggregate browser/evaluation artifacts have since been refreshed for 0.3.2; see `docs/UI_REFINEMENT_2026-10-24.md` for that run and the visual-feedback changes. The counts/timestamp below describe the earlier 0.3.1 run, not a second copy of the latest evidence.
+
 Version: 0.3.1, based on checkpoint `8f13a6c`. User requested a full check and concrete upgrades where needed. Scope, stack, local-only execution and the Python policy were preserved. No publication, billing change or new real model request is part of this pass.
 
 ## Problems found and fixed

@@ -1,9 +1,9 @@
 {
   "schemaVersion": 3,
-  "runId": "a1b79b5b-682d-4fd7-8100-cdd7e2f442f8",
-  "createdAt": "2026-10-23T23:26:52.209Z",
+  "runId": "b1ac2976-6bd2-4cea-b515-665a7a9d767f",
+  "createdAt": "2026-10-23T23:53:36.985Z",
   "app": {
-    "version": "0.3.1",
+    "version": "0.3.2",
     "sourceRevision": "working-tree; see repository and release record",
     "policyHashes": [
       "f3acae592b51a0497a451847cf6612c159559fca1b0250222a9a44938d2bfca4"
@@ -286,7 +286,7 @@
             "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
             "implementation": "cpython"
           },
-          "elapsedMs": 5
+          "elapsedMs": 4
         },
         "result": "pass"
       },
@@ -313,7 +313,7 @@
             "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
             "implementation": "cpython"
           },
-          "elapsedMs": 3
+          "elapsedMs": 1
         },
         "result": "pass"
       },
@@ -340,7 +340,7 @@
             "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
             "implementation": "cpython"
           },
-          "elapsedMs": 2
+          "elapsedMs": 1
         },
         "result": "fail"
       },
@@ -367,7 +367,7 @@
             "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
             "implementation": "cpython"
           },
-          "elapsedMs": 2
+          "elapsedMs": 1
         },
         "result": "pass"
       },
@@ -394,7 +394,7 @@
             "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
             "implementation": "cpython"
           },
-          "elapsedMs": 2
+          "elapsedMs": 1
         },
         "result": "pass"
       }

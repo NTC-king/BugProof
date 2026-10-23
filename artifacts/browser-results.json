@@ -1,13 +1,25 @@
 {
-  "generatedAt": "2026-10-23T23:27:37.600Z",
+  "generatedAt": "2026-10-23T23:54:22.573Z",
   "browser": "155.0.4283.62",
   "findings": [
+    {
+      "check": "plain-language guide and compact test previews preserve full editable JSON",
+      "status": "pass"
+    },
     {
       "check": "worker cannot fetch trusted API under own CSP",
       "status": "pass"
     },
     {
+      "check": "failed fix has a plain explanation and separate original/fix scores",
+      "status": "pass"
+    },
+    {
       "check": "median teaching candidate passes visible examples but fails independent challenge",
+      "status": "pass"
+    },
+    {
+      "check": "passing fix stays distinct from faulty original and retains limited-test warning",
       "status": "pass"
     },
     {

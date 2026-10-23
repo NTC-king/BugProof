@@ -1,0 +1,15 @@
+{
+  "generatedAt": "2026-10-23T23:57:17.987Z",
+  "appVersion": "0.3.2",
+  "browser": "155.0.4283.62",
+  "findings": [
+    "Keyboard focus and native JSON disclosure work.",
+    "Malformed, empty, unusual and long previews remain safe; preview truncation preserves all JSON.",
+    "Fresh compact desktop layout has no horizontal page overflow.",
+    "390px failed and passing results retain readable separate scores with no horizontal page overflow.",
+    "Updated reference map works offline with JavaScript disabled and zero HTTP requests."
+  ],
+  "pageErrors": [],
+  "repairAttempts": 0,
+  "limits": "Local UI checks and public fixtures; not a live-model benchmark or proof of correctness."
+}
