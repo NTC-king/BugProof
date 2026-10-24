@@ -39,10 +39,11 @@ Evidence: `artifacts/browser-results.json` and the 42 reports under `artifacts/e
 
 ## Remaining gates
 
+- Public source repository is now published and anonymously verified at https://github.com/NTC-king/BugProof with the detected MIT license. Silent local raw video is recorded, decoded and inspected (113.04 seconds, 1440×900). These are release-preparation deliverables, not a completed contest entry; current evidence is in `artifacts/public-release-verification.json`, `artifacts/demo-recording.json` and `artifacts/demo-verification.json`.
 - Ongoing account/quota/data-handling checks for future live use. The first genuine model smoke test passed after user-confirmed Free Tier/billing-off status; no billing/account settings were changed. A successful request does not independently audit an account's billing configuration.
 - App review is now entrant-confirmed, separate from agent checks. The concise recap/map reference is supplied; no interactive code tour or personal reflection is claimed.
 - Public repository/history and MIT licensing are now explicitly authorized. Final publication audit and external verification are tracked in the shipping checklist; dependency/upstream notices remain intact.
-- Entrant-written submission details/narration, accessible demo video, public repository and actual contest submission. None has been performed.
+- Remaining: entrant-reviewed public YouTube/Vimeo video link, entrant-written required form/survey answers, account/rules steps and actual submission. Narration is optional; if used, it must be the entrant's own. No upload or submission is claimed.
 
 ## Limits
 

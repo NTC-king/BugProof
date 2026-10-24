@@ -16,6 +16,9 @@ React/TypeScript with [Vite](https://vite.dev/guide/); Node HTTP server; [Pyodid
 ## Where It Runs and How Someone Tries It
 `npm ci`, `npm run build`, `npm start`; open `http://127.0.0.1:4100`. Runner assets served only at port 4101. Node 24 is available. No hosting/billing. Live repair requires an explicitly configured server-side key; no-key verification still runs.
 
+## Sharing and Submission Status
+Public source: https://github.com/NTC-king/BugProof . The entrant authorized publishing the code/history with MIT licensing on October 24; source access, required planning files and detected license were checked without authentication. This is a source repository, not a deployed execution service. Silent local demo footage is recorded and verified under ignored `artifacts/private/demo/`; no public YouTube/Vimeo URL or contest submission exists yet. `devpost/ship-checklist.md` tracks those remaining gates and the entrant-owned form answers.
+
 ## Look and Feel
 Custom CSS with readable monospaced editors, warm neutral surfaces, ink text, strong focus, accessible status labels. Implements `prd.md > Look and Feel`.
 

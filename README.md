@@ -74,6 +74,8 @@ With the local launcher running, `node tests/ui-review.mjs` checks the simplifie
 
 ## Project and competition state
 
+Public source: [NTC-king/BugProof](https://github.com/NTC-king/BugProof), MIT licensed and checked without authentication. The app remains local-only; no public execution service is deployed. A verified 1:53 silent technical demo is available locally but has not been uploaded to YouTube/Vimeo. **The competition entry is not submitted.** See [shipping status](devpost/ship-checklist.md) and [recording mechanics](docs/DEMO_RECORDING.md).
+
 This is separate from every trading project. The entrant explicitly approved implementing the displayed detailed proposal and requested fast execution; planning files retain that basis. After the 0.3.2 visual refinement, the entrant confirmed the app checks out and authorized continuation. They subsequently authorized publishing this code/history as BugProof with the MIT license. Repository publication and demo preparation are tracked separately in [the shipping checklist](devpost/ship-checklist.md). Registration, entrant-written submission fields, narration, video upload and actual entry are not invented or inferred from agent tests.
 
 See [the acceptance audit](docs/ACCEPTANCE_AUDIT.md) for each core requirement, its evidence and the remaining human-review/release gates. The latest October 24 interface pass has 63 passing unit/server checks, 33 full-run browser checks, all 42 distinct fixture comparisons and a final-build desktop/mobile/keyboard preview review. See [the 0.3.2 review record](docs/UI_REFINEMENT_2026-10-24.md) for exact run boundaries. The earlier 0.3.1 check passed 63 unit/server and 30 browser checks; the October 22 post-install check passed 55 unit/server and 26 browser checks.
@@ -83,3 +85,5 @@ The subsequent October 24 full check and bug fixes are recorded in [docs/FULL_CH
 The official Learn pack is pinned under `.agents/skills` to commit `a0f065781873e8a7ed9a9a705a8dafa6a0810439`; its MIT notice is retained. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). The personal learner profile, credentials, caches and private evidence are ignored, but ignore rules do not erase Git history. The original research proposal remains in the separate research_reports directory recorded in the project setup documents.
 
 Original project code is available under the [MIT license](LICENSE). Third-party components retain their own licenses and notices. `node --env-file-if-exists=.env tools/release-preflight.mjs` checks the current worktree and reachable history for the configured key, selected credential patterns and private paths before publication; it is not an exhaustive security or rights certification.
+
+`node tools/verify-public-repo.mjs --check-only` checks the current pushed checkpoint, public source/planning files and MIT detection without account authentication. Neither release check proves contest submission or eligibility.

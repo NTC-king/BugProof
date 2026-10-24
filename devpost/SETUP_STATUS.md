@@ -1,5 +1,7 @@
 # Implementation status
 
+Shipping update: the user-approved public repository is live at https://github.com/NTC-king/BugProof and was verified without authentication, including MIT license detection. The silent local demo is recorded/decoded at 1:53; public video upload and entrant-owned Devpost form/survey/submission remain unfinished. See `devpost/ship-checklist.md`.
+
 Current version: **0.3.2**, October 24. Visual simplification and final-build UI review passed, alongside 63 unit/server tests, 33 full-run browser checks, 42 candidate comparisons and the saved-report audit. See `docs/UI_REFINEMENT_2026-10-24.md`. The configured local app was restored without reloading the entrant's tab. The entrant subsequently confirmed everything checks out and authorized shipping preparation, then approved the public repository/history and MIT license. See `devpost/ship-checklist.md` for the remaining public-video/form/entry gates. No new real model request was made.
 
 The records below describe earlier checkpoints.

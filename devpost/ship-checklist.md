@@ -8,7 +8,7 @@ Updated October 24, 2026. Build checkpoint: `5fec5d3`. Application review is use
 - [x] Publication authorization received in direct response to the specific public-repository/history/MIT-license question. No further routine questions requested.
 - [x] MIT license added; third-party notices retained. This does not relicense upstream components.
 - [x] Initial current/history privacy preflight passed; repeat against the final intended publication state before pushing. This is selected-pattern/path checking plus manual review, not exhaustive certification.
-- [ ] Public repository created/pushed and checked without authentication. No remote was configured at the initial inspection.
+- [x] Public repository created/pushed and checked without authentication: https://github.com/NTC-king/BugProof . Initial verified checkpoint `95270a7`, branch `master`, detected MIT license, required source/planning files present and private paths absent. Evidence: `artifacts/public-release-verification.json`. Repeat the anonymous check after the final status push.
 - [x] Silent local raw demo recorded and decoded: 113.04 seconds, 1440×900, three decoded frames visually inspected. No page errors, repair calls or external requests. See `artifacts/demo-recording.json` and `artifacts/demo-verification.json`. The footage is local/ignored and must not be called a live-AI demonstration.
 - [ ] Entrant reviews the raw footage; optional narration, if used, must be their own. Final video uploaded publicly to YouTube/Vimeo and checked without authentication. Narration itself is not an added official requirement.
 - [ ] Entrant writes the project name/description and other required form answers, including their own learning/exit-survey responses. Agent may correct spelling/grammar only, not draft or rewrite this public copy.
@@ -19,5 +19,7 @@ Updated October 24, 2026. Build checkpoint: `5fec5d3`. Application review is use
 Deadline: **Monday, October 26, 2026, 22:00 CET** in North Macedonia/Poland (21:00 UTC / 17:00 EDT), from the official deadline and timezone conversion. Do not let optional deployment or extra features delay the required repository/video/form work. Deployment and peer feedback are optional under the saved ship guide.
 
 Form entry point: https://devpost.com/submit-to/30447-build-with-ai-basics/manage/submissions
+
+Local video: `F:\BugProof\artifacts\private\demo\BugProof-raw.webm` (1:53, 1440×900). It is deliberately not in Git history or the public repository. No YouTube/Vimeo upload, Devpost registration/entry, personal answers or exit-survey completion is claimed. The authenticated submission form is not accessible through the public inspection session, so its exact prompts remain unverified.
 
 No submission copy or narration is drafted in this checklist. Local recording instructions are technical mechanics, not words to submit as the entrant's own explanation.

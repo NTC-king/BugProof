@@ -1,0 +1,26 @@
+{
+  "generatedAt": "2026-10-24T00:22:59.794Z",
+  "repository": "https://github.com/NTC-king/BugProof",
+  "authenticated": false,
+  "public": true,
+  "verifiedCheckpoint": "95270a7b0becb3e3fa2955cb8cd85266f767d384",
+  "defaultBranch": "master",
+  "detectedLicense": "MIT",
+  "publicFiles": 137,
+  "requiredFilesPresent": [
+    "LICENSE",
+    "README.md",
+    "package-lock.json",
+    ".env.example",
+    "devpost/scope.md",
+    "devpost/prd.md",
+    "devpost/spec.md",
+    "src/App.tsx",
+    "runner/harness.py",
+    "server/main.mjs",
+    "start-local.cmd"
+  ],
+  "privatePathsAbsent": true,
+  "htmlStatus": 200,
+  "limits": "Verifies public source access and the named checkpoint, not contest registration, a video URL, submission or prize eligibility."
+}
