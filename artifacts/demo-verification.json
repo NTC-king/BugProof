@@ -1,0 +1,24 @@
+{
+  "generatedAt": "2026-10-24T00:19:47.644Z",
+  "durationSeconds": 113.04,
+  "width": 1440,
+  "height": 900,
+  "bytes": 10495421,
+  "sha256": "03925d1111c87563c832ddf5ca934a52291548e51359af62c484e912738920c3",
+  "decodedSamples": [
+    {
+      "phase": "Original code and hand-authored teaching candidate",
+      "atSeconds": 9.9
+    },
+    {
+      "phase": "Actual failed run: original 2/6, teaching candidate 4/6",
+      "atSeconds": 38.63
+    },
+    {
+      "phase": "Actual reference run: all six listed tests passed",
+      "atSeconds": 80.92
+    }
+  ],
+  "result": "video_decodes_and_duration_resolution_checks_passed",
+  "limits": "Silent local raw footage. Narration, public upload/link access and entrant review remain separate requirements."
+}

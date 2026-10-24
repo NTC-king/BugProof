@@ -1,6 +1,6 @@
 # Implementation status
 
-Current version: **0.3.2**, October 24. Visual simplification and final-build UI review passed, alongside 63 unit/server tests, 33 full-run browser checks, 42 candidate comparisons and the saved-report audit. See `docs/UI_REFINEMENT_2026-10-24.md`. The configured local app was restored without reloading the entrant's tab. Save edits before refreshing. Entrant retry/sign-off remains open; no new real model request was made.
+Current version: **0.3.2**, October 24. Visual simplification and final-build UI review passed, alongside 63 unit/server tests, 33 full-run browser checks, 42 candidate comparisons and the saved-report audit. See `docs/UI_REFINEMENT_2026-10-24.md`. The configured local app was restored without reloading the entrant's tab. The entrant subsequently confirmed everything checks out and authorized shipping preparation, then approved the public repository/history and MIT license. See `devpost/ship-checklist.md` for the remaining public-video/form/entry gates. No new real model request was made.
 
 The records below describe earlier checkpoints.
 

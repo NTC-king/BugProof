@@ -1,0 +1,12 @@
+{
+  "generatedAt": "2026-10-24T00:21:11.597Z",
+  "sourceCheckpoint": "5fec5d3f3c353d61c56bfffb5c97de3ec0500b25",
+  "historyCommits": 8,
+  "distinctHistoryBlobs": 408,
+  "currentFilesScanned": 137,
+  "configuredCredentialChecked": true,
+  "detectorSelfTestsPassed": true,
+  "findings": [],
+  "result": "checks_passed",
+  "limits": "Exact configured-key and selected credential-pattern/path checks, not an exhaustive secret/IP/privacy certification. Human review and authorization remain required before publication. No file contents or credentials are emitted."
+}

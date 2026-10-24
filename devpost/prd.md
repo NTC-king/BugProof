@@ -48,4 +48,4 @@ The complete core journey, including live-provider code and honest no-key handli
 Deployment, accounts, arbitrary Python/repositories, model training, and extra editor frameworks do not prove this kernel.
 
 ## Open Questions
-Provider credentials/consent and final user review remain release gates, not reasons to repeatedly stop local coding.
+Future provider requests still require consent. Final app review was user-confirmed on October 24 after the 0.3.2 visual refinement. Public video, entrant-authored form fields and actual contest submission remain shipping gates, tracked separately in `ship-checklist.md`.

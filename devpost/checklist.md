@@ -34,7 +34,7 @@ Build mode: fast, per explicit user instruction to code without routine stopping
   Verify (mechanical): Mocked adapter/error tests plus genuine live smoke test only if an authorized key becomes available. Do not tick complete while live behavior remains unverified.
   Learner check: Configure a key outside chat and request a non-confidential repair.
   Commit: `Add bounded model repair integration`
-- [ ] **4. Evaluation and release documentation are ready**
+- [x] **4. Evaluation and release documentation are ready**
   Becomes usable: Reproducible fixtures, measured outcomes, truthful setup and limitations.
   Why now: Final evidence follows the working app.
   PRD ref: `prd.md > The Core Journey`
@@ -45,25 +45,27 @@ Build mode: fast, per explicit user instruction to code without routine stopping
   Commit: `Document tested application and evaluation limits`
 
 ## Hands-on Checkpoints
-- [ ] Early usable behavior explored by entrant
-- [ ] Final kick-the-tires feedback completed
+- [x] Entrant app exploration and visual feedback received; the original early checkpoint was completed in the final-review session rather than inventing a separate earlier review.
+- [x] Final kick-the-tires feedback completed: entrant requested clearer labels/layout, then confirmed everything checks out after the verified 0.3.2 refinement.
 
 ## Final Review
 - [x] 2026-10-24 visual-simplification implementation and mechanical check: plain verdict explanations, original/fix comparison, readable case previews with collapsed JSON editing, three-step guide and mobile table guidance. Passed 63 unit/server tests, 33 full-run browser checks, all 42 candidate comparisons / 211 candidate cases, saved-report audit and final-build UI review. Exact evidence and run boundaries: `docs/UI_REFINEMENT_2026-10-24.md`. No new real model call.
-- [ ] Entrant retries the simplified screen and reports whether the requested visual clarity is resolved. Do not infer final readiness from agent tests.
+- [x] Entrant confirmed the simplified screen checks out and requested progression to the next task on October 24. This is user-reported readiness, separate from agent tests.
 - [x] 2026-10-24 full local check: compact-safe large workspaces, client repair-result validation and exact prompt-input records. Passed 63 unit/server tests, 30 browser checks, all 42 candidate comparisons / 211 candidate cases, saved-report audit, TypeScript/build, actual CMD startup and mobile/offline-map checks. Full run `2026-10-23T23:27:37.600Z` (October 24 locally). No new real model request; test servers stopped. Mechanical item only; entrant review stays separate.
-- [ ] Feedback resolved and entrant confirms ready to ship
+- [x] Feedback resolved and entrant confirms ready to move into shipping preparation. This is not authorization to publish, select a license, upload a video or submit an entry.
 - [x] 0.3 release-quality pass: observed runtime consistency, cancellation-on-consent-revocation, reliable request limits, setup cleanup, result navigation and complete regression evidence. Mechanical verification only; final entrant review remains open.
 - [x] Upgrade implementation/mechanical verification requested 2026-10-22: reliable prompt-exposure checks, server cancellation/output bounds, true source diff, clearer failures, portable workspaces, and regression verification. This does not mark entrant feedback/review complete.
 
 ## Code Tour and App Map
-- [ ] Learning wrap-up based on actual implementation
-- [ ] Optional reflection offered, not invented
-- [ ] App map generated and shown
+- [x] Evidence-based recap provided: expected answers precede execution; App.run freezes the task, domain assessment compares actual results, and EvidenceView explains them. Recorded as an agent recap, not a completed interactive code tour or proof of learning.
+- [x] Optional reflection offered without requiring a response; no personal reflection was supplied or invented. No further learning exercise required under the saved concise/no-routine-questions preference.
+- [x] App map generated, offline-tested and provided as a clickable reference. Opening its editor was queued; no claim is made that the entrant viewed the map or completed its source route.
 
-The 0.3 reference map is regenerated and was rendered in Edge with JavaScript disabled and no HTTP requests, including a 390px screenshot inspected by the agent. Opening it in the app was queued; this is not a claim that the entrant viewed it. Source stops are prepared, not a completed entrant tour or reflection. No additional learning interview was required, respecting the instruction for no more questions. The implementation recap connects a real finding (a candidate headline could coexist with an incomplete original run) to the stricter comparison assertion and saved-evidence audit.
+The 0.3.2 reference map was rendered in Edge with JavaScript disabled and no HTTP requests. The final recap connects the actual incomplete-original-run finding to the stricter completion assertion and report audit: a green headline must match the complete evidence. Application readiness is now user-confirmed; the optional reference route remains a reference, not an invented interactive activity.
 
 ## Revisions
+- 2026-10-24 public-release authorization: in direct response to the specific question about a public BugProof repository, included Git history and MIT license, the entrant authorized proceeding without more routine questions. This authorizes those technical publication steps, not invented narration, personal form answers or acceptance/submission on the entrant's behalf.
+- 2026-10-24 shipping handoff: entrant explicitly confirmed everything checks out and directed continuation to the next task. Closed final app-review gates and supplied a concise recap/map reference. Keep public repository, license, video upload, entrant-authored copy and actual submission as separate shipping gates.
 - 2026-10-24 visual feedback: entrant requested simpler presentation and clearer visual differences. Preserve verification, supported Python limits, explicit expectations, local-only execution and provider consent. Refine presentation only; do not add publication, storage or new model calls. This is actual feedback, not a completed final user review.
 - 2026-10-24: User requested a full test/upgrade pass and authorized restarting the old BugProof server without further routine questions. Three concrete correctness/robustness gaps were identified: pretty-printing beyond editor limits, accepting malformed repair metadata, and incomplete recorded prompt inputs supporting an exclusion claim. Preserve all approved boundaries, add regressions, and record completed results in `docs/FULL_CHECK_2026-10-24.md`. No new provider request or publication is planned.
 - 2026-10-22 acceptance audit: all approved core requirements mapped to current evidence in `docs/ACCEPTANCE_AUDIT.md`. Hardened the report auditor against duplicate/missing candidates and incorrect aggregate metadata; eight regressions added. The actual installer and complete Windows verification command passed after lockfile reinstallation: 55 unit/server tests and 26 browser checks, smoke timestamp `2026-10-22T18:05:34.682Z`. All 42 distinct expected reports pass the stronger audit. Application source unchanged; no new model request. Final hands-on feedback/sign-off remains genuinely missing and must not be replaced with further invented implementation work.

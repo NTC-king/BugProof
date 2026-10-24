@@ -1,5 +1,7 @@
 # Simpler interface — October 24, 2026
 
+Subsequent workflow update: the entrant confirmed everything checks out and requested continuation, closing the retry/sign-off mentioned at the end of this verification snapshot. Public shipping is tracked separately in `devpost/ship-checklist.md`.
+
 Version 0.3.2, based on local checkpoint `5507699`. The entrant asked for simpler presentation and clearer visual differences after asking what the verdict labels meant. This pass changes presentation, not the verification policy or project scope.
 
 ## What changed

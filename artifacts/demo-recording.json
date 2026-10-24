@@ -1,0 +1,62 @@
+{
+  "generatedAt": "2026-10-24T00:19:05.027Z",
+  "appVersion": "0.3.2",
+  "browser": "155.0.4283.62",
+  "width": 1440,
+  "height": 900,
+  "captureWallSeconds": 111.77,
+  "phases": [
+    {
+      "name": "Purpose and three-step guide",
+      "secondsFromStart": 1.73
+    },
+    {
+      "name": "Original code and hand-authored teaching candidate",
+      "secondsFromStart": 7.9
+    },
+    {
+      "name": "Visible examples and excluded extra tests",
+      "secondsFromStart": 15.04
+    },
+    {
+      "name": "Actual failed run: original 2/6, teaching candidate 4/6",
+      "secondsFromStart": 36.63
+    },
+    {
+      "name": "Exact mismatch: four-number median expected 6, actual 8",
+      "secondsFromStart": 44.75
+    },
+    {
+      "name": "Reference candidate control, not a live AI repair",
+      "secondsFromStart": 51.97
+    },
+    {
+      "name": "Hand-authored reference loaded; old verdict invalidated",
+      "secondsFromStart": 56.26
+    },
+    {
+      "name": "Actual reference run: all six listed tests passed",
+      "secondsFromStart": 78.92
+    },
+    {
+      "name": "Examples and extra-test counts; actual output table",
+      "secondsFromStart": 88.05
+    },
+    {
+      "name": "Export and recorded runtime/provenance evidence",
+      "secondsFromStart": 95.6
+    },
+    {
+      "name": "Limitations: listed cases, not universal correctness",
+      "secondsFromStart": 101.77
+    }
+  ],
+  "pageErrors": [],
+  "repairAttempts": 0,
+  "externalRequests": 0,
+  "liveModelUsed": false,
+  "candidates": "Newly hand-authored median teaching/reference fixtures, visibly labeled in the app.",
+  "status": "silent_raw_footage_not_uploaded_or_final_submission",
+  "narration": "Not supplied. Entrant must supply their own narration/submission wording.",
+  "localFile": "artifacts/private/demo/BugProof-raw.webm"
+}
